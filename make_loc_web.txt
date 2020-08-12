@@ -92,12 +92,48 @@ git init
 Initialized empty Git repository in ~/djangogirls/.git/
 $ git config --global user.name "Your Name"
 $ git config --global user.email you@example.com
+
 .gitignore
 -----------
 *.pyc
-*~
-/.vscode
 __pycache__
-myvenv
-db.sqlite3
-/static
+locvenv
+Djangoプロジェクト開始.txt
+locdata.sqlite
+locdata_dump.txt
+
+デプロイ!
+---------
+Github にプッシュしておく。
+git remote add origin https://github.com/aki4429/cover.git
+git push -u origin master
+
+ON pythonanywhere bash
+ヘルパーのインストール
+pip3.6 install --user pythonanywhere
+pa_autoconfigure_django.py --python=3.6 https://github.com/aki4429/cover.git
+
+cover/urls.py
+--------------
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('loc.urls')),
+]
+
+loc/urls.py
+--------------
+from django.urls import path
+from . import views
+urlpatterns = [
+    path('', views.loc_list, name='loc_list'),
+]
+
+loc/views.py
+--------------
+from django.shortcuts import render
+
+def loc_list(request):
+    return render(request, 'loc/loc_list.html', {})
