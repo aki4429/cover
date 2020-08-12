@@ -1,0 +1,103 @@
+Based on Django Girls
+
+
+On base dir (=loc_web, djangogirls)
+------------------------------------
+python3 -m venv locvenv
+source locvenv/bin/activate
+
+python -m pip install --upgrade pip
+
+touch requirements.txt
+Django~=2.2.4
+
+pip install -r requirements.txt
+
+django-admin startproject cover 
+
+./cover/settings.py
+-------------------
+TIME_ZONE = 'Asia/Tokyo'
+LANGUAGE_CODE = 'ja'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+ALLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+
+
+on Base dir
+-----------
+python manage.py migrate
+python manage.py runserver
+
+python manage.py startapp loc
+
+cover/settings.py
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'loc.apps.LocConfig',
+]
+
+By DB Browser for Sqlite
+------------------------
+open db 'locdata.sqlite'
+modify table (locdata)
+add field (id autoincrement primarykey)
+
+sqlite3 locdata.sqlite
+-----------------------
+.output ./locdata_dump.txt
+.dump locdata
+
+sqlite3 db.sqlite
+-----------------------
+.read ./locdata_dump.txt
+
+---------
+■　既存データベース取り込み
+
+* DBファイルを指定したら、まず、inspection
+* 既存DBのschema をmodels.py に取り込み
+python manage.py inspectdb >> tcode/models.py
+
+* Django のマイグレーションを実行
+python manage.py migrate
+
+* models.py の多対１など設定。
+inv = models.ForeignKey(Inv, on_delete=models.PROTECT)
+
+*model.py 設定後 マイグレーション
+(venv)$ python mysite/manage.py makemigrations
+(venv)$ python mysite/manage.py migrate 
+---------
+
+loc/admin.py
+------------
+from django.contrib import admin
+from .models import Loc
+
+admin.site.register(Loc)
+
+on Base Dir
+------------
+python manage.py createsuperuser
+
+git 設定
+--------
+git init
+Initialized empty Git repository in ~/djangogirls/.git/
+$ git config --global user.name "Your Name"
+$ git config --global user.email you@example.com
+.gitignore
+-----------
+*.pyc
+*~
+/.vscode
+__pycache__
+myvenv
+db.sqlite3
+/static

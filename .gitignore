@@ -1,6 +1,6 @@
 *.pyc
 __pycache__
 locvenv
-make_loc_web.txt
 Djangoプロジェクト開始.txt
 locdata.sqlite
+locdata_dump.txt
