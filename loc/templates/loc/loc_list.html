@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>TFCカバー番地リスト</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">TFCカバー番地リスト</a></h1>
+        </div>
+
+	{% for loc in locs %}
+    <div>
+        <p>番地: {{ loc.banch }}</p>
+	<h2>{{ loc.code }}</h2>
+        <p>数量:{{ loc.qty }}</p>
+    </div>
+{% endfor %}
+
+
+    </body>
+</html>

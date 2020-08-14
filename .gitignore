@@ -1,6 +1,6 @@
 *.pyc
 __pycache__
-locvenv
+*venv
 Djangoプロジェクト開始.txt
 locdata.sqlite
 locdata_dump.txt

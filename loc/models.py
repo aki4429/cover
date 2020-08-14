@@ -19,3 +19,6 @@ class Locdata(models.Model):
     class Meta:
         managed = False
         db_table = 'locdata'
+
+    def __str__(self):
+        return self.banch

@@ -134,6 +134,36 @@ urlpatterns = [
 loc/views.py
 --------------
 from django.shortcuts import render
+from .models import Locdata
 
 def loc_list(request):
-    return render(request, 'loc/loc_list.html', {})
+    locs = Locdata.objects.filter(qty__gt=0 ).order_by('banch')
+    return render(request, 'loc/loc_list.html', {'locs': locs})
+
+Templates!
+-------------
+mkdir loc/templates
+mkdir loc/templates/loc
+touch loc/templates/loc/loc_list.html
+
+loc_list.html
+--------------
+<html>
+    <head>
+        <title>TFCカバー番地リスト</title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/">TFCカバー番地リスト</a></h1>
+        </div>
+
+        {% for loc in locs %}
+    <div>
+        <p>番地: {{ loc.banch }}</p>
+        <h2>{{ loc.code }}</h2>
+        <p>数量:{{ loc.qty }}</p>
+    </div>
+{% endfor %}
+    </body>
+</html>
+
