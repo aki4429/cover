@@ -8,12 +8,14 @@
         <title>TFCカバー番地リスト</title>
     </head>
     <body>
-	    <div class="content container">
-	    <div class="row">
+	    
 	    <div class="page-header">
+	    <a href="{% url 'loc_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+	    	 
 		    <H1><a href="/">TFCカバー番地リスト</a></H1>
 	    </div>
-
+	    <div class="content container">
+	    <div class="row">
             {% block content %}
             {% endblock %}
 

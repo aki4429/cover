@@ -2,6 +2,8 @@
 
 {% block content %}
     <div class="loc">
+
+    
     <div class="banch">
         <p>番地:
     {{ loc.banch }}
@@ -15,4 +17,10 @@
     <p>数量:
         {{ loc.qty }}</p>
     </div>
+
+    <a class="btn btn-default" href="{% url 'loc_edit' pk=loc.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+    <a class="btn btn-default" href="{% url 'loc_remove' pk=loc.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
+    <a class="btn btn-danger" href="{% url 'loc_del' pk=loc.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 {% endblock %}
