@@ -7,9 +7,21 @@ def loc_list(request):
     bq_word = request.GET.get('banchquery')
     cq_word = request.GET.get('codequery')
     c2q_word = request.GET.get('code2query')
+    bq_clear = request.GET.get('bqclear')
+
+    if bq_clear:
+        del request.session['banchquery']
 
     if not bq_word :
-        bq_word = ''
+        # セッションにデータがあればそれを使う
+        if request.session.get('banchquery'):
+            bq_word = request.session.get('banchquery')
+        else:
+            bq_word = ''
+    else:
+        # セッションにデータを格納
+        request.session['banchquery'] = bq_word
+
     if not cq_word :
         cq_word = ''
     if not c2q_word :
