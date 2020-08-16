@@ -13,7 +13,7 @@
 	<div class="loc">
 	{% for loc in locs %}
 	<tr>
-        <td class="banch">
+        <td class="banch">>
         <a href="{% url 'loc_detail' pk=loc.pk %}">{{ loc.banch }}</a> 
         </td>
         

@@ -1,0 +1,18 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block content %}
+    <div class="loc">
+    <div class="banch">
+        <p>番地:
+    {{ loc.banch }}
+    </p>
+    </div>
+    <div class="code">
+    <h2>コード:
+        {{ loc.code }}</h2>
+    </div>
+    <div>
+    <p>数量:
+        {{ loc.qty }}</p>
+    </div>
+{% endblock %}

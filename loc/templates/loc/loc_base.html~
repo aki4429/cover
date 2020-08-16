@@ -1,0 +1,45 @@
+{% load static %}
+<html>
+    <head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/loc.css' %}">
+        <title>TFCカバー番地リスト</title>
+    </head>
+    <body>
+	    <div class="content container">
+	    <div class="row">
+	    <div class="page-header">
+		    <H1><a href="/">TFCカバー番地リスト</a></H1>
+	    </div>
+
+	<table border=1>
+		<tr>
+		<th> 番地 </th>
+		<th> コード </th>
+		<th> 数量 </th>
+		</tr>
+
+	<div class="loc">
+	{% for loc in locs %}
+	<tr>
+        <td class="banch">{{ loc.banch }}</td>
+	<td class="code">
+	<h3>{{ loc.code }}</h3>
+	</td>
+	<td class="qty">
+        {{ loc.qty }}
+	</td>
+	</tr>
+	{% endfor %}
+	</div>
+
+	</table>
+
+	    </div>
+	    </div>
+
+
+    </body>
+</html>
