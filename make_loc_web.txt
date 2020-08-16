@@ -329,6 +329,9 @@ def loc_list(request):
 
 urls.py
 
+下記のログインは止めた！！
+使い方がわからない。
+
 1. LOGIN_REDIRECT_URL の設定
 # /code/settings.py
 # ログイン後トップページにリダイレクト
