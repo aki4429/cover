@@ -290,3 +290,81 @@ urlpatterns = [
     path('loc/<int:pk>/', views.loc_detail, name='loc_detail'),
 ]
 
+forms.py
+
+loc_detail.html
+---------------
+  <a class="btn btn-default" href="{% url 'loc_edit' pk=loc.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn btn-default" href="{% url 'loc_remove' pk=loc.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+    <a class="btn btn-danger" href="{% url 'loc_del' pk=loc.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
+loc_new views.py
+loc_edit views.py
+loc_remove views.py
+
+検索機能 in loc_list.html
+  <form action="" method="get">
+        <input name="codequery" value="{{ request.GET.query }}" type="text">
+        <input name="code2query" value="{{ request.GET.query }}" type="text">
+        <button type="submit">コード検索する</button>
+    </form>
+
+検索機能 in views.py
+def loc_list(request):
+ bq_word = request.GET.get('banchquery')
+    cq_word = request.GET.get('codequery')
+    c2q_word = request.GET.get('code2query')
+
+    if not bq_word :
+        bq_word = ''
+    if not cq_word :
+        cq_word = ''
+    if not c2q_word :
+        c2q_word = ''
+
+    locs = Locdata.objects.filter(
+        Q(banch__icontains=bq_word ), 
+        Q(code__icontains=cq_word), 
+        Q(code__icontains=c2q_word)).order_by('banch')
+
+urls.py
+
+1. LOGIN_REDIRECT_URL の設定
+# /code/settings.py
+# ログイン後トップページにリダイレクト
+LOGIN_REDIRECT_URL = '/'
+
+myblog/myblog/urls.py に path(‘accounts/’, include(‘django.contrib.auth.urls’)) を追加
+urlpatterns = [
+    path('', include('blogs.urls')),
+    path('accounts/', include('django.contrib.auth.urls')), #  追加
+    path('admin/', admin.site.urls),
+]
+
+myblog/
+    manage.py
+    db.sqlite3
+    myblog/
+    blogs/
+    templates/ # 新規作成
+myblog/myblog/settings.py を編集し、作成した templatesディレクトリのパスをTEMPLATES  DIRS に追加します。
+#myblog/myblog/settings.py
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], # [追加]
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+ログイン画面: templates/registration/login.html
+ログアウト画面: templates/registration/logged_out.html
