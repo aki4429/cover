@@ -8,35 +8,20 @@
         <title>TFCカバー番地リスト</title>
     </head>
     <body>
-	    <div class="content container">
-	    <div class="row">
+	    
 	    <div class="page-header">
+	    <a href="{% url 'loc_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+	    	 
 		    <H1><a href="/">TFCカバー番地リスト</a></H1>
 	    </div>
+	    <div class="content container">
+	    <div class="row">
+            {% block content %}
+            {% endblock %}
 
-	<table border=1>
-		<tr>
-		<th> 番地 </th>
-		<th> コード </th>
-		<th> 数量 </th>
-		</tr>
+	
 
-	<div class="loc">
-	{% for loc in locs %}
-	<tr>
-        <td class="banch">{{ loc.banch }}</td>
-	<td class="code">
-	<h3>{{ loc.code }}</h3>
-	</td>
-	<td class="qty">
-        {{ loc.qty }}
-	</td>
-	</tr>
-	{% endfor %}
-	</div>
-
-	</table>
-
+			</div>	
 	    </div>
 	    </div>
 
