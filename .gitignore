@@ -1,8 +1,9 @@
 *.pyc
 __pycache__
 *venv
+db.sqlite3
 Djangoプロジェクト開始.txt
 locdata.sqlite
 locdata_dump.txt
-db.sqlite3
 /static
+
