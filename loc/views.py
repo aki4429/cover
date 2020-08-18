@@ -9,13 +9,14 @@ def loc_list(request):
     c2q_word = request.GET.get('code2query')
     bq_clear = request.GET.get('bqclear')
 
-    if bq_clear:
-        del request.session['banchquery']
-
     if not bq_word :
         # セッションにデータがあればそれを使う
         if request.session.get('banchquery'):
             bq_word = request.session.get('banchquery')
+            #ただし、クリアボタンで取り消し
+            if bq_clear:
+                del request.session['banchquery']
+                bq_word = ''
         else:
             bq_word = ''
     else:
@@ -34,7 +35,11 @@ def loc_list(request):
  
     #locs = Locdata.objects.filter(qty__gt=0 ).order_by('banch')
     #locs = Locdata.objects.order_by('banch')
-    return render(request, 'loc/loc_list.html', {'locs': locs})
+    params = {
+            'locs':locs,
+            'bq_word':bq_word,
+            }
+    return render(request, 'loc/loc_list.html', params)
 
 def loc_detail(request, pk):
     loc = get_object_or_404(Locdata, pk=pk)
