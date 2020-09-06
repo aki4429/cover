@@ -30,10 +30,17 @@ def loc_list(request):
     if not c2q_word :
         c2q_word = ''
 
-    locs = Locdata.objects.filter(
-        Q(banch__icontains=bq_word ), 
-        Q(code__icontains=cq_word), 
-        Q(code__icontains=c2q_word)).order_by('banch')
+    if cq_word == '':
+        locs = Locdata.objects.filter(
+            Q(banch__icontains=bq_word ), 
+            Q(code__icontains=cq_word), 
+            Q(code__icontains=c2q_word)).order_by('banch')
+    else:
+        locs = Locdata.objects.filter(
+            Q(banch__icontains=bq_word ), 
+            Q(code__icontains=cq_word), 
+            Q(code__icontains=c2q_word)).order_by('code')
+
  
     #locs = Locdata.objects.filter(qty__gt=0 ).order_by('banch')
     #locs = Locdata.objects.order_by('banch')
