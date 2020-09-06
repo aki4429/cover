@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import LocForm
 from .models import Locdata
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def loc_list(request):
     bq_word = request.GET.get('banchquery')
     cq_word = request.GET.get('codequery')
@@ -41,10 +43,12 @@ def loc_list(request):
             }
     return render(request, 'loc/loc_list.html', params)
 
+@login_required
 def loc_detail(request, pk):
     loc = get_object_or_404(Locdata, pk=pk)
     return render(request, 'loc/loc_detail.html', {'loc': loc})
 
+@login_required
 def loc_new(request):
     if request.method == "POST":
         form = LocForm(request.POST)
@@ -55,6 +59,7 @@ def loc_new(request):
         form = LocForm()
     return render(request, 'loc/loc_new.html', {'form': form})
 
+@login_required
 def loc_edit(request, pk):
     loc = get_object_or_404(Locdata, pk=pk)
     if request.method == "POST":
@@ -66,6 +71,7 @@ def loc_edit(request, pk):
         form = LocForm(instance=loc)
     return render(request, 'loc/loc_new.html', {'form': form})
 
+@login_required
 def loc_remove(request, pk):
     loc = get_object_or_404(Locdata, pk=pk)
     form = LocForm(instance=loc) #POSTデータが送られて来ないのでそのまま:request.POST引数はなし
@@ -75,6 +81,7 @@ def loc_remove(request, pk):
     loc.save()
     return redirect('loc_detail', pk=loc.pk)
 
+@login_required
 def loc_del(request, pk):
     loc = get_object_or_404(Locdata, pk=pk)
     loc.delete()
