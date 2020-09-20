@@ -10,4 +10,5 @@ urlpatterns = [
     path('loc/<pk>/del/', views.loc_del, name='loc_del'),
     path('upload', views.model_form_upload, name='upload'),
     path('loc/shiji_list', views.shiji_list, name='shiji_list'),
+    path('<int:shiji_id>/del/', views.shiji_del, name='shiji_del'),
 ]
