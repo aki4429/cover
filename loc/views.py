@@ -99,10 +99,18 @@ def model_form_upload(request):
     if request.method == 'POST':
         form = ShijiForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('loc_list')
+            shiji = form.save(commit=False)
+            shiji.shiji_date = shiji.file_name.name[10:20]
+            shiji.save()
+            shijis = Shiji.objects.all()
+            return render(request, 'loc/shiji_list.html', {'shijis': shijis})
     else:
         form = ShijiForm()
     return render(request, 'loc/model_form_upload.html', {
         'form': form
     })
+
+@login_required
+def shiji_list(request):
+    shijis = Shiji.objects.order_by('uploaded_at')
+    return render(request, 'loc/shiji_list.html', {'shijis': shijis})

@@ -1,0 +1,23 @@
+{% extends 'loc/loc_base.html' %}
+
+
+{% block content %}
+
+    <table border=1>
+	<tr>
+	<th> ファイル名 </th>
+	<th> 生産指示 </th>
+	<th> アップロード日 </th>
+	</tr>
+     {% for item in shijis %}
+    <tr>
+        <td>{{ item.shiji_date }}</td>
+        <td>{{ item.file_name }}</td>
+        <td>{{ item.uploaded_at }}</td>
+    <tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}
+
