@@ -22,3 +22,8 @@ class Locdata(models.Model):
 
     def __str__(self):
         return self.banch
+
+class Shiji(models.Model):
+    file_name = models.CharField(max_length=255,blank=True)
+    seisan_shiji = models.FileField(upload_to='shiji/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

@@ -8,4 +8,5 @@ urlpatterns = [
     path('loc/<int:pk>/edit/', views.loc_edit, name='loc_edit'),
     path('loc/<pk>/remove/', views.loc_remove, name='loc_remove'),
     path('loc/<pk>/del/', views.loc_del, name='loc_del'),
+    path('upload', views.model_form_upload, name='upload')
 ]

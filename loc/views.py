@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import LocForm
-from .models import Locdata
+from .forms import LocForm, ShijiForm
+from .models import Locdata, Shiji
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
@@ -93,3 +93,16 @@ def loc_del(request, pk):
     loc = get_object_or_404(Locdata, pk=pk)
     loc.delete()
     return redirect('loc_list')
+
+@login_required
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = ShijiForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('loc_list')
+    else:
+        form = ShijiForm()
+    return render(request, 'loc/model_form_upload.html', {
+        'form': form
+    })
