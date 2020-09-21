@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import LocForm, ShijiForm
-from .models import Locdata, Shiji
+from .models import Locdata, Shiji, Seisan
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from .read_shiji import read_shiji
 
 @login_required
 def loc_list(request):
@@ -119,3 +120,25 @@ def shiji_del(request, shiji_id):
    shiji = get_object_or_404(Shiji, id=shiji_id)
    shiji.delete()
    return redirect('shiji_list')
+
+@login_required
+def seisan_list(request):
+    seisans = Seisan.objects.order_by('seisan')
+    return render(request, 'loc/seisan_list.html', {'seisans': seisans})
+
+@login_required
+def make_seisan(request, shiji_id):
+    Seisan.objects.all().delete()
+    shiji = get_object_or_404(Shiji, id=shiji_id)
+    shiji_file_name =  shiji.file_name.path
+    sdata = read_shiji(shiji_file_name)
+
+    add_seisan = []
+    for row in sdata:
+        seisan = Seisan(code = row[0], \
+                om = row[1], seisan = row[2], qty = row[3])
+        add_seisan.append(seisan)
+
+    Seisan.objects.bulk_create(add_seisan) 
+
+    return redirect('seisan_list')

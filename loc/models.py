@@ -28,4 +28,13 @@ class Shiji(models.Model):
     file_name = models.FileField(upload_to='shiji/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+class Seisan(models.Model):
+    code = models.TextField(blank=True, null=True)
+    om = models.CharField(max_length=50, blank = True)
+    seisan = models.DateField(blank=True, null=True)
+    qty = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return self.om
+
 

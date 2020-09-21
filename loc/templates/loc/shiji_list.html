@@ -5,19 +5,21 @@
 
     <table border=1>
 	<tr>
-	<th>  </th>
+	<th>読込</th>
 	<th> ファイル名 </th>
 	<th> 生産指示 </th>
 	<th> アップロード日 </th>
+	<th>削除</th>
 	</tr>
      {% for item in shijis %}
     <tr>
         <td>
-        <a class="btn btn-default" href="{% url 'shiji_del' shiji_id=item.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+        <a class="btn btn-default" href="{% url 'make_seisan' shiji_id=item.id %}"><span class="glyphicon glyphicon-pencil"></span></a>
         </td>
         <td>{{ item.shiji_date }}</td>
         <td>{{ item.file_name }}</td>
         <td>{{ item.uploaded_at }}</td>
+        <a class="btn btn-default" href="{% url 'shiji_del' shiji_id=item.id %}"><span class="glyphicon glyphicon-remove"></span></a>
     <tr>
     {% endfor %}
 	</table>

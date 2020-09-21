@@ -1,0 +1,29 @@
+{% extends 'loc/loc_base.html' %}
+
+
+{% block content %}
+
+    <table border=1>
+	<tr>
+	<th>  </th>
+	<th> コード </th>
+	<th> 数量 </th>
+	<th> 生産日 </th>
+	<th> 受注ナンバー </th>
+	</tr>
+     {% for item in seisans %}
+    <tr>
+        <td>
+        </td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.seisan }}</td>
+        <td>{{ item.om }}</td>
+    <tr>
+    {% endfor %}
+	</table>
+
+    <a class="btn btn-default" href="{% url 'upload'  %}">アップロード</a>
+
+{% endblock %}
+
