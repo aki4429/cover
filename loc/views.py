@@ -130,6 +130,12 @@ def seisan_list(request):
 def make_seisan(request, shiji_id):
     Seisan.objects.all().delete()
     shiji = get_object_or_404(Shiji, id=shiji_id)
+
+    #製造指示日を記録
+    ls = LocStatus.objects.get(pk=1)
+    ls.seizoshiji = shiji.shiji_date
+    ls.save()
+
     shiji_file_name =  shiji.file_name.path
     sdata = read_shiji(shiji_file_name)
 
@@ -142,3 +148,20 @@ def make_seisan(request, shiji_id):
     Seisan.objects.bulk_create(add_seisan) 
 
     return redirect('seisan_list')
+
+@login_required
+def make_pick(request):
+    locs = Locdata.objects.order_by('banch').values()
+    ls = LocStatus.objects.get(pk=1)
+    seis = Seisan.objects.filter(seisan__gt=ls.koshinbi).order_by('seisan').values()
+
+    add_seisan = []
+    for row in sdata:
+        seisan = Seisan(code = row[0], \
+                om = row[1], seisan = row[2], qty = row[3])
+        add_seisan.append(seisan)
+
+    Seisan.objects.bulk_create(add_seisan) 
+
+    return redirect('seisan_list')
+
