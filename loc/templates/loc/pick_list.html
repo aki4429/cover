@@ -3,12 +3,16 @@
 
 {% block content %}
 
+<p> 現在の更新日は、{{ koshinbi }} です。 </p>
+
+<a class="btn btn-default" href="{% url 'koshin' pick_id=pick.id %}">{{ pick.seisan }}の生産を更新します</a>
     <table border=1>
 	<tr>
 	<th>  </th>
 	<th> 番地 </th>
 	<th> コード </th>
-	<th> 数量 </th>
+	<th> ピック数量 </th>
+	<th> 在庫数量 </th>
 	<th> 生産日 </th>
 	<th> 受注ナンバー </th>
 	</tr>
@@ -19,6 +23,7 @@
         <td>{{ item.banch }}</td>
         <td>{{ item.code }}</td>
         <td>{{ item.qty }}</td>
+        <td>{{ item.loc_qty }}</td>
         <td>{{ item.seisan }}</td>
         <td>{{ item.om }}</td>
     <tr>

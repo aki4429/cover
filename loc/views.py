@@ -161,8 +161,8 @@ def make_pick(request):
 
     add_pick =[]
     for row in picks:
-        pick = Pick(code = row[0], \
-                qty = row[1], seisan = row[2], om = row[3], banch = row[4])
+        pick = Pick(code = row[0], qty = row[1], loc_qty = row[2],
+                seisan = row[3], om = row[4], banch = row[5])
         add_pick.append(pick)
 
     Pick.objects.bulk_create(add_pick) 
@@ -172,5 +172,30 @@ def make_pick(request):
 @login_required
 def pick_list(request):
     picks = Pick.objects.order_by('seisan', 'banch')
-    return render(request, 'loc/pick_list.html', {'picks': picks})
+    status = LocStatus.objects.get(id=1)
+    params = {
+            'pick':picks[0],
+            'picks':picks,
+            'koshinbi':status.koshinbi,
+            }
+    return render(request, 'loc/pick_list.html', params)
+
+@login_required
+def koshin(request, pick_id ):
+    pick = get_object_or_404(Pick, id=pick_id)
+    seisanbi = pick.seisan
+    picks = Pick.objects.filter(seisan = seisanbi)
+    for pick in picks:
+        if pick.banch != 'mitei':
+            loc = Locdata.objects.get(banch = pick.banch)
+            loc.qty = loc.qty - pick.qty
+            if loc.qty == 0:
+                loc.code = 'empty'
+
+        loc.save()
+
+    status = LocStatus.objects.get(id=1)
+    status.koshinbi = seisanbi
+    status.save()
+    return redirect('make_pick')
 
