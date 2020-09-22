@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import LocForm, ShijiForm
-from .models import Locdata, Shiji, Seisan
+from .models import Locdata, Shiji, Seisan, LocStatus, Pick
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
@@ -149,19 +149,28 @@ def make_seisan(request, shiji_id):
 
     return redirect('seisan_list')
 
+from .pickup import pickup
 @login_required
 def make_pick(request):
-    locs = Locdata.objects.order_by('banch').values()
-    ls = LocStatus.objects.get(pk=1)
-    seis = Seisan.objects.filter(seisan__gt=ls.koshinbi).order_by('seisan').values()
+    Pick.objects.all().delete()
+    locs = list(Locdata.objects.order_by('banch').values())
+    koshinbi = LocStatus.objects.get(pk=1).koshinbi
+    seis = list(Seisan.objects.filter(seisan__gt=koshinbi).order_by('seisan').values())
 
-    add_seisan = []
-    for row in sdata:
-        seisan = Seisan(code = row[0], \
-                om = row[1], seisan = row[2], qty = row[3])
-        add_seisan.append(seisan)
+    picks = pickup(seis, locs)
 
-    Seisan.objects.bulk_create(add_seisan) 
+    add_pick =[]
+    for row in picks:
+        pick = Pick(code = row[0], \
+                qty = row[1], seisan = row[2], om = row[3], banch = row[4])
+        add_pick.append(pick)
 
-    return redirect('seisan_list')
+    Pick.objects.bulk_create(add_pick) 
+
+    return redirect('pick_list')
+
+@login_required
+def pick_list(request):
+    picks = Pick.objects.order_by('seisan', 'banch')
+    return render(request, 'loc/pick_list.html', {'picks': picks})
 

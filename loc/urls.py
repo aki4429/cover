@@ -13,4 +13,6 @@ urlpatterns = [
     path('<int:shiji_id>/del/', views.shiji_del, name='shiji_del'),
     path('loc/seisan_list', views.seisan_list, name='seisan_list'),
     path('<int:shiji_id>/seisan/', views.make_seisan, name='make_seisan'),
+    path('loc/pick_list', views.pick_list, name='pick_list'),
+    path('loc/pick', views.make_pick, name='make_pick'),
 ]

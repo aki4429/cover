@@ -3,20 +3,20 @@
 
 {% block content %}
 
-<a class="btn btn-default" href="{% url 'make_pick' %}">ピック指示作成</a>
-
     <table border=1>
 	<tr>
 	<th>  </th>
+	<th> 番地 </th>
 	<th> コード </th>
 	<th> 数量 </th>
 	<th> 生産日 </th>
 	<th> 受注ナンバー </th>
 	</tr>
-     {% for item in seisans %}
+     {% for item in picks %}
     <tr>
         <td>
         </td>
+        <td>{{ item.banch }}</td>
         <td>{{ item.code }}</td>
         <td>{{ item.qty }}</td>
         <td>{{ item.seisan }}</td>

@@ -19,8 +19,10 @@
         <td>{{ item.shiji_date }}</td>
         <td>{{ item.file_name }}</td>
         <td>{{ item.uploaded_at }}</td>
+        <td>
         <a class="btn btn-default" href="{% url 'shiji_del' shiji_id=item.id %}"><span class="glyphicon glyphicon-remove"></span></a>
-    <tr>
+        </td>
+    </tr>
     {% endfor %}
 	</table>
 
