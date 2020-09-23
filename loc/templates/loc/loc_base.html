@@ -8,8 +8,25 @@
         <title>TFCカバー番地リスト</title>
     </head>
     <body>
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1rem;">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="/">カバー番地リスト</a></li>
+      <li class="nav-item"><a class="nav-link" href="/loc/shiji_list">製造指示ファイルリスト</a></li>
+      <li class="nav-item"><a class="nav-link" href="/loc/seisan_list">生産リスト</a></li>
+      <li class="nav-item"><a class="nav-link" href="/loc/pick_list">ピック指示リスト</a></li>
+      <li class="nav-item"><a class="nav-link" href="/upload">製造指示ファイルアップロード</a></li>
+
+      </ul>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
 	    
-	    <div class="page-header">
+<div class="page-header">
 	    <a href="{% url 'loc_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
 	    	 
 		    <H1><a href="/">TFCカバー番地リスト</a></H1>
@@ -25,6 +42,5 @@
 	    </div>
 	    </div>
 	    
-
     </body>
 </html>
