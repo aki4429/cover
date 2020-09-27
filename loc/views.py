@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import LocForm, ShijiForm
-from .models import Locdata, Shiji, Seisan, LocStatus, Pick
+from .forms import LocForm, ShijiForm, LocStatusForm
+from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
 
 @login_required
 def loc_list(request):
+    ls = LocStatus.objects.all() 
+    if len(ls) == 0 or ls[0].koshinbi == None :
+        return redirect('status_edit')
+    else:
+        status = ls[0]
     bq_word = request.GET.get('banchquery')
     cq_word = request.GET.get('codequery')
     c2q_word = request.GET.get('code2query')
@@ -46,6 +51,8 @@ def loc_list(request):
     #locs = Locdata.objects.filter(qty__gt=0 ).order_by('banch')
     #locs = Locdata.objects.order_by('banch')
     params = {
+            'title':'カバー番地リスト',
+            'koshinbi': status.koshinbi,
             'locs':locs,
             'bq_word':bq_word,
             }
@@ -123,18 +130,34 @@ def shiji_del(request, shiji_id):
 
 @login_required
 def seisan_list(request):
-    seisans = Seisan.objects.order_by('seisan')
-    return render(request, 'loc/seisan_list.html', {'seisans': seisans})
+    ls = LocStatus.objects.all() 
+    if len(ls) == 0 or ls[0].koshinbi == None :
+        return redirect('status_edit')
+    else:
+        status = LocStatus.objects.get(id=1)
+        koshinbi = status.koshinbi
+        seisans = Seisan.objects.filter(seisan__gt=koshinbi).order_by('seisan')
+    params = {
+            'title':'生産リスト',
+            'seisans':seisans,
+            'status':status,
+            }
+
+    return render(request, 'loc/seisan_list.html', params)
 
 @login_required
 def make_seisan(request, shiji_id):
     Seisan.objects.all().delete()
+    Pick.objects.all().delete()
     shiji = get_object_or_404(Shiji, id=shiji_id)
 
     #製造指示日を記録
-    ls = LocStatus.objects.get(pk=1)
-    ls.seizoshiji = shiji.shiji_date
-    ls.save()
+    ls = LocStatus.objects.all() 
+    if len(ls) == 0 or ls[0].koshinbi == None :
+        return redirect('status_edit')
+    status = LocStatus.objects.get(pk=1)
+    status.shijibi = shiji.shiji_date
+    status.save()
 
     shiji_file_name =  shiji.file_name.path
     sdata = read_shiji(shiji_file_name)
@@ -147,15 +170,36 @@ def make_seisan(request, shiji_id):
 
     Seisan.objects.bulk_create(add_seisan) 
 
-    return redirect('seisan_list')
+    locs = list(Locdata.objects.order_by('banch').values())
+    koshinbi = LocStatus.objects.get(pk=1).koshinbi
+    if koshinbi == None:
+        return redirect('status_edit')
+    else:
+        seis = list(Seisan.objects.filter(seisan__gt=koshinbi).order_by('seisan').values())
+
+    picks = pickup(seis, locs)
+
+    add_pick =[]
+    for row in picks:
+        pick = Pick(code = row[0], qty = row[1], loc_qty = row[2],
+                seisan = row[3], om = row[4], banch = row[5])
+        add_pick.append(pick)
+
+    Pick.objects.bulk_create(add_pick) 
+
+    return redirect('pick_list')
 
 from .pickup import pickup
 @login_required
 def make_pick(request):
     Pick.objects.all().delete()
     locs = list(Locdata.objects.order_by('banch').values())
-    koshinbi = LocStatus.objects.get(pk=1).koshinbi
-    seis = list(Seisan.objects.filter(seisan__gt=koshinbi).order_by('seisan').values())
+    ls = LocStatus.objects.all() 
+    if len(ls) == 0 or ls[0].koshinbi == None :
+        return redirect('status_edit')
+    else:
+        koshinbi = ls[0].koshinbi
+        seis = list(Seisan.objects.filter(seisan__gt=koshinbi).order_by('seisan').values())
 
     picks = pickup(seis, locs)
 
@@ -172,18 +216,32 @@ def make_pick(request):
 @login_required
 def pick_list(request):
     picks = Pick.objects.order_by('seisan', 'banch')
-    status = LocStatus.objects.get(id=1)
+    ls = LocStatus.objects.all() 
+    if len(ls) == 0 or ls[0].koshinbi == None :
+        return redirect('status_edit')
+    else:
+        status = ls[0]
+
+    if len(Kakutei.objects.all()) == 0:
+        k = Kakutei()
+        k.save()
+    kaku = Kakutei.objects.last()
     params = {
+            'kaku':kaku,
             'pick':picks[0],
             'picks':picks,
-            'koshinbi':status.koshinbi,
+            'status':status,
             }
     return render(request, 'loc/pick_list.html', params)
 
 @login_required
 def koshin(request, pick_id ):
-    pick = get_object_or_404(Pick, id=pick_id)
-    seisanbi = pick.seisan
+    #pick_id はpicks[0]のidが与えられます。
+    #seisanbiが該当するpickデータの数量を番地リストから差し引きます。
+    #更新したpickデータをkakuteiデータに残します。
+    last_pick = get_object_or_404(Pick, id=pick_id)
+    seisanbi = last_pick.seisan
+    add_kaku = []
     picks = Pick.objects.filter(seisan = seisanbi)
     for pick in picks:
         if pick.banch != 'mitei':
@@ -191,11 +249,60 @@ def koshin(request, pick_id ):
             loc.qty = loc.qty - pick.qty
             if loc.qty == 0:
                 loc.code = 'empty'
+            loc.save()
 
-        loc.save()
+            kaku = Kakutei()
+            kaku.code = pick.code
+            kaku.qty = pick.qty
+            kaku.seisan = pick.seisan
+            kaku.om = pick.om
+            kaku.banch = pick.banch
+            add_kaku.append(kaku)
+            
+    Kakutei.objects.bulk_create(add_kaku)
 
     status = LocStatus.objects.get(id=1)
     status.koshinbi = seisanbi
     status.save()
     return redirect('make_pick')
 
+def rollback(request, kaku_id):
+    #kakutei_id はkakus.lastのidが与えられます。
+    #seisanbiが該当するpickデータの数量を番地リストから差し引きます。
+    #更新したpickデータをkakuteiデータに残します。
+    last_kaku = get_object_or_404(Kakutei, id=kaku_id)
+    seisanbi = last_kaku.seisan
+    mess = ""
+    kakus = Kakutei.objects.filter(seisan = seisanbi)
+    for kaku in kakus:
+        loc = Locdata.objects.get(banch = kaku.banch)
+        if loc.code == 'empty':
+            loc.code = kaku.code
+        if loc.code != kaku.code :
+            mess = "ピック指示{0}は該当する番地内容が違います。".format(kaku)
+        else:
+            loc.qty = loc.qty + kaku.qty
+            loc.save()
+
+    Kakutei.objects.filter(seisan = seisanbi).delete()
+
+    status = LocStatus.objects.get(id=1)
+    status.koshinbi = Kakutei.objects.last().seisan
+    status.save()
+
+    return redirect('make_pick')
+
+@login_required
+def status_edit(request):
+    if len(LocStatus.objects.all()) == 0:
+        status = LocStatus(id=1)
+    else: 
+        status = LocStatus.objects.get(id=1)
+    if request.method == "POST":
+        form = LocStatusForm(request.POST, instance=status)
+        if form.is_valid():
+            loc = form.save()
+            return render(request, 'loc/status_detail.html', {'status': status})
+
+    form = LocStatusForm(request.POST, instance=status)
+    return render(request, 'loc/status_new.html', {'form': form})

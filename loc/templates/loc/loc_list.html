@@ -1,7 +1,18 @@
 {% extends 'loc/loc_base.html' %}
 
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
 
 {% block content %}
+
+   <p>
+   更新日は {{ koshinbi }}  です。
+   </p>
 
     <form action="" method="get">
         <input name="banchquery" value="{{ bq_word }}" type="text">

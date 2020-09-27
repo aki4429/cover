@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Locdata, Shiji
+from .models import Locdata, Shiji, LocStatus
 
 class LocForm(forms.ModelForm):
 
@@ -12,3 +12,10 @@ class ShijiForm(forms.ModelForm):
     class Meta:
         model = Shiji
         fields = ('shiji_date', 'file_name', )
+
+class LocStatusForm(forms.ModelForm):
+
+    class Meta:
+        model = LocStatus
+        fields = ('koshinbi', 'shijibi',)
+

@@ -10,11 +10,9 @@
 
 {% block content %}
 
-<p> 現在の更新日は、{{ status.koshinbi }} です。 </p>
-<p> 参照している製造指示書は、{{ status.shijibi }} です。 </p>
+<p> 現在の更新日は、{{ koshinbi }} です。 </p>
 
 <a class="btn btn-default" href="{% url 'koshin' pick_id=pick.id %}">{{ pick.seisan }}の生産を更新します</a>
-<a class="btn btn-default" href="{% url 'rollback' kaku_id=kaku.id %}">{{ kaku.seisan }}の更新を戻します</a>
     <table border=1>
 	<tr>
 	<th>  </th>

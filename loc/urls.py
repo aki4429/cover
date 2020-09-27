@@ -16,4 +16,6 @@ urlpatterns = [
     path('loc/pick_list', views.pick_list, name='pick_list'),
     path('loc/pick', views.make_pick, name='make_pick'),
     path('<int:pick_id>/koshin/', views.koshin, name='koshin'),
+    path('<int:kaku_id>/rollback/', views.rollback, name='rollback'),
+    path('loc/status/', views.status_edit, name='status_edit'),
 ]

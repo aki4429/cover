@@ -45,5 +45,15 @@ class LocStatus(models.Model):
     def __str__(self):
         return self.koshinbi
 
+class Kakutei(models.Model):
+    code = models.TextField(blank=True, null=True)
+    qty = models.IntegerField(blank=True, null=True)
+    loc_qty = models.IntegerField(blank=True, null=True)
+    seisan = models.DateField(blank=True, null=True)
+    om = models.CharField(max_length=50, blank = True)
+    banch = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.code + '.' + self.qty + ':' + self.banch + ':' + self.om
 
 

@@ -1,22 +1,29 @@
 {% extends 'loc/loc_base.html' %}
 
+{% block title %}
+番地リスト
+{% endblock title %}
+
+{% block page %}
+番地リスト
+{% endblock page %}
 
 {% block content %}
 
-   <form action="" method="get">
-        <input name="banchquery" value="{{ request.GET.query }}" type="text">
+    <form action="" method="get">
+        <input name="banchquery" value="{{ bq_word }}" type="text">
         <button type="submit">番地検索する</button>
     </form>
-    
-       <form action="" method="get">
+    <form action="" method="get">
+        <button type="submit" name="bqclear" value="clear">クリアする</button>
+    </form>
+	　
+    <form action="" method="get">
         <input name="codequery" value="{{ request.GET.query }}" type="text">
+        <input name="code2query" value="{{ request.GET.query }}" type="text">
         <button type="submit">コード検索する</button>
     </form>
-    
-       <form action="" method="get">
-        <input name="code2query" value="{{ request.GET.query }}" type="text">
-        <button type="submit">コード絞り込み</button>
-    </form>
+
 
 	<table border=1>
 		<tr>

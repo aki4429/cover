@@ -1,22 +1,26 @@
 {% load static %}
+{% bootstrap_css %} 
+{% bootstrap_javascript jquery='full' %} 
+
+
 <html>
     <head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/loc.css' %}">
-        <title>TFCカバー番地リスト</title>
+    <link rel="stylesheet" href="{% static 'css/loc.css' %}"> 
+        <title>{% block title %} {% endblock title %}</title>
     </head>
     <body>
 
- <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 1rem;">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 1rem;">
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
       <li class="nav-item"><a class="nav-link" href="/">カバー番地リスト</a></li>
-      <li class="nav-item"><a class="nav-link" href="/loc/shiji_list">製造指示ファイルリスト</a></li>
       <li class="nav-item"><a class="nav-link" href="/loc/seisan_list">生産リスト</a></li>
       <li class="nav-item"><a class="nav-link" href="/loc/pick_list">ピック指示リスト</a></li>
-      <li class="nav-item"><a class="nav-link" href="/upload">製造指示ファイルアップロード</a></li>
+      <li class="nav-item"><a class="nav-link" href="/loc/shiji_list">製造指示ファイルリスト</a></li>
+      <li class="nav-item"><a class="nav-link" href="/upload">アップロード</a></li>
 
       </ul>
     </div>
@@ -27,20 +31,17 @@
 
 	    
 <div class="page-header">
-	    <a href="{% url 'loc_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-	    	 
-		    <H1><a href="/">TFCカバー番地リスト</a></H1>
+	       	 
+		    <H1>{% block page %} {% endblock page %}</H1>
 	    </div>
 	    <div class="content container">
-	    <div class="row">
+	    
             {% block content %}
             {% endblock %}
 
 	
 
 			</div>	
-	    </div>
-	    </div>
 	    
     </body>
 </html>

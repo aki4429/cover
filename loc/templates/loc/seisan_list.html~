@@ -1,20 +1,18 @@
 {% extends 'loc/loc_base.html' %}
 
 {% block title %}
-{{ title }}
+生産リスト
 {% endblock title %}
 
 {% block page %}
-{{ title }}
+生産リスト
 {% endblock page %}
 
 {% block content %}
-<p>
-更新日は、{{status.koshinbi}} です。
-</p>
-<p>
-参照している製造指示書は、{{status.shijibi}} です。
-</p>
+<div class="row">
+<a class="btn btn-default" href="{% url 'make_pick' %}">ピック指示作成</a>
+ <a class="btn btn-default" href="{% url 'upload'  %}">アップロード</a>
+</div>
 <div class="row">
     <table border=1>
 	<tr>
