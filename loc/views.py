@@ -4,6 +4,7 @@ from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
+from .drop  import drop
 
 @login_required
 def loc_list(request):
@@ -264,6 +265,9 @@ def koshin(request, pick_id ):
     status = LocStatus.objects.get(id=1)
     status.koshinbi = seisanbi
     status.save()
+
+    locs = Locdata.objects.all()
+    locs = drop(locs)
     return redirect('make_pick')
 
 def rollback(request, kaku_id):
@@ -276,10 +280,21 @@ def rollback(request, kaku_id):
     kakus = Kakutei.objects.filter(seisan = seisanbi)
     for kaku in kakus:
         loc = Locdata.objects.get(banch = kaku.banch)
+        upper = Locdata.objects.get(banch = kaku.banch.replace('2', '1').replace('4', '3'))
         if loc.code == 'empty':
             loc.code = kaku.code
         if loc.code != kaku.code :
-            mess = "ピック指示{0}は該当する番地内容が違います。".format(kaku)
+            #該当番地の箱の内容が違うが、上の箱が空の場合、
+            #空の箱に入れて、上下入れ替え
+            if upper.code == 'empty' :
+                upper.code = kaku.code
+                upper.qty = kaku.qty
+                loc.banch = upper.banch
+                upper.banch = kaku.banch
+                upper.save()
+                loc.save()
+            else:
+                mess = "ピック指示{0}は該当する番地内容が違います。".format(kaku)
         else:
             loc.qty = loc.qty + kaku.qty
             loc.save()

@@ -19,6 +19,8 @@ def drop(locs):
                 #上下の番地を置き換えます。
                 loc.banch = ue.banch
                 ue.banch = shita
+                loc.save()
+                ue.save()
 
     return locs
 
