@@ -1,6 +1,8 @@
 from django import forms
 
-from .models import Locdata, Shiji, LocStatus
+from .models import Locdata, Shiji, LocStatus, Pick
+
+from .p2d import p2d
 
 class LocForm(forms.ModelForm):
 
@@ -19,3 +21,19 @@ class LocStatusForm(forms.ModelForm):
         model = LocStatus
         fields = ('koshinbi', 'shijibi',)
 
+class OrderChoiceForm(forms.Form):
+    choice1 = forms.fields.ChoiceField(
+        choices = (
+            ('banch', '番地'),
+            ('code', 'コード'),
+        ),
+        required=True,
+        widget=forms.widgets.Select
+    )
+
+class ChoiceForm(forms.Form):
+    seisan = forms.ChoiceField(
+        label = '生産日',
+        choices = p2d(),
+        widget=forms.widgets.Select,
+        )

@@ -18,4 +18,5 @@ urlpatterns = [
     path('<int:pick_id>/koshin/', views.koshin, name='koshin'),
     path('<int:kaku_id>/rollback/', views.rollback, name='rollback'),
     path('loc/status/', views.status_edit, name='status_edit'),
+    path('loc/download_pick/<int:pick_pk>', views.download_pick, name='download_pick'),
 ]

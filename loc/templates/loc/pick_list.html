@@ -13,6 +13,38 @@
 <p> 現在の更新日は、{{ status.koshinbi }} です。 </p>
 <p> 参照している製造指示書は、{{ status.shijibi }} です。 </p>
 
+	<!-- <form method="POST" aciton="">
+	<p> ソート順を選択してください。</p>
+            {% for field in cform %}
+            {{ field }}
+            {% endfor %}
+            {% csrf_token %}
+        <button type="submit">並べ替える</button>
+        </form>
+	-->
+
+	<form method="POST" aciton="">
+	<p> 生産日を選択してください。。</p>
+	{{ pform }}
+        {% csrf_token %}
+        <button type="submit">絞り込む</button>
+        </form>
+    <a class="btn btn-default" href="{% url 'download_pick' pick.pk  %} " download = 'shiji.csv'>指示書ダウンロード</a>
+
+    <form action="" method="get">
+        <input name="banchquery" value="{{ bq_word }}" type="text">
+        <button type="submit">番地検索する</button>
+    </form>
+    <form action="" method="get">
+        <button type="submit" name="bqclear" value="clear">クリアする</button>
+    </form>
+	　
+    <form action="" method="get">
+        <input name="codequery" value="{{ request.GET.query }}" type="text">
+        <input name="code2query" value="{{ request.GET.query }}" type="text">
+        <button type="submit">コード検索する</button>
+    </form>
+
 <a class="btn btn-default" href="{% url 'koshin' pick_id=pick.id %}">{{ pick.seisan }}の生産を更新します</a>
 <a class="btn btn-default" href="{% url 'rollback' kaku_id=kaku.id %}">{{ kaku.seisan }}の更新を戻します</a>
     <table border=1>

@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import LocForm, ShijiForm, LocStatusForm
+from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm
 from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
 from .drop  import drop
+from django.conf import settings
 
 @login_required
 def loc_list(request):
@@ -131,6 +132,9 @@ def shiji_del(request, shiji_id):
 
 @login_required
 def seisan_list(request):
+    
+    #LocStatusにデータがないときはstatus_editに飛ばして、
+    #更新日を設定してもらいます。
     ls = LocStatus.objects.all() 
     if len(ls) == 0 or ls[0].koshinbi == None :
         return redirect('status_edit')
@@ -153,6 +157,9 @@ def make_seisan(request, shiji_id):
     shiji = get_object_or_404(Shiji, id=shiji_id)
 
     #製造指示日を記録
+    
+    #LocStatusにデータがないときはstatus_editに飛ばして、
+    #更新日を設定してもらいます。
     ls = LocStatus.objects.all() 
     if len(ls) == 0 or ls[0].koshinbi == None :
         return redirect('status_edit')
@@ -195,6 +202,9 @@ from .pickup import pickup
 def make_pick(request):
     Pick.objects.all().delete()
     locs = list(Locdata.objects.order_by('banch').values())
+    
+    #LocStatusにデータがないときはstatus_editに飛ばして、
+    #更新日を設定してもらいます。
     ls = LocStatus.objects.all() 
     if len(ls) == 0 or ls[0].koshinbi == None :
         return redirect('status_edit')
@@ -216,7 +226,21 @@ def make_pick(request):
 
 @login_required
 def pick_list(request):
-    picks = Pick.objects.order_by('seisan', 'banch')
+    choice1 = 'banch'
+    if request.method == 'POST' and 'choice1' in request.POST:
+        choice1 = request.POST['choice1']
+        picks = Pick.objects.order_by('seisan', choice1)
+    elif request.method == 'POST' and 'seisan' in request.POST:
+        seisan = request.POST['seisan']
+        #down_pick(seisan)
+        picks = Pick.objects.filter(seisan=seisan).order_by('seisan', choice1)
+        #download_pick(request,picks)
+        #write_pick(picks)
+    else:
+        picks = Pick.objects.order_by('seisan', choice1)
+    
+    #LocStatusにデータがないときはstatus_editに飛ばして、
+    #更新日を設定してもらいます。
     ls = LocStatus.objects.all() 
     if len(ls) == 0 or ls[0].koshinbi == None :
         return redirect('status_edit')
@@ -227,7 +251,23 @@ def pick_list(request):
         k = Kakutei()
         k.save()
     kaku = Kakutei.objects.last()
+
+    #result =[]
+    #i=0
+    #seisans = Pick.objects.all().values('seisan')
+    #for seisan in seisans:
+    #    #dates.append(seisan['seisan'])
+    #    #dates = sorted(list(set(dates)))
+    #    for d in dates:
+    #        result.append([i+1, d])
+    #        i += 1
+
+
+    cform = OrderChoiceForm()
+    pform = ChoiceForm()
     params = {
+            'cform':cform,
+            'pform':pform,
             'kaku':kaku,
             'pick':picks[0],
             'picks':picks,
@@ -315,9 +355,50 @@ def status_edit(request):
         status = LocStatus.objects.get(id=1)
     if request.method == "POST":
         form = LocStatusForm(request.POST, instance=status)
+        form = LocStatusForm(request.POST, instance=status)
         if form.is_valid():
             loc = form.save()
             return render(request, 'loc/status_detail.html', {'status': status})
 
     form = LocStatusForm(request.POST, instance=status)
     return render(request, 'loc/status_new.html', {'form': form})
+
+from django.http import HttpResponse
+import io
+import csv
+import os
+#@login_required
+#def down_pick(request, pick_id):
+#    pick = Pick.objects.get(id=pick_id)
+#    download_pick(pick.seisan)
+#return redirect('pick_list')
+
+from .s2d import d2sh
+@login_required
+def download_pick(request, pick_pk):
+    pick = get_object_or_404(Pick, pk=pick_pk)
+    picks = Pick.objects.filter(seisan = pick.seisan).order_by('banch', 'code' )
+    output = io.StringIO()
+    writer = csv.writer(output)
+    lines =[]
+    lines.append(['番地','コード', 'ピック数量', '番地在庫', '生産日', '受注NO'])
+    for pick in picks:
+        lines.append([pick.banch, pick.code, pick.qty, pick.loc_qty, 
+                d2sh(pick.seisan), pick.om])
+    writer.writerows(lines)
+    response = HttpResponse(output.getvalue(), content_type="text/csv", charset = "ShiftJIS")
+    response["Content-Disposition"] = "filename=pick.csv"
+    return response
+
+def write_pick(picks):
+    path = 'shiji.csv'
+    filename = os.path.join(settings.MEDIA_ROOT, path)
+    lines = []
+    lines.append(['番地','コード', 'ピック数量', '番地在庫', '生産日', '受注NO'])
+    with open(filename, 'w', encoding='CP932') as f:
+        writer = csv.writer(f)
+        for pick in picks:
+            lines.append([pick.banch, pick.code, pick.qty, pick.loc_qty, 
+                d2sh(pick.seisan), pick.om])
+        writer.writerows(lines)
+
