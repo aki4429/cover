@@ -1,0 +1,42 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+   <p>
+   更新日は {{ koshinbi }}  です。
+   </p>
+    <table border=1>
+	<tr>
+	<th>  </th>
+	<th> 番地 </th>
+	<th> コード </th>
+	<th> ピック数量 </th>
+	<th> 在庫数量 </th>
+	<th> 生産日 </th>
+	<th> 受注ナンバー </th>
+	</tr>
+     {% for item in kakus %}
+    <tr>
+        <td>
+        </td>
+        <td>{{ item.banch }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.loc_qty }}</td>
+        <td>{{ item.seisan }}</td>
+        <td>{{ item.om }}</td>
+    <tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}
+

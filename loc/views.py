@@ -229,7 +229,7 @@ def pick_list(request):
     choice1 = 'banch'
     if request.method == 'POST' and 'choice1' in request.POST:
         choice1 = request.POST['choice1']
-        picks = Pick.objects.order_by('seisan', choice1)
+        #picks = Pick.objects.order_by('seisan', choice1)
     elif request.method == 'POST' and 'seisan' in request.POST:
         seisan = request.POST['seisan']
         #down_pick(seisan)
@@ -251,6 +251,29 @@ def pick_list(request):
         k = Kakutei()
         k.save()
     kaku = Kakutei.objects.last()
+
+    bq_word = request.GET.get('banchquery')
+    cq_word = request.GET.get('codequery')
+    c2q_word = request.GET.get('code2query')
+    bq_clear = request.GET.get('bqclear')
+
+    if not bq_word :
+        bq_word = ''
+    if not cq_word :
+        cq_word = ''
+    if not c2q_word :
+        c2q_word = ''
+
+    if cq_word == '' and bq_word != '':
+        picks = Pick.objects.filter(
+            Q(banch__icontains=bq_word ), 
+            Q(code__icontains=cq_word), 
+            Q(code__icontains=c2q_word)).order_by('banch')
+    elif bq_word == '' and cq_word != '' :
+        picks = Pick.objects.filter(
+            Q(banch__icontains=bq_word ), 
+            Q(code__icontains=cq_word), 
+            Q(code__icontains=c2q_word)).order_by('code')
 
     #result =[]
     #i=0
@@ -402,3 +425,29 @@ def write_pick(picks):
                 d2sh(pick.seisan), pick.om])
         writer.writerows(lines)
 
+@login_required
+def kaku_list(request):
+    
+    #LocStatusにデータがないときはstatus_editに飛ばして、
+    #更新日を設定してもらいます。
+    ls = LocStatus.objects.all() 
+    if len(ls) == 0 or ls[0].koshinbi == None :
+        return redirect('status_edit')
+    else:
+        status = ls[0]
+
+    koshinbi = status.koshinbi
+
+    if len(Kakutei.objects.all()) == 0:
+        k = Kakutei()
+        k.save()
+
+    kakus = Kakutei.objects.filter(seisan__gt=koshinbi).order_by('seisan', 'banch')
+
+
+    params = {
+            'title':'確定指示リスト',
+            'koshinbi': status.koshinbi,
+            'kakus':kakus,
+            }
+    return render(request, 'loc/kaku_list.html', params)
