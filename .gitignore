@@ -2,7 +2,6 @@
 __pycache__
 *venv
 db.sqlite3
-Djangoプロジェクト開始.txt
 locdata.sqlite
 locdata_dump.txt
 /static

@@ -1,0 +1,28 @@
+python3 -m venv djangobros_venv
+source djangobros_venv/bin/activate
+
+「DjangoBros」というディレクトリを作ってそこに移動しました。現在のカレントディレクトリは「DjangoBros」です。現時点では、この中に何にもディレクトリやファイルを作成していないので、ここでlsコマンドを実行しても何も表示されないことを確認してください。
+
+それでは、このディレクトリの中に仮想環境を作ります。
+
+仮想環境を作る方法はいくつかありますが、今回はpython3 -m venvコマンドを使います。
+
+コマンドラインにpython3 -m venv djangobros_venvと入力してください。
+
+これは、Python3を使って「djangobros_venv」という名前の仮想環境を作る、という意味のコマンドです。「djangobros_venv」の部分は自分の好きな名前を指定しても大丈夫です。ちなみにvenvは、Virtual Environment(仮想環境)の略です。
+
+
+今は、環境を作っただけですので、まずはこの環境の中に入る必要があります。以下コマンドで環境の中に入ることができます。
+
+このコマンドは、仮想環境（djangobros_venv）がある、一つ上の階層で実行してください。今回の場合だと、「DjangoBros」ディレクトリをカレントディレクトリにした状態で実行してください。
+
+
+$ source djangobros_venv/bin/activate
+(djangobros_venv) $
+コマンドがうまく実行されると、＄の前に（djangobros_venv）のような文字が出ます。これが「仮想環境の中にいる」状態を表しています。
+
+*パッケージ一括インストール
+pip install -r requirements.txt
+
+現在の環境の設定ファイルを書き出し: pip freeze
+pip freeze > requirements.txt
