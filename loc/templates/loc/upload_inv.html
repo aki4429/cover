@@ -1,0 +1,22 @@
+
+{% extends 'loc/loc_base.html' %}
+
+{% block content %}
+    <h2>インボイスアップロード</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" >送信</button>
+    </form>
+    {% if download_url %}
+        <a href="{{ download_url }}">{{ download_url }}</a>
+    {% endif %}
+    {% if addcovers %}
+    	{% for adds in addcovers %}
+	<p> {{ adds.hcode }} | {{ adds.qty }}   </p>
+    	{% endfor %}
+    {% endif %}
+
+{% endblock %}
+
+

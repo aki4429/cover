@@ -1,11 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm
-from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei
+from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm, InvUpForm
+from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei, Addcover
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
 from .drop  import drop
 from django.conf import settings
+import xlrd
+from .read_inv import pick_items
 
 @login_required
 def loc_list(request):
@@ -451,3 +453,38 @@ def kaku_list(request):
             'kakus':kakus,
             }
     return render(request, 'loc/kaku_list.html', params)
+
+
+@login_required
+def upload_inv(request):
+    INVN = (2,0) #inv.#位置
+    form = InvUpForm()
+    #template_name = 'inv/upload_inv.html'
+
+    if request.method == 'POST':
+        form = InvUpForm(request.POST, request.FILES)  # Do not forget to add: request.FILES
+        if form.is_valid():
+            # Do something with our files or simply save them
+            # if saved, our files would be located in media/ folder under the project's base folder
+            file, download_url = form.save()
+            #book = xlrd.open_workbook(file.name)
+            dict, invn = pick_items(file.name)
+            adds = []
+            for key, val in dict.items():
+                addcover = Addcover(hcode = key, qty = val, invn = invn)
+                adds.append( addcover)
+
+            Addcover.objects.bulk_create(adds)
+            addcovers = Addcover.objects.all()
+
+            context = {
+                #'download_url': download_url,
+                #'dict' : dict,
+                'addcovers' : addcovers,
+                'invn': invn,
+                'form': form,
+                }
+            os.remove(file.name)
+            return render(request, 'loc/upload_inv.html', context)
+    return render(request, 'loc/upload_inv.html', locals())
+

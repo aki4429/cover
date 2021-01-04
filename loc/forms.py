@@ -1,8 +1,13 @@
 from django import forms
 
+from django.core.files.storage import default_storage
+from django.core.validators import FileExtensionValidator
+
 from .models import Locdata, Shiji, LocStatus, Pick
 
 from .p2d import p2d
+import os
+from django.conf import settings
 
 class LocForm(forms.ModelForm):
 
@@ -37,3 +42,18 @@ class ChoiceForm(forms.Form):
         choices = p2d(),
         widget=forms.widgets.Select,
         )
+
+
+class InvUpForm(forms.Form):
+    invf = forms.FileField(label='入荷インボイス',
+        validators=[FileExtensionValidator(['xls' ])],
+        #拡張子バリデーター。アップロードファイルの拡張子が違う時にエラー
+        )
+
+    def save(self):
+        upload_file = self.cleaned_data['invf']
+        #default_storage.location = os.path.join(settings.MEDIA_ROOT, 'inv')
+        file_name = default_storage.save(upload_file.name, upload_file)
+        #return default_storage.url(file_name)
+        #file属性で返す。
+        return default_storage.open(file_name), default_storage.url(file_name)

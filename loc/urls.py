@@ -19,5 +19,6 @@ urlpatterns = [
     path('<int:kaku_id>/rollback/', views.rollback, name='rollback'),
     path('loc/status/', views.status_edit, name='status_edit'),
     path('loc/download_pick/<int:pick_pk>', views.download_pick, name='download_pick'),
+    path('loc/upload_inv', views.upload_inv, name='upload_inv'),
     path('loc/kaku_list', views.kaku_list, name='kaku_list'),
 ]
