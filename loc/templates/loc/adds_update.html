@@ -1,0 +1,13 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+    <form method="POST" class="loc-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}
+

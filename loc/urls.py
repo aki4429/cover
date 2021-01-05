@@ -21,5 +21,6 @@ urlpatterns = [
     path('loc/download_pick/<int:pick_pk>', views.download_pick, name='download_pick'),
     path('loc/upload_inv', views.upload_inv, name='upload_inv'),
     path('loc/adds_list', views.AddcoverList.as_view(), name='adds_list'),
+    path('<int:pk>/adds_update/', views.AddcoverUpdate.as_view(), name='adds_update'),
     path('loc/kaku_list', views.kaku_list, name='kaku_list'),
 ]

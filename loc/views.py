@@ -13,7 +13,8 @@ import io
 import csv
 import os
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse
 
 
 @login_required
@@ -500,4 +501,24 @@ class AddcoverList(LoginRequiredMixin, ListView):
         context['title']='追加カバーリスト'
         invn = Addcover.objects.all()[0].invn
         context['invn']= invn
+        return context
+
+class AddcoverUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'loc/adds_update.html'
+    model = Addcover
+    fields = ['hcode', 'qty', 'invn']
+ 
+    def get_success_url(self):
+        return reverse('adds_list')
+ 
+    def get_form(self):
+        form = super(AddcoverUpdate, self).get_form()
+        form.fields['hcode'].label = 'コード'
+        form.fields['qty'].label = '数量'
+        form.fields['invn'].label = 'インボイスNo.'
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='入荷カバー編集画面'
         return context

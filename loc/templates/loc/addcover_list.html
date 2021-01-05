@@ -19,6 +19,7 @@
 		<tr>
 		<th> コード </th>
 		<th> 数量 </th>
+		<th> 編集 </th>
 		</tr>
 
 	<div class="loc">
@@ -29,6 +30,9 @@
 	</td>
 	<td class="qty">
         {{ ac.qty | floatformat:0 }}
+	</td>
+	<td class="qty">
+    	<a class="btn btn-default" href="{% url 'adds_update' pk=ac.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
 	</td>
 	</tr>
 	{% endfor %}
