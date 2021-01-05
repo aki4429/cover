@@ -563,7 +563,8 @@ def input_case(request):
     response['Content-Disposition'] = 'attachment; filename="input_case.csv"'
     # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
     input_cases = make_input_list(Locdata, Addcover)
-    writer = csv.writer(response)
+    sio = io.StringIO()
+    writer = csv.writer(sio)
     writer.writerows(input_cases)
     response.write(sio.getvalue().encode('cp932'))
     return response
