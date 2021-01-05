@@ -8,6 +8,13 @@ from .drop  import drop
 from django.conf import settings
 import xlrd
 from .read_inv import pick_items
+from django.http import HttpResponse
+import io
+import csv
+import os
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+
 
 @login_required
 def loc_list(request):
@@ -388,10 +395,6 @@ def status_edit(request):
     form = LocStatusForm(request.POST, instance=status)
     return render(request, 'loc/status_new.html', {'form': form})
 
-from django.http import HttpResponse
-import io
-import csv
-import os
 #@login_required
 #def down_pick(request, pick_id):
 #    pick = Pick.objects.get(id=pick_id)
@@ -488,3 +491,13 @@ def upload_inv(request):
             return render(request, 'loc/upload_inv.html', context)
     return render(request, 'loc/upload_inv.html', locals())
 
+class AddcoverList(LoginRequiredMixin, ListView):
+    context_object_name = 'addcovers'
+    queryset = Addcover.objects.order_by('hcode')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='追加カバーリスト'
+        invn = Addcover.objects.all()[0].invn
+        context['invn']= invn
+        return context

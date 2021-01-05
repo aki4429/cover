@@ -1,0 +1,41 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+   <p>
+   インボイスNo. {{ invn }}  のリストです。
+   </p>
+
+
+	<table border=1>
+		<tr>
+		<th> コード </th>
+		<th> 数量 </th>
+		</tr>
+
+	<div class="loc">
+	{% for ac in addcovers %}
+
+	<td class="code">
+	<h3>{{ ac.hcode }}</h3>
+	</td>
+	<td class="qty">
+        {{ ac.qty | floatformat:0 }}
+	</td>
+	</tr>
+	{% endfor %}
+	</div>
+
+	</table>
+
+
+{% endblock %}
+
