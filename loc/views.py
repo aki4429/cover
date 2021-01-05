@@ -559,10 +559,11 @@ class AddcoverDelete(LoginRequiredMixin, DeleteView):
         return context
 
 def input_case(request):
-    response = HttpResponse(content_type='text/csv')
+    response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] = 'attachment; filename="input_case.csv"'
     # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
     input_cases = make_input_list(Locdata, Addcover)
     writer = csv.writer(response)
     writer.writerows(input_cases)
+    response.write(sio.getvalue().encode('cp932'))
     return response
