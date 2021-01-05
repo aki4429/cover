@@ -13,7 +13,7 @@ import io
 import csv
 import os
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 
 
@@ -468,6 +468,8 @@ def upload_inv(request):
     if request.method == 'POST':
         form = InvUpForm(request.POST, request.FILES)  # Do not forget to add: request.FILES
         if form.is_valid():
+            #前の内容は全削除する。
+            Addcover.objects.all().delete()
             # Do something with our files or simply save them
             # if saved, our files would be located in media/ folder under the project's base folder
             file, download_url = form.save()
@@ -520,5 +522,39 @@ class AddcoverUpdate(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title']='入荷カバー編集画面'
+        context['title']='入荷カバー編集'
         return context
+
+class AddcoverCreate(LoginRequiredMixin, CreateView):
+    #template_name = 'loc/addcover_form.html'
+    model = Addcover
+    fields = ['hcode', 'qty', 'invn']
+
+    def get_success_url(self):
+        return reverse('adds_list')
+
+    def get_form(self):
+        form = super(AddcoverCreate, self).get_form()
+        form.fields['hcode'].label = 'コード'
+        form.fields['qty'].label = '数量'
+        form.initial['invn'] = Addcover.objects.first().invn
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='入荷カバー新規作成'
+        return context
+
+class AddcoverDelete(LoginRequiredMixin, DeleteView):
+    #template_name = 'loc/addcover_confirm_delete.html'
+    model = Addcover
+
+    def get_success_url(self):
+        return reverse('adds_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='入荷カバー削除確認'
+        return context
+
+

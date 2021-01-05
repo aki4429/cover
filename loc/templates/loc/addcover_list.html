@@ -12,14 +12,17 @@
 
    <p>
    インボイスNo. {{ invn }}  のリストです。
-   </p>
+    	<a class="btn btn-default" href="{% url 'adds_new' %}">新規追加</a>
 
+   </p>
 
 	<table border=1>
 		<tr>
 		<th> コード </th>
 		<th> 数量 </th>
+		<th> INV. NO. </th>
 		<th> 編集 </th>
+		<th> 削除 </th>
 		</tr>
 
 	<div class="loc">
@@ -31,8 +34,14 @@
 	<td class="qty">
         {{ ac.qty | floatformat:0 }}
 	</td>
-	<td class="qty">
+	<td class="code">
+	<h3>{{ ac.invn }}</h3>
+	</td>
+	<td class="loc">
     	<a class="btn btn-default" href="{% url 'adds_update' pk=ac.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+	</td>
+	<td class="loc">
+        <a class="btn btn-default" href="{% url 'adds_del' pk=ac.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
 	</td>
 	</tr>
 	{% endfor %}
