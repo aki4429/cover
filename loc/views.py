@@ -15,6 +15,7 @@ import os
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
+from .input_case import make_input_list
 
 
 @login_required
@@ -557,4 +558,11 @@ class AddcoverDelete(LoginRequiredMixin, DeleteView):
         context['title']='入荷カバー削除確認'
         return context
 
-
+def input_case(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="input_case.csv"'
+    # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
+    input_cases = make_input_list(Locdata, Addcover)
+    writer = csv.writer(response)
+    writer.writerows(input_cases)
+    return response
