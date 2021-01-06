@@ -16,6 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from .input_case import make_input_list
+from .cover_zaiko import make_zaiko
 
 
 @login_required
@@ -560,11 +561,21 @@ class AddcoverDelete(LoginRequiredMixin, DeleteView):
 
 def input_case(request):
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
-    response['Content-Disposition'] = 'attachment; filename="input_case.csv"'
+    response['Content-Disposition'] = 'attachment; filename="cover_seiri.csv"'
     # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
     input_cases = make_input_list(Locdata, Addcover)
     sio = io.StringIO()
     writer = csv.writer(sio)
     writer.writerows(input_cases)
+    response.write(sio.getvalue().encode('cp932'))
+    return response
+
+def cover_zaiko(request):
+    response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
+    response['Content-Disposition'] = 'attachment; filename="cover_zaiko.csv"'
+    cover_zaiko = make_zaiko()
+    sio = io.StringIO()
+    writer = csv.writer(sio)
+    writer.writerows(cover_zaiko)
     response.write(sio.getvalue().encode('cp932'))
     return response

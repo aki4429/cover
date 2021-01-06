@@ -47,7 +47,7 @@ def pick_items(filename):
     return itemdic, invn
 
 
-#items = pick_items('/home/akiyoshi/Downloads/TI201126A FUGUE.xls')
+#items = pick_items('/home/akiyoshi/Downloads/TI201222A FUGUE.xls')
 #print(items)
 
 

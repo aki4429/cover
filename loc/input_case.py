@@ -1,6 +1,6 @@
 #入荷カバーのコード/数量リストから、箱入れ用のリストを作る。
-#既存箱のリストと、空箱リストから、最大値までの箱リストを
-#作っていく。
+#既存箱のリストと、空箱リストの収容最大値まで、入荷したカバーを
+#割り振って、片付けられるようにする。
 
 #from loc.models import Locdata, Addcover
 
@@ -65,5 +65,6 @@ def make_input_list(Locdata, Addcover):
                     inputs.append([empties.pop(0), ac[0], balance, 0 ])
                     balance = 0 #全部入れちゃったので残りはゼロ
 
+    inputs = sorted(inputs, key = lambda x: x[1])
     return inputs
 

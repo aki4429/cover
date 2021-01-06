@@ -25,5 +25,6 @@ urlpatterns = [
     path('loc/<int:pk>/adds_del/', views.AddcoverDelete.as_view(), name='adds_del'),
     path('<int:pk>/adds_update/', views.AddcoverUpdate.as_view(), name='adds_update'),
     path('adds_export/', views.input_case, name='input_list'),
+    path('cover_zaiko/', views.cover_zaiko, name='cover_zaiko'),
     path('loc/kaku_list', views.kaku_list, name='kaku_list'),
 ]
