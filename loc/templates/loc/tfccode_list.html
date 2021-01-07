@@ -1,0 +1,72 @@
+{% extends 'loc/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+    <form action="" method="get">
+        <input name="query" value="{{ request.GET.query }}" type="text">
+        <button type="submit">検索する</button>
+    </form>
+
+	<table border=1>
+		<tr>
+		<th> 品番 </th>
+		<th> アイテム</th>
+		<th> 詳細 </th>
+		<th> 備考 </th>
+		<th> 単位 </th>
+		<th> 単価 </th>
+		<th> vol </th>
+		<th>Z </th>
+		<th>H </th>
+		<th>cat</th>
+		</tr>
+
+	{% for cd in codes %}
+	<tr>
+	<td class="code">
+	{{ cd.hinban }}
+	</td>
+	<td class="code">
+	{{ cd.item }}
+	</td>
+	<td class="code">
+	{{ cd.description }}
+	</td>
+	<td class="code">
+	{{ cd.remarks }}
+	</td>
+	<td class="code">
+	{{ cd.unit }}
+	</td>
+	<td class="code">
+	{{ cd.uprice }}
+	</td>
+	<td class="code">
+	{{ cd.vol }}
+	</td>
+	<td class="code">
+	{{ cd.zaiko }}
+	</td>
+	<td class="code">
+	{{ cd.kento }}
+	</td>
+	<td class="code">
+	{{ cd.hcode }}
+	</td>
+	<td class="code">
+	{{ cd.cat }}
+	</td>
+	</tr>
+	{% endfor %}
+	</table>
+
+
+{% endblock %}
+

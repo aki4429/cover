@@ -38,7 +38,7 @@
     <form action="" method="get">
         <button type="submit" name="bqclear" value="clear">クリアする</button>
     </form>
-	　
+
     <form action="" method="get">
         <input name="codequery" value="{{ request.GET.query }}" type="text">
         <input name="code2query" value="{{ request.GET.query }}" type="text">
@@ -47,6 +47,9 @@
 
 <a class="btn btn-default" href="{% url 'koshin' pick_id=pick.id %}">{{ pick.seisan }}の生産を更新します</a>
 <a class="btn btn-default" href="{% url 'rollback' kaku_id=kaku.id %}">{{ kaku.seisan }}の更新を戻します</a>
+<a class="btn btn-default" href="{% url 'cover_zaiko' %}">在庫表出力</a>
+
+
     <table border=1>
 	<tr>
 	<th>  </th>

@@ -1,7 +1,7 @@
 *.pyc
 __pycache__
 *venv
-db.sqlite3
+tfc_cover.sqlite
 locdata.sqlite
 locdata_dump.txt
 /static
