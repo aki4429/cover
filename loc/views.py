@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm, InvUpForm
-from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei, Addcover
+from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei, Addcover, Input
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
@@ -15,7 +15,7 @@ import os
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
-from .input_case import make_input_list
+from .input_case import make_input
 from .cover_zaiko import make_zaiko
 
 
@@ -559,7 +559,9 @@ class AddcoverDelete(LoginRequiredMixin, DeleteView):
         context['title']='入荷カバー削除確認'
         return context
 
-def input_case(request):
+#loc/input_case.pyのmake_input_listを呼び出し。
+#
+def case_list(request):
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] = 'attachment; filename="cover_seiri.csv"'
     # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
@@ -568,8 +570,15 @@ def input_case(request):
     writer = csv.writer(sio)
     writer.writerows(input_cases)
     response.write(sio.getvalue().encode('cp932'))
+
+    #整理
+    #前の内容は全削除する。
+    Addcover.objects.all().delete()
+
     return response
 
+#「在庫表出力]ボタンで、cover_zaiko.csvをダウンロードさせる。
+#cover_zaiko.pyの make_zaiko()呼びだし
 def cover_zaiko(request):
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] = 'attachment; filename="cover_zaiko.csv"'
@@ -579,3 +588,89 @@ def cover_zaiko(request):
     writer.writerows(cover_zaiko)
     response.write(sio.getvalue().encode('cp932'))
     return response
+
+
+#Inputモデルを作ります。
+@login_required
+def input_case(request):
+    #整理用のケースリストをゲット
+    inputs = make_input(Locdata, Addcover, Input)
+    #return render(request, 'loc/input_list.html', {'inputs': inputs})
+    return redirect('input_list')
+
+#class InitialInputList(LoginRequiredMixin, ListView):
+#    template_name = 'loc/input_list.html'
+#    Input = make_input(Locdata, Addcover, Input)
+#    queryset = Input.objects.order_by('hcode')
+#    context_object_name = 'inputs'
+
+#    def get_context_data(self, **kwargs):
+#        context = super().get_context_data(**kwargs)
+#        context['title']='カバー整理リスト'
+#        context['invn'] = Addcover.objects.first().invn
+
+
+class InputList(LoginRequiredMixin, ListView):
+    queryset = Input.objects.order_by('hcode')
+    context_object_name = 'inputs'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='カバー整理リスト'
+        context['invn'] = Addcover.objects.first().invn
+        return context
+
+class InputCreate(LoginRequiredMixin, CreateView):
+    #template_name = 'loc/input_form.html'
+    model = Input
+    fields = ['banch', 'hcode', 'qty', 'kqty']
+
+    def get_success_url(self):
+        return reverse('input_list')
+
+    def get_form(self):
+        form = super(InputCreate, self).get_form()
+        form.fields['banch'].label = '番地'
+        form.fields['hcode'].label = 'コード'
+        form.fields['qty'].label = '数量'
+        form.fields['kqty'].label = '数量'
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='整理カバー新規作成'
+        return context
+
+class InputUpdate(LoginRequiredMixin, UpdateView):
+    #template_name = 'loc/input_update.html'
+    model = Input
+    fields = ['banch', 'hcode', 'qty', 'kqty']
+
+    def get_success_url(self):
+        return reverse('input_list')
+
+    def get_form(self):
+        form = super(InputUpdate, self).get_form()
+        form.fields['banch'].label = '番地'
+        form.fields['hcode'].label = 'コード'
+        form.fields['qty'].label = '数量'
+        form.fields['kqty'].label = '数量'
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='整理カバー編集'
+        return context
+
+class InputDelete(LoginRequiredMixin, DeleteView):
+    #template_name = 'loc/input_confirm_delete.html'
+    model =  Input
+
+    def get_success_url(self):
+        return reverse('input_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='整理カバー削除確認'
+        return context
+

@@ -1,0 +1,58 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+   <p>
+   インボイスNo. {{ invn }}  のリストです。
+    	<a class="btn btn-default" href="{% url 'input_new' %}">新規追加</a>
+
+   </p>
+
+	<table border=1>
+		<tr>
+		<th> 番地 </th>
+		<th> コード </th>
+		<th> 追加数量 </th>
+		<th> 既存数 </th>
+		<th> 編集 </th>
+		<th> 削除 </th>
+		</tr>
+
+	<div class="loc">
+	{% for cs in inputs %}
+
+	<td class="code">
+	<h3>{{ cs.banch }}</h3>
+	</td>
+	<td class="code">
+	<h3>{{ cs.hcode }}</h3>
+	</td>
+	<td class="qty">
+        {{ cs.qty | floatformat:0 }}
+	</td>
+	<td class="qty">
+        {{ cs.kqty | floatformat:0 }}
+	</td>
+	<td class="loc">
+    	<a class="btn btn-default" href="{% url 'input_update' pk=cs.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+	</td>
+	<td class="loc">
+        <a class="btn btn-default" href="{% url 'input_del' pk=cs.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+	</td>
+	</tr>
+	{% endfor %}
+	</div>
+
+	</table>
+
+
+{% endblock %}
+

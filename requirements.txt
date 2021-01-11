@@ -6,3 +6,4 @@ django-bootstrap4==2.2.0
 sqlparse==0.3.1
 zipp==3.2.0
 openpyxl==3.0.5
+xlrd==2.0.1

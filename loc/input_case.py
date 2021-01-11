@@ -13,9 +13,13 @@ def get_max(code):
     return MAX_DIC[piece]
 
 
-def make_input_list(Locdata, Addcover):
+def make_input(Locdata, Addcover, Input):
 #def make_input_list():
-    inputs = [] #しまうための、[番地、コード、数量、既存数]リスト <=最終目的
+    #前の内容は全削除する。
+    Input.objects.all().delete()
+    inputs = [] #Inputモデルをリストで格納。後で bulk_create
+    #Inputモデル[番地、コード、数量、既存数]
+    #Input:banch, hcode, qty, kqty
 
     adds = [] #到着カバーのリスト用
     locs = [] #番地カバーのリスト用
@@ -46,11 +50,17 @@ def make_input_list(Locdata, Addcover):
             for kizon in kizons :
                 if balance > kizon[1] : #残りが収納可能数より多い
                     #[番地, コード, 数量(最大可能数), 既存数]
-                    inputs.append([kizon[0], ac[0], kizon[1], max - kizon[1] ])
+                    input = Input(banch=kizon[0], hcode=ac[0], 
+                            qty=kizon[1], kqty=(max - kizon[1]) )
+                    inputs.append( input)
+                    #inputs.append([kizon[0], ac[0], kizon[1], max - kizon[1] ])
                     balance -= kizon[1]
                 elif balance > 0:
                     #[番地, コード, 数量(残り全部), 既存数]
-                    inputs.append([kizon[0], ac[0], balance, max - kizon[1] ])
+                    input = Input(banch=kizon[0], hcode=ac[0],
+                            qty = balance, kqty= (max - kizon[1]) )
+                    inputs.append( input)
+                    #inputs.append([kizon[0], ac[0], balance, max - kizon[1] ])
                     balance = 0 #全部入れちゃったので残りはゼロ
 
         #残りがあれば、
@@ -58,13 +68,21 @@ def make_input_list(Locdata, Addcover):
             while balance > 0 :
                 if balance > max :
                     #[番地, コード, 数量(最大可能数), 既存数]emptyは減っていく
-                    inputs.append([empties.pop(0), ac[0], max, 0 ])
+                    input = Input(banch=empties.pop(0), hcode=ac[0],
+                            qty = max, kqty = 0 )
+                    inputs.append( input)
+                    #inputs.append([empties.pop(0), ac[0], max, 0 ])
                     balance -= max
                 else:
                     #[番地, コード, 数量(残り全部), 既存数]emptyは減っていく
-                    inputs.append([empties.pop(0), ac[0], balance, 0 ])
+                    input = Input(banch=empties.pop(0), hcode=ac[0], 
+                            qty = balance, kqty = 0 )
+                    inputs.append( input)
+                    #inputs.append([empties.pop(0), ac[0], balance, 0 ])
                     balance = 0 #全部入れちゃったので残りはゼロ
 
-    inputs = sorted(inputs, key = lambda x: x[1])
+    #Input.objects.bulk_create(inputs) 
+    #input_cases = Input.objects.order_by('hcode')
+    Input.objects.bulk_create(inputs) 
+    inputs = Input.objects.order_by('hcode')
     return inputs
-

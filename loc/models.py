@@ -140,3 +140,10 @@ class Addcover(models.Model):
     qty = models.FloatField(blank=True, null=True)
     invn = models.TextField(blank=True, null=True)
 
+#しまうための、[番地、コード、数量、既存数] 
+#整理用リスト兼追加リスト
+class Input(models.Model):
+    banch = models.CharField(max_length=50, blank=True, null=True)
+    hcode = models.TextField(blank=True, null=True)
+    qty = models.FloatField(blank=True, null=True)
+    kqty = models.FloatField(blank=True, null=True)
