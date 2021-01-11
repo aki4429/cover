@@ -9,14 +9,13 @@ from django.conf import settings
 import xlrd
 from .read_inv import pick_items
 from django.http import HttpResponse
-import io
-import csv
-import os
+import io, csv, os, openpyxl
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse
 from .input_case import make_input
 from .cover_zaiko import make_zaiko
+from .make_seiri_excel import write_excel
 
 
 @login_required
@@ -559,22 +558,27 @@ class AddcoverDelete(LoginRequiredMixin, DeleteView):
         context['title']='入荷カバー削除確認'
         return context
 
-#loc/input_case.pyのmake_input_listを呼び出し。
-#
-def case_list(request):
-    response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
-    response['Content-Disposition'] = 'attachment; filename="cover_seiri.csv"'
+
+#整理用ケース明細をダウンロードします。
+def down_case(request):
+    #response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    #response['Content-Disposition'] = 'attachment; filename="cover_seiri.csv"'
+    response['Content-Disposition'] = 'attachment; filename="cover_seiri.xlsx"'
     # HttpResponseオブジェクトはファイルっぽいオブジェクトなので、csv.writerにそのまま渡せます。
-    input_cases = make_input_list(Locdata, Addcover)
-    sio = io.StringIO()
-    writer = csv.writer(sio)
-    writer.writerows(input_cases)
-    response.write(sio.getvalue().encode('cp932'))
+    #cases = []
+    #inputs = Input.objects.order_by('hcode').values()
+    #for case in inputs:
+    #    cases.append(list(case.values())[1:]) #1:はスライスで、id外し
 
-    #整理
-    #前の内容は全削除する。
-    Addcover.objects.all().delete()
+    #sio = io.StringIO()
+    #writer = csv.writer(sio)
+    #writer.writerows(cases)
+    #response.write(sio.getvalue().encode('cp932'))
+    
+    wb = write_excel(Input.objects.order_by('hcode'), Addcover.objects.first().invn)
 
+    wb.save(response)
     return response
 
 #「在庫表出力]ボタンで、cover_zaiko.csvをダウンロードさせる。

@@ -30,6 +30,7 @@ urlpatterns = [
     path('loc/input_new/', views.InputCreate.as_view(), name='input_new'),
     path('loc/<int:pk>/input_update/', views.InputUpdate.as_view(), name='input_update'),
     path('loc/<int:pk>/input_del/', views.InputDelete.as_view(), name='input_del'),
+    path('loc/down_case/', views.down_case, name='down_case'),
     path('loc/cover_zaiko/', views.cover_zaiko, name='cover_zaiko'),
     path('loc/kaku_list', views.kaku_list, name='kaku_list'),
 ]
