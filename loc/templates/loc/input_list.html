@@ -14,7 +14,8 @@
 	<a href="{{request.META.HTTP_REFERER}}">戻る</a>
    インボイスNo. {{ invn }}  のリストです。
     	<a class="btn btn-default" href="{% url 'down_case' %}">明細D/L</a>
-    	<a class="btn btn-default" href="{% url 'input_new' %}">新規追加</a>
+    	<a class="btn btn-default" href="{% url 'down_label' %}">ラベルD/L</a>
+    	<a href="{% url 'input_new' %}">新規追加</a>
 
    </p>
 

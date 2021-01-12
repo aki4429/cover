@@ -31,14 +31,15 @@ def pick_items(filename):
     for row_index in range(BEGIN_ROW, sheet.nrows):
         item_name = sheet.cell(row_index, ITEM_COL).value
         qty = sheet.cell(row_index, QTY_COL).value
-        code = TfcCode.objects.filter(item = item_name)
+        #アイテム名が同じかつ在庫フラグが1
+        code = TfcCode.objects.filter(item = item_name, zaiko = 1)
 
         #Item 列のセルが空白になったら、終わり
         if len(item_name) == 0 :
             break
         elif len(code) == 1: 
             h_code = code[0].hcode
-            if code[0].zaiko == '1' and h_code.startswith('013CH2'):
+            if h_code.startswith('013CH2'):
                 if h_code not in itemdic:
                     itemdic[h_code] = qty
                 else:
