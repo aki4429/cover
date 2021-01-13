@@ -693,3 +693,36 @@ class InputDelete(LoginRequiredMixin, DeleteView):
         context['title']='整理カバー削除確認'
         return context
 
+@login_required
+def add_input(request):
+    #整理内容をLocdataに追加します。
+    locs = Locdata.objects.all()
+    inputs = Input.objects.all()
+    newlocs = []
+    for cs in inputs:
+        for loc in locs:
+            if cs.banch == loc.banch:
+                if loc.code == cs.hcode:
+                    loc.qty += cs.qty
+                elif loc.code == 'empty' :
+                    loc.code = cs.hcode
+                    loc.qty = cs.qty
+                else:
+                    #上記のいずれにも該当しない場合は、コード数量上書き
+                    loc.code = cs.hcode
+                    loc.qty = cs.qty
+
+            newlocs.append(loc)
+    
+    Locdata.objects.bulk_update(newlocs, fields=['code', 'qty'])
+    #前の内容は全削除する。
+    Input.objects.all().delete()
+    Input.objects.create(hcode='empty')
+
+    #前の内容は全削除する。
+    Addcover.objects.all().delete()
+    Addcover.objects.create(hcode='empty')
+    
+
+    return redirect('loc_list')
+
