@@ -16,6 +16,7 @@ from django.urls import reverse
 from .input_case import make_input
 from .cover_zaiko import make_zaiko
 from .make_seiri_excel import write_excel
+from .make_pick_excel import write_pick_excel
 from .make_label import kako
 
 
@@ -398,28 +399,39 @@ def status_edit(request):
     form = LocStatusForm(request.POST, instance=status)
     return render(request, 'loc/status_new.html', {'form': form})
 
+#ピッキング番地明細をダウンロードします。
+@login_required
+def down_pick(request, pick_pk):
+    pick = get_object_or_404(Pick, pk=pick_pk)
+    picks = Pick.objects.filter(seisan = pick.seisan).order_by('banch', 'code' )
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="cover_pick.xlsx"'
+    wb = write_pick_excel(picks)
+    wb.save(response)
+    return response
+
 #@login_required
 #def down_pick(request, pick_id):
 #    pick = Pick.objects.get(id=pick_id)
 #    download_pick(pick.seisan)
 #return redirect('pick_list')
 
-from .s2d import d2sh
-@login_required
-def download_pick(request, pick_pk):
-    pick = get_object_or_404(Pick, pk=pick_pk)
-    picks = Pick.objects.filter(seisan = pick.seisan).order_by('banch', 'code' )
-    output = io.StringIO()
-    writer = csv.writer(output)
-    lines =[]
-    lines.append(['番地','コード', 'ピック数量', '番地在庫', '生産日', '受注NO'])
-    for pick in picks:
-        lines.append([pick.banch, pick.code, pick.qty, pick.loc_qty, 
-                d2sh(pick.seisan), pick.om])
-    writer.writerows(lines)
-    response = HttpResponse(output.getvalue(), content_type="text/csv", charset = "ShiftJIS")
-    response["Content-Disposition"] = "filename=pick.csv"
-    return response
+#from .s2d import d2sh
+#@login_required
+#def download_pick(request, pick_pk):
+#    pick = get_object_or_404(Pick, pk=pick_pk)
+#    picks = Pick.objects.filter(seisan = pick.seisan).order_by('banch', 'code' )
+##    output = io.StringIO()
+#    writer = csv.writer(output)
+#    lines =[]
+#    lines.append(['番地','コード', 'ピック数量', '番地在庫', '生産日', '受注NO'])
+#    for pick in picks:
+#        lines.append([pick.banch, pick.code, pick.qty, pick.loc_qty, 
+#                d2sh(pick.seisan), pick.om])
+#    writer.writerows(lines)
+#    response = HttpResponse(output.getvalue(), content_type="text/csv", charset = "ShiftJIS")
+#    response["Content-Disposition"] = "filename=pick.csv"
+#    return response
 
 def write_pick(picks):
     path = 'shiji.csv'
@@ -472,6 +484,7 @@ def upload_inv(request):
         if form.is_valid():
             #前の内容は全削除する。
             Addcover.objects.all().delete()
+            Input.objects.all().delete()
             # Do something with our files or simply save them
             # if saved, our files would be located in media/ folder under the project's base folder
             file, download_url = form.save()
@@ -716,12 +729,12 @@ def add_input(request):
     
     Locdata.objects.bulk_update(newlocs, fields=['code', 'qty'])
     #前の内容は全削除する。
-    Input.objects.all().delete()
-    Input.objects.create(hcode='empty')
+    #Input.objects.all().delete()
+    #Input.objects.create(hcode='empty')
 
     #前の内容は全削除する。
-    Addcover.objects.all().delete()
-    Addcover.objects.create(hcode='empty')
+    #Addcover.objects.all().delete()
+    #Addcover.objects.create(hcode='empty')
     
 
     return redirect('loc_list')

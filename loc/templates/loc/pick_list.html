@@ -29,7 +29,7 @@
         {% csrf_token %}
         <button type="submit">絞り込む</button>
         </form>
-    <a class="btn btn-default" href="{% url 'download_pick' pick.pk  %} " download = 'shiji.csv'>指示書ダウンロード</a>
+    <a class="btn btn-default" href="{% url 'down_pick' pick.pk  %} " download = 'shiji.csv'>指示書ダウンロード</a>
 
     <form action="" method="get">
         <input name="banchquery" value="{{ bq_word }}" type="text">
