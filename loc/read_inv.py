@@ -6,7 +6,7 @@
 
 import xlrd
 
-from .models import TfcCode
+from po.models import TfcCode
 
 SHEET_NAME = 'INVOCE' #sheet名がINVOCEだけ対象
 BEGIN_ROW = 12 #０から数えてデータが始まる行
