@@ -10,7 +10,13 @@
 
 {% block content %}
     <form action="" method="get">
-        <input name="query" value="{{ request.GET.query }}" type="text">
+	    品番: <input name="qh" value="{{ request.GET.qh }}" type="text">
+	    アイテム: <input name="qi" value="{{ request.GET.qi }}" type="text">
+	    hcode: <input name="qc" value="{{ request.GET.qc }}" type="text">
+	    cat: <input name="qt" value="{{ request.GET.qt }}" type="text">
+	    <input type="checkbox" name="z" value="1" id="id_tags_0">Z
+	    <input type="checkbox" name="h" value="1" id="id_tags_0">H
+	    
         <button type="submit">検索する</button>
     </form>
     {% include 'loc/pagination.html'%}
@@ -27,6 +33,7 @@
 		<th> vol </th>
 		<th>Z </th>
 		<th>H </th>
+		<th>hcode</th>
 		<th>cat</th>
 		</tr>
 
