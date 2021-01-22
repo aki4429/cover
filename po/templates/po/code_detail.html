@@ -1,0 +1,24 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block content %}
+    <div class="loc">
+
+    
+    <div class="banch">
+        <p>品番:
+    {{ tfccode.pk }}
+    {{ tfccode.hinban }}
+    </p>
+    </div>
+    <div class="code">
+    <h2>Item:
+        {{ tfccode.item }}</h2>
+    </div>
+    <div>
+    <p>分類:
+        {{ tfccode.cat }}</p>
+    </div>
+
+    <a class="btn btn-default" href="{% url 'code_update' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+
+{% endblock %}

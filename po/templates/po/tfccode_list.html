@@ -40,7 +40,9 @@
 	{% for cd in codes %}
 	<tr>
 	<td class="code">
+        <a href="{% url 'code_detail' pk=cd.pk %}">
 	{{ cd.hinban }}
+        </a></th>
 	</td>
 	<td class="code">
 	{{ cd.item }}
@@ -73,6 +75,7 @@
 	{{ cd.cat }}
 	</td>
 	</tr>
+
 	{% endfor %}
 	</table>
 

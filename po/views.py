@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from loc.models import TfcCode
-from django.views.generic import ListView
+from .models import TfcCode
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
  
-class CodeList(ListView):
+class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
     model = TfcCode
 
@@ -59,3 +60,50 @@ class CodeList(ListView):
             codes = TfcCode.objects.filter(query)
 
         return codes
+
+
+class CodeUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'po/code_update.html'
+    model = TfcCode
+    fields = ['hinban',
+            'item',
+            'description',
+            'remarks',
+            'unit',
+            'uprice',
+            'ouritem',
+            'vol',
+            'zaiko',
+            'kento',
+            'hcode',
+            'cat' ]
+
+    def get_success_url(self):
+        return reverse('tfccover_list')
+
+
+    def get_form(self):
+        form = super(CodeUpdate, self).get_form()
+        form.fields['hinban'].label = '品番'
+        form.fields['item'].label = 'アイテム'
+        form.fields['description'].label = '詳細'
+        form.fields['remarks'].label = '備考'
+        form.fields['unit'].label = '単位'
+        form.fields['uprice'].label = '単価'
+        form.fields['ouritem'].label = 'ouritem'
+        form.fields['vol'].label = '容積'
+        form.fields['zaiko'].label = '在庫管理'
+        form.fields['kento'].label = '発注管理'
+        form.fields['hcode'].label = 'フクラ品番'
+        form.fields['cat'].label = '分類'
+        return form
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコード編集'
+        return context
+
+
+class CodeDetail(LoginRequiredMixin, DetailView):
+    template_name = 'po/code_detail.html'
+    model = TfcCode

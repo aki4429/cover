@@ -21,6 +21,11 @@ $ source djangobros_venv/bin/activate
 (djangobros_venv) $
 コマンドがうまく実行されると、＄の前に（djangobros_venv）のような文字が出ます。これが「仮想環境の中にいる」状態を表しています。
 
+の前に、最新バージョンの pip がインストールされていることを確認すべきです。pipはDjangoのインストールに使うソフトウェアです。
+
+command-line
+(myvenv) ~$ python -m pip install --upgrade pip
+
 *パッケージ一括インストール
 pip install -r requirements.txt
 
