@@ -6,17 +6,32 @@
     
     <div class="banch">
         <p>品番:
-    {{ tfccode.pk }}
     {{ tfccode.hinban }}
     </p>
-    </div>
-    <div class="code">
-    <h2>Item:
-        {{ tfccode.item }}</h2>
-    </div>
-    <div>
+    <p>Item:
+        {{ tfccode.item }}
+    </p>
+    <p>詳細:
+        {{ tfccode.description }}
+    </p>
+    <p>備考:
+        {{ tfccode.remarks }}
+    </p>
+    <p>単位:
+        {{ tfccode.unit }}
+    </p>
+    <p>単価:
+        {{ tfccode.uprice }}
+    </p>
+    <p>在庫管理:
+        {{ tfccode.zaiko }}
+    </p>
+    <p>発注管理:
+        {{ tfccode.kento }}
+    </p>
     <p>分類:
-        {{ tfccode.cat }}</p>
+        {{ tfccode.cat }}
+    </p>
     </div>
 
     <a class="btn btn-default" href="{% url 'code_update' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>

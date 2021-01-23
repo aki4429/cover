@@ -1,18 +1,31 @@
 from django.db import models
 
 class TfcCode(models.Model):
-    hinban = models.TextField(blank=True, null=True)
-    item = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    remarks = models.TextField(blank=True, null=True)
-    unit = models.TextField(blank=True, null=True)
-    uprice = models.TextField(blank=True, null=True)
+    ZAIKO_CHOICES = (
+    (0, '在庫管理なし'),
+    (1, '在庫管理あり'),)
+
+    KENTO_CHOICES = (
+    (0, '発注管理なし'),
+    (1, '発注管理あり'),)
+
+    UNIT_CHOICES = (
+    ('pcs','PCS'),
+    ('set','SET'),
+    ('M','M'),)
+
+    hinban = models.TextField(blank=True, null=True, max_length=100, verbose_name="品番")
+    item = models.TextField(blank=True, null=True, max_length=100, verbose_name="アイテム")
+    description = models.TextField(blank=True, null=True, max_length=100, verbose_name="詳細")
+    remarks = models.TextField(blank=True, null=True, max_length=100, verbose_name="備考")
+    unit = models.TextField(blank=True, null=True, max_length=20, choices = UNIT_CHOICES, verbose_name="単位")
+    uprice = models.TextField(blank=True, null=True, max_length=40, verbose_name="単価")
     ouritem = models.TextField(blank=True, null=True)
-    vol = models.TextField(blank=True, null=True)
-    zaiko = models.TextField(blank=True, null=True)
-    kento = models.TextField(blank=True, null=True)
-    hcode = models.TextField(blank=True, null=True)
-    cat = models.TextField(blank=True, null=True)
+    vol = models.TextField(blank=True, null=True, max_length=10, verbose_name="容積")
+    zaiko = models.IntegerField(blank=True, null=True, verbose_name="在庫管理", choices = ZAIKO_CHOICES)
+    kento = models.IntegerField(blank=True, null=True, verbose_name="発注管理", choices = KENTO_CHOICES)
+    hcode = models.TextField(blank=True, null=True, max_length=100, verbose_name="フクラ品番")
+    cat = models.TextField(blank=True, null=True, max_length=20, verbose_name="分類")
 
     class Meta:
         managed = False
