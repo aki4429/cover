@@ -56,13 +56,34 @@ class CodeList(LoginRequiredMixin, ListView):
             flag += 1
 
         if flag == 0:
-            codes = TfcCode.objects.all()
+            codes = TfcCode.objects.order_by('hinban')
         else:
             print('Query',query)
-            codes = TfcCode.objects.filter(query)
+            codes = TfcCode.objects.filter(query).order_by('hinban')
 
         return codes
 
+class CodeCopy(LoginRequiredMixin, UpdateView):
+    template_name = 'po/code_update.html'
+    model = TfcCode
+    form_class = CodeForm
+
+    def get_success_url(self):
+        return reverse('tfc_code')
+
+    #ここでコピーするためにget_objectをオーバーライドします。
+    def get_object(self, queryset=None):
+        #self.request.GETは使えないので、self.kwargsを使うところがミソ
+        tfccode = TfcCode.objects.get(pk=self.kwargs.get('pk'))
+        #プライマリーキーを最新に。これがしたいためのオーバーライド
+        tfccode.pk = TfcCode.objects.last().pk + 1
+        return tfccode
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコードコピー'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
 
 class CodeUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'po/code_update.html'
@@ -72,10 +93,36 @@ class CodeUpdate(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse('tfc_code')
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコード編集'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
+
+class CodeDetail(LoginRequiredMixin, DetailView):
+    template_name = 'po/code_detail.html'
+    model = TfcCode
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコード詳細'
+        return context
+
+class CodeCreate(LoginRequiredMixin, CreateView):
+    template_name = 'po/code_create.html'
+    model = TfcCode
+    form_class = CodeForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコード作成'
+        return context
+
+
     #def get_form(self):
         #form = super(CodeUpdate, self).get_form()
-        #form.fields['hinban'].label = '品番'
-        #form.fields['item'].label = 'アイテム'
+        #form.initial['id'] = TfcCode.objects.last().pk
+        #form.fields['item'] = 'アイテム'
         #form.fields['description'].label = '詳細'
         #form.fields['remarks'].label = '備考'
         #form.fields['unit'].label = '単位'
@@ -87,13 +134,3 @@ class CodeUpdate(LoginRequiredMixin, UpdateView):
         #form.fields['hcode'].label = 'フクラ品番'
         #form.fields['cat'].label = '分類'
         #return form
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title']='TFCコード編集'
-        return context
-
-
-class CodeDetail(LoginRequiredMixin, DetailView):
-    template_name = 'po/code_detail.html'
-    model = TfcCode

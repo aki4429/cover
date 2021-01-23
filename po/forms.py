@@ -6,7 +6,7 @@ class CodeForm(forms.ModelForm):
 
     class Meta:
         model = TfcCode
-        fields = ['hinban',
+        fields = [ 'hinban',
                     'item',
                     'description',
                     'remarks',

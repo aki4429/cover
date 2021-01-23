@@ -1,8 +1,6 @@
 {% extends 'loc/loc_base.html' %}
 
 {% block content %}
-    <div class="loc">
-
     
     <div class="banch">
         <p>品番:
@@ -34,6 +32,8 @@
     </p>
     </div>
 
-    <a class="btn btn-default" href="{% url 'code_update' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    <a class="btn btn-default" href="{% url 'code_update' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a>
+    <a class="btn btn-default" href="{% url 'code_copy' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span>コピー</a>
+    <a class="btn btn-default" href="{% url 'code_create' %}"><span class="glyphicon glyphicon-pencil"></span>新規</a>
 
 {% endblock %}
