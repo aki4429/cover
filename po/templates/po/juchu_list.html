@@ -1,0 +1,37 @@
+
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+    <a class="btn btn-default" href="{% url 'juchu_upload'  %}">受注アップロード</a>
+    <table border=1>
+	<tr>
+	<th>読込</th>
+	<th> 受注データファイル名 </th>
+	<th> アップロード日 </th>
+	<th>削除</th>
+	</tr>
+     {% for juchu in juchus %}
+    <tr>
+        <td>
+		{#  <a class="btn btn-default" href="{% url 'make_seisan' shiji_id=juchu.id %}"><span class="glyphicon glyphicon-pencil"></span></a> #}
+        </td>
+        <td>{{ juchu.file_name }}</td>
+        <td>{{ juchu.uploaded_at }}</td>
+        <td>
+	<a class="btn btn-default" href="{% url 'juchu_delete' pk=juchu.id %}"><span class="glyphicon glyphicon-remove"></span></a> 
+        </td>
+    </tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}

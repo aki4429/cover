@@ -80,3 +80,7 @@ class Invline(models.Model):
     class Meta:
         managed = False
         db_table = 'invline'
+
+class Juchu(models.Model):
+    file_name = models.FileField(upload_to='juchu/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

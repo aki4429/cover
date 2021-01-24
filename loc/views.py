@@ -128,9 +128,12 @@ def model_form_upload(request):
             return redirect('shiji_list')
     else:
         form = ShijiForm()
-    return render(request, 'loc/model_form_upload.html', {
-        'form': form
-    })
+
+    context = {
+        'title' : '生産指示明細アップロード',
+        'form': form,
+        }
+    return render(request, 'loc/model_form_upload.html', context )
 
 @login_required
 def shiji_list(request):

@@ -16,7 +16,7 @@ class Locdata(models.Model):
 
 class Shiji(models.Model):
     shiji_date = models.CharField(max_length=50, blank = True)
-    file_name = models.FileField(upload_to='shiji/')
+    file_name = models.FileField(upload_to='shiji/', verbose_name="ファイルを送信")
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class Seisan(models.Model):

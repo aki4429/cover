@@ -10,6 +10,7 @@
 
 {% block content %}
 
+    <a class="btn btn-default" href="{% url 'upload'  %}">アップロード</a>
     <table border=1>
 	<tr>
 	<th>読込</th>
@@ -33,7 +34,6 @@
     {% endfor %}
 	</table>
 
-    <a class="btn btn-default" href="{% url 'upload'  %}">アップロード</a>
 
 {% endblock %}
 

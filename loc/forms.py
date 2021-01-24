@@ -18,7 +18,7 @@ class LocForm(forms.ModelForm):
 class ShijiForm(forms.ModelForm):
     class Meta:
         model = Shiji
-        fields = ('shiji_date', 'file_name', )
+        fields = ('file_name', )
 
 class LocStatusForm(forms.ModelForm):
 

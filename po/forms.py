@@ -1,5 +1,5 @@
 from django import forms
-from .models import TfcCode
+from .models import TfcCode, Juchu
 
 
 class CodeForm(forms.ModelForm):
@@ -30,3 +30,9 @@ class CodeForm(forms.ModelForm):
             'hcode': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'cat': forms.Textarea(attrs={'rows':1, 'cols':10}),
         }
+
+class JuchuForm(forms.ModelForm):
+    class Meta:
+        model = Juchu
+        fields = ('file_name', )
+

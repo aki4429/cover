@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode
-from .forms import CodeForm
+from .models import TfcCode, Juchu
+from .forms import CodeForm, JuchuForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
  
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -39,6 +40,14 @@ class CodeList(LoginRequiredMixin, ListView):
             query = self.make_q(query, 'qi', 'item')
             flag += 1
 
+        if 'qs' in self.request.GET:
+            query = self.make_q(query, 'qs', 'description')
+            flag += 1
+
+        if 'qb' in self.request.GET:
+            query = self.make_q(query, 'qb', 'remarks')
+            flag += 1
+
         if 'qc' in self.request.GET:
             query = self.make_q(query, 'qc', 'hcode')
             flag += 1
@@ -62,6 +71,12 @@ class CodeList(LoginRequiredMixin, ListView):
             codes = TfcCode.objects.filter(query).order_by('hinban')
 
         return codes
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコードリスト'
+        return context
+
 
 class CodeCopy(LoginRequiredMixin, UpdateView):
     template_name = 'po/code_update.html'
@@ -99,6 +114,19 @@ class CodeUpdate(LoginRequiredMixin, UpdateView):
         #context['last_id'] = TfcCode.objects.last().pk
         return context
 
+class CodeDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/code_confirm_delete.html'
+    model = TfcCode
+    form_class = CodeForm
+
+    def get_success_url(self):
+        return reverse('tfc_code')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコード削除確認'
+        return context
+
 class CodeDetail(LoginRequiredMixin, DetailView):
     template_name = 'po/code_detail.html'
     model = TfcCode
@@ -118,19 +146,39 @@ class CodeCreate(LoginRequiredMixin, CreateView):
         context['title']='TFCコード作成'
         return context
 
+@login_required
+def juchu_upload(request):
+    if request.method == 'POST':
+        form = JuchuForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('juchu_list')
+    else:
+        form = JuchuForm()
 
-    #def get_form(self):
-        #form = super(CodeUpdate, self).get_form()
-        #form.initial['id'] = TfcCode.objects.last().pk
-        #form.fields['item'] = 'アイテム'
-        #form.fields['description'].label = '詳細'
-        #form.fields['remarks'].label = '備考'
-        #form.fields['unit'].label = '単位'
-        #form.fields['uprice'].label = '単価'
-        #form.fields['ouritem'].label = 'ouritem'
-        #form.fields['vol'].label = '容積'
-        #form.fields['zaiko'].label = '在庫管理'
-        #form.fields['kento'].label = '発注管理'
-        #form.fields['hcode'].label = 'フクラ品番'
-        #form.fields['cat'].label = '分類'
-        #return form
+    context = {
+        'title' : '受注データアップロード',
+        'form': form
+        }
+
+    return render(request, 'po/juchu_upload.html', context )
+    
+ 
+class JuchuList(LoginRequiredMixin, ListView):
+    context_object_name = 'juchus'
+    template_name = 'po/juchu_list.html'
+    model = Juchu
+    form_class = JuchuForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='受注データリスト'
+        return context
+
+
+@login_required
+def juchu_delete(request, pk):
+   juchu = get_object_or_404(Juchu, id=pk)
+   juchu.delete()
+   return redirect('juchu_list')
+

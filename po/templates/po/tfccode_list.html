@@ -12,6 +12,8 @@
     <form action="" method="get">
 	    品番: <input name="qh" value="{{ request.GET.qh }}" type="text">
 	    アイテム: <input name="qi" value="{{ request.GET.qi }}" type="text">
+	    詳細: <input name="qs" value="{{ request.GET.qs }}" type="text">
+	    備考: <input name="qb" value="{{ request.GET.qb }}" type="text">
 	    hcode: <input name="qc" value="{{ request.GET.qc }}" type="text">
 	    cat: <input name="qt" value="{{ request.GET.qt }}" type="text">
 	    <input type="checkbox" name="z" value="1" id="id_tags_0">Z
@@ -19,8 +21,7 @@
 	    
         <button type="submit">検索する</button>
     </form>
-    {% include 'loc/pagination.html'%}
-
+    <a class="btn btn-default" href="{% url 'juchu_upload'  %}">受注アップロード</a>
 
 	<table border=1>
 		<tr>
@@ -81,4 +82,3 @@
 
 
 {% endblock %}
-
