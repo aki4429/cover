@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode, Juchu
+from .models import TfcCode, Juchu, Cart
 from .forms import CodeForm, JuchuForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from .juchu_read_2 import JuchuRead
  
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -181,4 +182,40 @@ def juchu_delete(request, pk):
    juchu = get_object_or_404(Juchu, id=pk)
    juchu.delete()
    return redirect('juchu_list')
+
+@login_required
+def make_cart(request, juchu_id):
+    #Cart.objects.all().delete()
+    juchu = get_object_or_404(Juchu, id=juchu_id)
+
+    juchu_file_name =  juchu.file_name.path
+    jr = JuchuRead(juchu_file_name)
+    jdata = jr.get_juchu()
+
+    add_cart = []
+    for row in jdata:
+        cart = Cart(hinban = row[0], \
+                om = row[1],
+                juchubi = row[2].replace('/','-'),
+                noki = row[3].replace('/','-'),
+                qty = int(float(row[4])),
+                flag = row[5],
+                code = row[6],
+                obic = row[7])
+        add_cart.append(cart)
+
+    Cart.objects.bulk_create(add_cart)
+
+    return redirect('cart_list')
+
+ 
+class CartList(LoginRequiredMixin, ListView):
+    context_object_name = 'cart'
+    template_name = 'po/cart_list.html'
+    model = Cart
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='発注カートリスト'
+        return context
 

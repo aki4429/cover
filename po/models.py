@@ -84,3 +84,19 @@ class Invline(models.Model):
 class Juchu(models.Model):
     file_name = models.FileField(upload_to='juchu/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+
+
+class Cart(models.Model):
+    hinban = models.TextField(blank=True, null=True, max_length=100, verbose_name="品番")
+    om = models.TextField(blank=True, null=True)
+    juchubi = models.DateField(blank=True, null=True)
+    noki = models.DateField(blank=True, null=True)
+    qty = models.FloatField(blank=True, null=True)
+    flag = models.TextField(blank=True, null=True)
+    code = models.TextField(blank=True, null=True)
+    obic = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービックコード")
+
+    class Meta:
+        managed = True
+        db_table = 'cart'

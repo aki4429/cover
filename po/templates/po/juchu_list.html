@@ -22,7 +22,7 @@
      {% for juchu in juchus %}
     <tr>
         <td>
-		{#  <a class="btn btn-default" href="{% url 'make_seisan' shiji_id=juchu.id %}"><span class="glyphicon glyphicon-pencil"></span></a> #}
+		<a class="btn btn-default" href="{% url 'make_cart' juchu_id=juchu.id %}"><span class="glyphicon glyphicon-pencil"></span></a> 
         </td>
         <td>{{ juchu.file_name }}</td>
         <td>{{ juchu.uploaded_at }}</td>

@@ -1,0 +1,46 @@
+
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+    <a class="btn btn-default" href="{% url 'juchu_upload'  %}">受注アップロード</a>
+    <table border=1>
+	<tr>
+	<th></th>
+	<th>品番</th>
+	<th> 受注番号 </th>
+	<th> 受注日 </th>
+	<th> 納期 </th>
+	<th>数量</th>
+	<th>コード有無</th>
+	<th>オービックコード</th>
+	</tr>
+     {% for item in cart %}
+    <tr>
+        <td>
+		{#  <a class="btn btn-default" href="{% url 'make_seisan' shiji_id=juchu.id %}"><span class="glyphicon glyphicon-pencil"></span></a> #}
+        </td>
+        <td>{{ item.hinban }}</td>
+        <td>{{ item.om }}</td>
+        <td>{{ item.juchubi }}</td>
+        <td>{{ item.noki }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.flag }}</td>
+        <td>{{ item.obic }}</td>
+        <td>
+	<a class="btn btn-default" href="{% url 'juchu_delete' pk=item.id %}"><span class="glyphicon glyphicon-remove"></span></a> 
+        </td>
+    </tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}

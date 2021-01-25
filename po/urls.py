@@ -9,6 +9,8 @@ urlpatterns = [
     path('<int:pk>/code_copy/', views.CodeCopy.as_view(), name='code_copy'),
     path('juchu_upload/', views.juchu_upload, name='juchu_upload'),
     path('juchu_list/', views.JuchuList.as_view(), name='juchu_list'),
+    path('<int:juchu_id>/make_cart/', views.make_cart, name='make_cart'),
+    path('cart_list/', views.CartList.as_view(), name='cart_list'),
     path('<int:pk>/code_delete/', views.CodeDelete.as_view(), name='code_delete'),
     path('<int:pk>/juchu_delete/', views.juchu_delete, name='juchu_delete'),
 ]
