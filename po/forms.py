@@ -1,5 +1,5 @@
 from django import forms
-from .models import TfcCode, Juchu
+from .models import TfcCode, Juchu, Condition, Po
 
 
 class CodeForm(forms.ModelForm):
@@ -35,4 +35,40 @@ class JuchuForm(forms.ModelForm):
     class Meta:
         model = Juchu
         fields = ('file_name', )
+
+
+class ConditionForm(forms.ModelForm):
+    class Meta:
+        model = Condition
+        fields = [ 'name',
+                    'shipment_per',
+                    'shipto_1',
+                    'shipto_2',
+                    'shipto_3',
+                    'shipto_4',
+                    'shipto_5',
+                    'via',
+                    'forwarder',
+                    'trade_term',
+                    'payment_term',
+                    'insurance',
+                    'comment', ]
+
+
+class PoForm(forms.ModelForm):
+    class Meta:
+        model = Po
+        fields = [
+                'pod',
+                'pon',
+                'per',
+                'port',
+                'shipto',
+                'etd',
+                'delivery',
+                ]
+        widgets = {
+            'pod': forms.SelectDateWidget,
+            'etd': forms.SelectDateWidget
+        }
 

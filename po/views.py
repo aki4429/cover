@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode, Juchu, Cart
-from .forms import CodeForm, JuchuForm
+from .models import TfcCode, Juchu, Cart, Condition, Po
+from .forms import CodeForm, JuchuForm, ConditionForm, PoForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -217,5 +217,92 @@ class CartList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='発注カートリスト'
+        return context
+
+class ConditionList(LoginRequiredMixin, ListView):
+    context_object_name = 'conditions'
+    template_name = 'po/condition_list.html'
+    model = Condition
+    form_class = ConditionForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='輸入条件選択'
+        return context
+
+class ConditionUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'po/condition_update.html'
+    model = Condition
+    form_class = ConditionForm
+
+    def get_success_url(self):
+        return reverse('condition_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='輸入条件編集'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
+
+class ConditionCopy(LoginRequiredMixin, UpdateView):
+    template_name = 'po/condition_update.html'
+    model = Condition
+    form_class = ConditionForm
+
+    def get_success_url(self):
+        return reverse('condition_list')
+
+    #ここでコピーするためにget_objectをオーバーライドします。
+    def get_object(self, queryset=None):
+        #self.request.GETは使えないので、self.kwargsを使うところがミソ
+        condi = Condition.objects.get(pk=self.kwargs.get('pk'))
+        #プライマリーキーを最新に。これがしたいためのオーバーライド
+        condi.pk = Condition.objects.last().pk + 1
+        return condi
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='輸入条件コピー'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
+
+class ConditionDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/condition_confirm_delete.html'
+    model = Condition
+    form_class = ConditionForm
+
+    def get_success_url(self):
+        return reverse('condition_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='輸入条件削除確認'
+        return context
+
+class CartDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/cart_confirm_delete.html'
+    model = Cart
+
+    def get_success_url(self):
+        return reverse('cart_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='カート行削除確認'
+        return context
+
+@login_required
+def cart_delete_all(request):
+    Cart.objects.all().delete()
+    return redirect('cart_list')
+
+class PoCreate(LoginRequiredMixin, CreateView):
+    template_name = 'po/po_create.html'
+    model = Po
+    form_class = PoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO作成'
         return context
 

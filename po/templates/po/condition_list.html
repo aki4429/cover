@@ -1,0 +1,53 @@
+
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+    <a class="btn btn-default" href="{% url 'juchu_upload'  %}">受注アップロード</a>
+    <table border=1>
+	<tr>
+	<th></th>
+	<th>輸入条件名</th>
+	<th> 輸入手段 </th>
+	<th>輸入先 </th>
+	<th> 仕向地 </th>
+	<th>フォワーダー</th>
+	<th>貿易条件</th>
+	<th>保険</th>
+	<th>コメント</th>
+	<th>編集</th>
+	<th>コピー</th>
+	<th>削除</th>
+	</tr>
+     {% for item in conditions %}
+    <tr>
+        <td>
+		{#  <a class="btn btn-default" href="{% url 'make_seisan' shiji_id=juchu.id %}"><span class="glyphicon glyphicon-pencil"></span></a> #}
+        </td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.shipment_per}}</td>
+        <td>{{ item.shipto_1 }}</td>
+        <td>{{ item.via }}</td>
+        <td>{{ item.forwarder}}</td>
+        <td>{{ item.trade_term }}</td>
+        <td>{{ item.insurance }}</td>
+        <td>{{ item.comment }}</td>
+        <td>
+	<a class="btn btn-default" href="{% url 'condition_update' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
+	<td><a class="btn btn-default" href="{% url 'condition_copy' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span>コピー</a> </td>
+	<td><a class="btn btn-danger" href="{% url 'condition_delete' pk=item.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> </td>
+    </tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}
+

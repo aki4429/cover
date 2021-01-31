@@ -1,0 +1,20 @@
+
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+    <form method="POST" class="loc-form">
+	{% csrf_token %}
+	<p>{{ condition.name }}/{{ condition.hipment_per}}/{{ condition.shipto_1 }} />{{ condition.shipment_per }}/{{ condition.via }}/{{ condition.forwarder }}を削除しますか？</p>
+        <button type="submit" class="save btn btn-default">削除</button>
+    </form>
+{% endblock %}
+
+
