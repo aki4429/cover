@@ -52,7 +52,8 @@ class ConditionForm(forms.ModelForm):
                     'trade_term',
                     'payment_term',
                     'insurance',
-                    'comment', ]
+                    'comment', 
+                    'nic', ]
 
 
 class PoForm(forms.ModelForm):

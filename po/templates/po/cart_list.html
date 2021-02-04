@@ -11,6 +11,16 @@
 
 {% block content %}
 
+<script language="JavaScript" type="text/javascript">
+function allcheck( tf ) {
+   var ElementsCount = document.cart.elements.length; // チェックボックスの数
+   for( i=0 ; i<ElementsCount ; i++ ) {
+      document.cart.elements[i].checked = tf; // ON・OFFを切り替え
+   }
+}
+ </script>
+
+
 
     <a class="btn btn-default" href="{% url 'juchu_upload'  %}">受注アップロード</a>
     <a class="btn btn-default" href="{% url 'cart_delete_all'  %}">カート全削除</a>
@@ -25,9 +35,11 @@
 	<th>コード有無</th>
 	<th>オービックコード</th>
 	<th>発注:
-	<input type="checkbox" name="aaa" onClick="AllChecked();" /> 全選択
+  <input type="button" value="全部ON！" onclick="allcheck(true);">
+   <input type="button" value="全部OFF！" onclick="allcheck(false);">
 	</th>
 	<th>削除</th>
+    <form name="cart" action="" method="POST">
 	</tr>
      {% for item in cart %}
     <tr>
@@ -50,18 +62,9 @@
         </td>
     </tr>
     {% endfor %}
-	</table>
-
-<script language="JavaScript" type="text/javascript">
-<!--
-function AllChecked(){
-  var check =  document.form.aaa.checked;
-
-  for (var i=0; i<document.form.order.length; i++){
-    document.form.order.checked = check;
-  }
-}
-//-->
-</script>
+</table>
+{% csrf_token %}
+<button type="submit">発注</button>
+</form>
 
 {% endblock %}

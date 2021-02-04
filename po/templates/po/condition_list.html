@@ -23,6 +23,7 @@
 	<th>貿易条件</th>
 	<th>保険</th>
 	<th>コメント</th>
+	<th>ニックネーム</th>
 	<th>編集</th>
 	<th>コピー</th>
 	<th>削除</th>
@@ -40,6 +41,7 @@
         <td>{{ item.trade_term }}</td>
         <td>{{ item.insurance }}</td>
         <td>{{ item.comment }}</td>
+        <td>{{ item.nic }}</td>
         <td>
 	<a class="btn btn-default" href="{% url 'condition_update' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
 	<td><a class="btn btn-default" href="{% url 'condition_copy' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span>コピー</a> </td>

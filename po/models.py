@@ -147,6 +147,7 @@ class Condition(models.Model):
     payment_term = models.TextField(blank=True, null=True, max_length=50, verbose_name="支払条件", choices=PAY_CHOICES)
     insurance = models.TextField(blank=True, null=True, max_length=50, verbose_name="保険", choices=INSURANCE_CHOICES)
     comment = models.TextField(blank=True, null=True, max_length=100, verbose_name="備考")
+    nic = models.TextField(blank=True, null=True, max_length=50, verbose_name="ニックネーム")
 
     class Meta:
         db_table = 'condition'

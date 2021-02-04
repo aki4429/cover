@@ -214,6 +214,11 @@ class CartList(LoginRequiredMixin, ListView):
     template_name = 'po/cart_list.html'
     model = Cart
 
+    def post(self, request):
+        orders = request.POST.getlist('order')  # <input type="checkbox" name="delete"のnameに対応
+        request.session['orders'] = orders
+        return redirect('po_create')  # 一覧ページにリダイレクト
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='発注カートリスト'
@@ -304,5 +309,7 @@ class PoCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='PO作成'
+        context['orders']= self.request.session['orders']
         return context
 
+    
