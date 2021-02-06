@@ -46,7 +46,8 @@
 	<a class="btn btn-default" href="{% url 'condition_update' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
 	<td><a class="btn btn-default" href="{% url 'condition_copy' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span>コピー</a> </td>
 	<td><a class="btn btn-danger" href="{% url 'condition_delete' pk=item.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> </td>
-    </tr>
+
+    <th><a class="btn btn-default" href="{% url 'po_create' item.pk %}">発注</a></th>
     {% endfor %}
 	</table>
 

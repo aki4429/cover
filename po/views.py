@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .juchu_read_2 import JuchuRead
+import datetime
  
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -217,7 +218,7 @@ class CartList(LoginRequiredMixin, ListView):
     def post(self, request):
         orders = request.POST.getlist('order')  # <input type="checkbox" name="delete"のnameに対応
         request.session['orders'] = orders
-        return redirect('po_create')  # 一覧ページにリダイレクト
+        return redirect('condition_list')  # 一覧ページにリダイレクト
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -305,6 +306,24 @@ class PoCreate(LoginRequiredMixin, CreateView):
     template_name = 'po/po_create.html'
     model = Po
     form_class = PoForm
+
+    def get_initial(self):
+         initial = super().get_initial()
+
+         #最新pon を取り出し、数字部分に1加えてHをつける
+         new_pon = 'H' + str(int(Po.objects.last().pon.split('H')[1])+1)
+         initial["pon"] = new_pon
+
+         #発注日の初期値は今日の日付
+         initial["pod"] = datetime.date.today
+
+         #URLで受け取ったparameterから、Conditionのインスタンスを取り出し。
+         condi = Condition.objects.get(pk=self.kwargs.get('condi_pk'))
+         initial["condition"] = condi
+         initial["port"] = condi.via
+         initial["per"] = condi.shipment_per
+         initial["shipto"] = condi.shipto_1
+         return initial
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

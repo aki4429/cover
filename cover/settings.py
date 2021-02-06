@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'po.apps.PoConfig', 
     'django_cleanup', 
     'bootstrap4',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [

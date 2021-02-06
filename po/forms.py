@@ -1,5 +1,6 @@
 from django import forms
 from .models import TfcCode, Juchu, Condition, Po
+import bootstrap_datepicker_plus as datetimepicker
 
 
 class CodeForm(forms.ModelForm):
@@ -55,6 +56,8 @@ class ConditionForm(forms.ModelForm):
                     'comment', 
                     'nic', ]
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class PoForm(forms.ModelForm):
     class Meta:
@@ -67,9 +70,16 @@ class PoForm(forms.ModelForm):
                 'shipto',
                 'etd',
                 'delivery',
+                'condition',
                 ]
         widgets = {
-            'pod': forms.SelectDateWidget,
-            'etd': forms.SelectDateWidget
-        }
+            'pod': DateInput(),
+            'etd': DateInput(),
+            'delivery': DateInput(),
+            'pon': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'per': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'port': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
+            'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
+            }
 

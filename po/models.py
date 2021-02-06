@@ -31,6 +31,61 @@ class TfcCode(models.Model):
         managed = False
         db_table = 'tfc_code'
 
+
+class Condition(models.Model):
+    SHIP_CHOICES = (
+    ('Vessel', 'vessel'),
+    ('DHL(Courier)', 'dhl'),
+    )
+
+    PORT_CHOICES = (
+    ('NAGOYA Port', 'nagoya'),
+    ('OSAKA Port', 'osaka'),
+    ('HAKATA Port', 'hakata'),
+    ('MOJI Port', 'moji'),
+    ('Japanese AIR Port', 'air'),
+    )
+
+    FORWARDER_CHOICES = (
+    ('TRADIA', 'tradia'),
+    ('DHL', 'DHL'),
+    )
+
+    TRADE_CHOICES = (
+    ('FOB Taicang', 'FOB Taicang'),
+    ('Ex works', 'Ex Works'),
+    ('DDP', 'DDP'),
+    )
+
+    PAY_CHOICES = (
+    ('Remittance in 30 days each month', 'remittance'),
+    ('No Coomercial Value', 'no value'),
+    )
+
+    INSURANCE_CHOICES = (
+    ('', ''),
+    ('to be covered by us', 'to be covered by us'),
+    )
+
+    name = models.TextField(blank=True, null=True, max_length=100, verbose_name="輸入形体名")
+    shipment_per = models.TextField(blank=True, null=True, choices=SHIP_CHOICES, verbose_name="輸入手段")
+    shipto_1 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所1")
+    shipto_2 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所2")
+    shipto_3 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所3")
+    shipto_4 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所4")
+    shipto_5 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所5")
+    via = models.TextField(blank=True, null=True, max_length=50, verbose_name="経由地", choices=PORT_CHOICES)
+    forwarder = models.TextField(blank=True, null=True, max_length=50, verbose_name="フォワーダー", choices=FORWARDER_CHOICES)
+    trade_term = models.TextField(blank=True, null=True, max_length=50, verbose_name="貿易条件", choices=TRADE_CHOICES)
+    payment_term = models.TextField(blank=True, null=True, max_length=50, verbose_name="支払条件", choices=PAY_CHOICES)
+    insurance = models.TextField(blank=True, null=True, max_length=50, verbose_name="保険", choices=INSURANCE_CHOICES)
+    comment = models.TextField(blank=True, null=True, max_length=100, verbose_name="備考")
+    nic = models.TextField(blank=True, null=True, max_length=50, verbose_name="ニックネーム")
+
+    class Meta:
+        db_table = 'condition'
+
+
 class Po(models.Model):
     pod = models.DateField(blank=True, null=True, verbose_name="受注日")
     pon = models.TextField(blank=True, null=True, verbose_name="PO#")
@@ -40,6 +95,7 @@ class Po(models.Model):
     etd = models.DateField(db_column='ETD', blank=True, null=True)  # Field name made lowercase.
     comment = models.TextField(blank=True, null=True)
     delivery = models.TextField(blank=True, null=True, verbose_name="取込日")
+    condition = models.ForeignKey(Condition, on_delete=models.PROTECT, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -97,60 +153,3 @@ class Cart(models.Model):
     class Meta:
         managed = True
         db_table = 'cart'
-
-
-class Condition(models.Model):
-    SHIP_CHOICES = (
-    ('Vessel', 'vessel'),
-    ('DHL(Courier)', 'dhl'),
-    )
-
-    PORT_CHOICES = (
-    ('NAGOYA Port', 'nagoya'),
-    ('OSAKA Port', 'osaka'),
-    ('HAKATA Port', 'hakata'),
-    ('MOJI Port', 'moji'),
-    ('Japanese AIR Port', 'air'),
-    )
-
-    FORWARDER_CHOICES = (
-    ('TRADIA', 'tradia'),
-    ('DHL', 'DHL'),
-    )
-
-    TRADE_CHOICES = (
-    ('FOB Taicang', 'FOB Taicang'),
-    ('Ex works', 'Ex Works'),
-    ('DDP', 'DDP'),
-    )
-
-    PAY_CHOICES = (
-    ('Remittance in 30 days each month', 'remittance'),
-    ('No Coomercial Value', 'no value'),
-    )
-
-    INSURANCE_CHOICES = (
-    ('', ''),
-    ('to be covered by us', 'to be covered by us'),
-    )
-
-    name = models.TextField(blank=True, null=True, max_length=100, verbose_name="輸入形体名")
-    shipment_per = models.TextField(blank=True, null=True, choices=SHIP_CHOICES, verbose_name="輸入手段")
-    shipto_1 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所1")
-    shipto_2 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所2")
-    shipto_3 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所3")
-    shipto_4 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所4")
-    shipto_5 = models.TextField(blank=True, null=True, max_length=100, verbose_name="住所5")
-    via = models.TextField(blank=True, null=True, max_length=50, verbose_name="経由地", choices=PORT_CHOICES)
-    forwarder = models.TextField(blank=True, null=True, max_length=50, verbose_name="フォワーダー", choices=FORWARDER_CHOICES)
-    trade_term = models.TextField(blank=True, null=True, max_length=50, verbose_name="貿易条件", choices=TRADE_CHOICES)
-    payment_term = models.TextField(blank=True, null=True, max_length=50, verbose_name="支払条件", choices=PAY_CHOICES)
-    insurance = models.TextField(blank=True, null=True, max_length=50, verbose_name="保険", choices=INSURANCE_CHOICES)
-    comment = models.TextField(blank=True, null=True, max_length=100, verbose_name="備考")
-    nic = models.TextField(blank=True, null=True, max_length=50, verbose_name="ニックネーム")
-
-    class Meta:
-        db_table = 'condition'
-
-
-
