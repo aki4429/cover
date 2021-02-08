@@ -1,6 +1,6 @@
 from django import forms
 from .models import TfcCode, Juchu, Condition, Po
-import bootstrap_datepicker_plus as datetimepicker
+from bootstrap_datepicker_plus import DatePickerInput
 
 
 class CodeForm(forms.ModelForm):
@@ -73,13 +73,31 @@ class PoForm(forms.ModelForm):
                 'condition',
                 ]
         widgets = {
-            'pod': DateInput(),
-            'etd': DateInput(),
-            'delivery': DateInput(),
-            'pon': forms.Textarea(attrs={'rows':1, 'cols':15}),
-            'per': forms.Textarea(attrs={'rows':1, 'cols':15}),
-            'port': forms.Textarea(attrs={'rows':1, 'cols':15}),
-            'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
-            'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
+                'pod': DatePickerInput(
+                    format='%Y-%m-%d',
+                    options={
+                        'locale': 'ja',
+                        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                    }
+                ),
+                'etd': DatePickerInput(
+                    format='%Y-%m-%d',
+                    options={
+                        'locale': 'ja',
+                        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                    }
+                ),
+                'delivery': DatePickerInput(
+                    format='%Y-%m-%d',
+                    options={
+                        'locale': 'ja',
+                        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                    }
+                ),
+                'pon': forms.Textarea(attrs={'rows':1, 'cols':15}),
+                'per': forms.Textarea(attrs={'rows':1, 'cols':15}),
+                'port': forms.Textarea(attrs={'rows':1, 'cols':15}),
+                'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
+                'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
             }
 

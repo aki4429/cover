@@ -87,14 +87,14 @@ class Condition(models.Model):
 
 
 class Po(models.Model):
-    pod = models.DateField(blank=True, null=True, verbose_name="受注日")
+    pod = models.DateField(blank=True, null=True, verbose_name="発注日")
     pon = models.TextField(blank=True, null=True, verbose_name="PO#")
     per = models.TextField(blank=True, null=True, verbose_name="手段")
     port = models.TextField(blank=True, null=True, verbose_name="仕向港")
     shipto = models.TextField(blank=True, null=True, verbose_name="届先")
     etd = models.DateField(db_column='ETD', blank=True, null=True)  # Field name made lowercase.
     comment = models.TextField(blank=True, null=True)
-    delivery = models.TextField(blank=True, null=True, verbose_name="取込日")
+    delivery = models.DateField(blank=True, null=True, verbose_name="取込日")
     condition = models.ForeignKey(Condition, on_delete=models.PROTECT, blank=True, null=True)
 
     class Meta:
@@ -104,7 +104,7 @@ class Po(models.Model):
 class Poline(models.Model):
     code = models.ForeignKey(TfcCode, on_delete=models.PROTECT)
     remark = models.TextField(blank=True, null=True)
-    om = models.IntegerField(blank=True, null=True)
+    om = models.TextField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
     balance = models.FloatField(blank=True, null=True)
     po = models.ForeignKey(Po, on_delete=models.PROTECT)
@@ -147,7 +147,7 @@ class Cart(models.Model):
     noki = models.DateField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
     flag = models.TextField(blank=True, null=True)
-    code = models.TextField(blank=True, null=True)
+    code = models.TextField(blank=True, null=True) #TfcCodeのｐｋを持つ
     obic = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービックコード")
 
     class Meta:

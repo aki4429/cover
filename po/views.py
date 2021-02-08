@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode, Juchu, Cart, Condition, Po
+from .models import TfcCode, Juchu, Cart, Condition, Po, Poline
 from .forms import CodeForm, JuchuForm, ConditionForm, PoForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .juchu_read_2 import JuchuRead
 import datetime
- 
+
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
     model = TfcCode
@@ -164,8 +164,8 @@ def juchu_upload(request):
         }
 
     return render(request, 'po/juchu_upload.html', context )
-    
- 
+
+
 class JuchuList(LoginRequiredMixin, ListView):
     context_object_name = 'juchus'
     template_name = 'po/juchu_list.html'
@@ -209,7 +209,7 @@ def make_cart(request, juchu_id):
 
     return redirect('cart_list')
 
- 
+
 class CartList(LoginRequiredMixin, ListView):
     context_object_name = 'cart'
     template_name = 'po/cart_list.html'
@@ -217,6 +217,7 @@ class CartList(LoginRequiredMixin, ListView):
 
     def post(self, request):
         orders = request.POST.getlist('order')  # <input type="checkbox" name="delete"のnameに対応
+        #POSTされたorderの配列をセッションに保存
         request.session['orders'] = orders
         return redirect('condition_list')  # 一覧ページにリダイレクト
 
@@ -331,4 +332,51 @@ class PoCreate(LoginRequiredMixin, CreateView):
         context['orders']= self.request.session['orders']
         return context
 
-    
+    def get_success_url(self):
+        orders = self.request.session['orders']
+        polines = []
+        for cartpk in orders:
+            cart = Cart.objects.get(pk=cartpk)
+            tfccode  = TfcCode.objects.get(pk=cart.code)
+            pl = Poline(
+                code = tfccode,
+                remark =tfccode.remarks,
+                om =cart.om,
+                qty =cart.qty,
+                balance =cart.qty,
+                po = Po.objects.last()
+                )
+            polines.append(pl)
+
+        Poline.objects.bulk_create(polines)
+
+        return reverse('po_list')
+
+class PoList(LoginRequiredMixin, ListView):
+    context_object_name = 'pos'
+    template_name = 'po/po_list.html'
+    model = Po
+    #form_class = PoForm
+
+    def get_queryset(self):
+        return Po.objects.filter(etd__gte='2020-01-01').order_by('-pon')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='POリスト'
+        return context
+
+class PolineList(LoginRequiredMixin, ListView):
+    context_object_name = 'polines'
+    template_name = 'po/poline_list.html'
+    model = Poline
+    #form_class = PoForm
+
+    def get_queryset(self):
+        po = Po.objects.get(pk=self.kwargs.get('po_pk'))
+        return Poline.objects.filter(po=po)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO内容リスト'
+        return context
