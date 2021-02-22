@@ -71,6 +71,8 @@ class PoForm(forms.ModelForm):
                 'etd',
                 'delivery',
                 'condition',
+                'ft40',
+                'ft20',
                 ]
         widgets = {
                 'pod': DatePickerInput(

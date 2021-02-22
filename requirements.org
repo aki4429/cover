@@ -1,0 +1,9 @@
+Django==2.2.16
+django-cleanup==5.1.0
+pytz==2020.1
+sqlparse==0.3.1
+django-bootstrap4==2.2.0
+sqlparse==0.3.1
+zipp==3.2.0
+openpyxl==3.0.5
+xlrd==2.0.1

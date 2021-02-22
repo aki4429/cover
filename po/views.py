@@ -7,7 +7,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .juchu_read_2 import JuchuRead
+from .make_po import write_po_excel
 import datetime
+from django.http import HttpResponse
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -380,3 +382,14 @@ class PolineList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title']='PO内容リスト'
         return context
+
+#POを作ってダウンロードします。
+@login_required
+def make_po(request, po_pk):
+    po = get_object_or_404(Po, pk=po_pk)
+    wb, file_name = write_po_excel(po)
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename={}'.format(file_name)
+    wb.save(response)
+    return response
+

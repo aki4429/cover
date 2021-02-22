@@ -20,6 +20,8 @@
 	<th>届け先</th>
 	<th>ETD</th>
 	<th>取込日</th>
+	<th>40f</th>
+	<th>20ft</th>
 	<th>条件</th>
 	<th>詳細</th>
 	</tr>
@@ -27,13 +29,18 @@
 	<tr>
 
         <td><a href="{% url 'poline_list' po_pk=po.pk %}"> {{ po.pon }}</a></td>
-        <td>{{ po.pod |date:"y/m/d"}}</td>
+        <td>{{ po.pod |date:"y/m/d" }}</td>
         <td>{{ po.per }}</td>
         <td>{{ po.port }}</td>
         <td>{{ po.shipto }}</td>
-        <td>{{ po.etd |date:"y/m/d"}}</td>
-        <td>{{ po.delivery |date:"y/m/d"}}</td>
+        <td>{{ po.etd |date:"y/m/d" }}</td>
+        <td>{{ po.delivery |date:"y/m/d" }}</td>
+        <td>{{ po.ft40 }}</td>
+        <td>{{ po.ft20 }}</td>
         <td>{{ po.condition.name }}</td>
+	<td>
+<a class="btn btn-default" href="{% url 'make_po' po.pk  %} " >POダウンロード</a>
+	</td>
     </tr>
     {% endfor %}
 </table>

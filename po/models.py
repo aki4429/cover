@@ -96,9 +96,11 @@ class Po(models.Model):
     comment = models.TextField(blank=True, null=True)
     delivery = models.DateField(blank=True, null=True, verbose_name="取込日")
     condition = models.ForeignKey(Condition, on_delete=models.PROTECT, blank=True, null=True)
+    ft40 = models.TextField(blank=True, null=True, verbose_name="40f")
+    ft20 = models.TextField(blank=True, null=True, verbose_name="20f")
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'po'
 
 class Poline(models.Model):
@@ -153,3 +155,8 @@ class Cart(models.Model):
     class Meta:
         managed = True
         db_table = 'cart'
+
+class Fabric(models.Model):
+    code = models.TextField(blank=True, null=True, max_length=100, verbose_name="コード")
+    name = models.TextField(blank=True, null=True, max_length=300, verbose_name="名前")
+

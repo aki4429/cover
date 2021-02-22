@@ -19,6 +19,7 @@ urlpatterns = [
     path('<int:pk>/juchu_delete/', views.juchu_delete, name='juchu_delete'),
     path('cart_delete_all/', views.cart_delete_all, name='cart_delete_all'),
     path('condition_list/', views.ConditionList.as_view(), name='condition_list'),
+    path('make_po/<int:po_pk>/', views.make_po, name='make_po'),
     path('condition_update/<int:pk>/', views.ConditionUpdate.as_view(), name='condition_update'),
     path('<int:pk>/condition_copy/', views.ConditionCopy.as_view(), name='condition_copy'),
     path('<int:pk>/condition_delete/', views.ConditionDelete.as_view(), name='condition_delete'),
