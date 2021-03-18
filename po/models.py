@@ -148,7 +148,7 @@ class Cart(models.Model):
     juchubi = models.DateField(blank=True, null=True)
     noki = models.DateField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
-    flag = models.TextField(blank=True, null=True)
+    flag = models.TextField(blank=True, null=True) #コードがあればok
     code = models.TextField(blank=True, null=True) #TfcCodeのｐｋを持つ
     obic = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービックコード")
 

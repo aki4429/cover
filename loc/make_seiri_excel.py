@@ -4,7 +4,7 @@ from cover.settings import *
 SEXCEL = 'arrive_template.xlsx'
 
 #受け取るinputs = Input.objects.order_by('hcode')
-def write_excel(inputs, invn):
+def write_excel(inputs, invn, bangos):
     filename = os.path.join(MEDIA_ROOT, 'template', SEXCEL)
     wb = openpyxl.load_workbook(filename)
 
@@ -22,6 +22,10 @@ def write_excel(inputs, invn):
             sheet.cell(row=n+5, column=5, value = '新規') #新規/既存
         else:
             sheet.cell(row=n+5, column=5, value = '既存') #新規/既存
-        n += 1
 
+        for ban in bangos:
+            if ban.hcode == case.hcode:
+                sheet.cell(row=n+5, column=6, value = ban.se) #背番号
+
+        n += 1
     return wb

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm, InvUpForm
-from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei, Addcover, Input
+from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei, Addcover, Input, Bango
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .read_shiji import read_shiji
@@ -592,8 +592,9 @@ def down_case(request):
     #writer = csv.writer(sio)
     #writer.writerows(cases)
     #response.write(sio.getvalue().encode('cp932'))
-    
-    wb = write_excel(Input.objects.order_by('hcode'), Addcover.objects.first().invn)
+   
+    bangos = Bango.objects.all()
+    wb = write_excel(Input.objects.order_by('hcode'), Addcover.objects.first().invn, bangos)
 
     wb.save(response)
     return response
@@ -603,7 +604,8 @@ def down_label(request):
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] = 'attachment; filename="case_label.csv"'
     inputs = Input.objects.order_by('banch')
-    data = kako(inputs)
+    bangos = Bango.objects.all()
+    data = kako(inputs, bangos)
 
     sio = io.StringIO()
     writer = csv.writer(sio)

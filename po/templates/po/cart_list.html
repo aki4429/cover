@@ -52,7 +52,11 @@ function allcheck( tf ) {
         <td>{{ item.juchubi }}</td>
         <td>{{ item.noki }}</td>
         <td>{{ item.qty }}</td>
-        <td>{{ item.flag }}</td>
+        {% if item.code %}
+        <td>ok</td>
+        {% else %}
+        <td></td>
+        {% endif %}
         <td>{{ item.obic }}</td>
         <td>
 	<input type="checkbox" name="order" value="{{ item.pk }}">

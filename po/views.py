@@ -10,6 +10,7 @@ from .juchu_read_2 import JuchuRead
 from .make_po import write_po_excel
 import datetime
 from django.http import HttpResponse
+from bootstrap_datepicker_plus import DateTimePickerInput
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -219,13 +220,15 @@ class CartList(LoginRequiredMixin, ListView):
 
     def post(self, request):
         orders = request.POST.getlist('order')  # <input type="checkbox" name="delete"のnameに対応
+        for cpk in orders:
+            Cart.objects.filter(pk=cpk).update(flag='order') 
         #POSTされたorderの配列をセッションに保存
         request.session['orders'] = orders
         return redirect('condition_list')  # 一覧ページにリダイレクト
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title']='発注カートリスト'
+        context['title']='カートリスト'
         return context
 
 class ConditionList(LoginRequiredMixin, ListView):
@@ -237,6 +240,12 @@ class ConditionList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='輸入条件選択'
+        #ordersセッションが存在しないか、空のときorder_exitはFalse
+        if 'orders' in self.request.session and len(self.request.session['orders']) > 0:
+            context['order_exist']= True
+        else:
+            context['order_exist']= False
+
         return context
 
 class ConditionUpdate(LoginRequiredMixin, UpdateView):
@@ -331,11 +340,17 @@ class PoCreate(LoginRequiredMixin, CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='PO作成'
-        context['orders']= self.request.session['orders']
+        if 'orders' in self.request.session:
+            context['orders']= self.request.session['orders']
         return context
 
     def get_success_url(self):
-        orders = self.request.session['orders']
+        carts = Cart.objects.filter(flag='order')
+        orders = []
+        for cart in carts:
+            orders.append(cart.pk)
+
+        #orders = self.request.session['orders']
         polines = []
         for cartpk in orders:
             cart = Cart.objects.get(pk=cartpk)

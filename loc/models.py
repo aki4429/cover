@@ -70,3 +70,20 @@ class Input(models.Model):
     hcode = models.TextField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
     kqty = models.FloatField(blank=True, null=True)
+
+#仕入先コードリスト
+class Shiire(models.Model):
+    scode = models.CharField(max_length=30)
+    sname = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.scode
+
+#背番号リスト
+class Bango(models.Model):
+    hcode = models.CharField(max_length=200)
+    se = models.CharField(max_length=30, unique=True)
+    shiire = models.ForeignKey(Shiire, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.se
