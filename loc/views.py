@@ -18,6 +18,7 @@ from .cover_zaiko import make_zaiko
 from .make_seiri_excel import write_excel
 from .make_pick_excel import write_pick_excel
 from .make_label import kako
+from .make_tana import tana
 
 
 @login_required
@@ -577,6 +578,7 @@ class AddcoverDelete(LoginRequiredMixin, DeleteView):
 
 
 #整理用ケース明細をダウンロードします。
+@login_required
 def down_case(request):
     #response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response = HttpResponse(content_type='application/vnd.ms-excel')
@@ -600,6 +602,7 @@ def down_case(request):
     return response
 
 #箱ラベル用明細(csv)をダウンロードします。
+@login_required
 def down_label(request):
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] = 'attachment; filename="case_label.csv"'
@@ -614,8 +617,25 @@ def down_label(request):
     
     return response
 
+#棚卸用ラベル(csv)をダウンロードします。
+@login_required
+def down_tana(request):
+    response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
+    response['Content-Disposition'] = 'attachment; filename="case_tana.csv"'
+    inputs = Locdata.objects.order_by('banch')
+    bangos = Bango.objects.all()
+    data = tana(inputs, bangos)
+
+    sio = io.StringIO()
+    writer = csv.writer(sio)
+    writer.writerows(data)
+    response.write(sio.getvalue().encode('cp932'))
+    
+    return response
+
 #「在庫表出力]ボタンで、cover_zaiko.csvをダウンロードさせる。
 #cover_zaiko.pyの make_zaiko()呼びだし
+@login_required
 def cover_zaiko(request):
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS')
     response['Content-Disposition'] = 'attachment; filename="cover_zaiko.csv"'

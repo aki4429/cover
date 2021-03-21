@@ -33,6 +33,7 @@ urlpatterns = [
     path('loc/down_case/', views.down_case, name='down_case'),
     path('loc/add_input/', views.add_input, name='add_input'),
     path('loc/down_label/', views.down_label, name='down_label'),
+    path('loc/down_tana/', views.down_tana, name='down_tana'),
     path('loc/cover_zaiko/', views.cover_zaiko, name='cover_zaiko'),
     path('loc/kaku_list', views.kaku_list, name='kaku_list'),
 ]
