@@ -101,7 +101,7 @@ class PoForm(forms.ModelForm):
                 'port': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
                 'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
-                'ft40': forms.Textarea(attrs={'rows':1, 'cols':15}),
-                'ft20': forms.Textarea(attrs={'rows':1, 'cols':15}),
+                #'ft40': forms.Textarea(attrs={'rows':1, 'cols':15}),
+                #'ft20': forms.Textarea(attrs={'rows':1, 'cols':15}),
             }
 

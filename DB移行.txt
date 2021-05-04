@@ -1,6 +1,9 @@
 anywhere側DB (tfc.sqlite)
 sqlite3 コマンドライン
 sqlite> update po set delivery='' where delivery like '%--%';
+sqlite> alter table po add column condition_id integer;
+sqlite> alter table po add column ft40 integer;
+sqlite> alter table po add column ft20 integer;
 sqlite>.output ./anywhere.dump
 sqlite>.dump
 

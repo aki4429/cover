@@ -33,6 +33,9 @@ class TfcCode(models.Model):
 
 
 class Condition(models.Model):
+    def __str__(self):
+        return self.name
+
     SHIP_CHOICES = (
     ('Vessel', 'vessel'),
     ('DHL(Courier)', 'dhl'),
@@ -87,6 +90,12 @@ class Condition(models.Model):
 
 
 class Po(models.Model):
+    FT40_CHOICES = (
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+    )
+
     pod = models.DateField(blank=True, null=True, verbose_name="発注日")
     pon = models.TextField(blank=True, null=True, verbose_name="PO#")
     per = models.TextField(blank=True, null=True, verbose_name="手段")
@@ -96,7 +105,7 @@ class Po(models.Model):
     comment = models.TextField(blank=True, null=True)
     delivery = models.DateField(blank=True, null=True, verbose_name="取込日")
     condition = models.ForeignKey(Condition, on_delete=models.PROTECT, blank=True, null=True)
-    ft40 = models.TextField(blank=True, null=True, verbose_name="40f")
+    ft40 = models.TextField(blank=True, null=True, verbose_name="40f", choices=FT40_CHOICES)
     ft20 = models.TextField(blank=True, null=True, verbose_name="20f")
 
     class Meta:

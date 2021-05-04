@@ -11,6 +11,38 @@
 
 {% block content %}
 
+   <table border=1>
+        <tr>
+        <th> 発注日 </th>
+        <th> PO番号 </th>
+        <th> 手段 </th>
+        <th> 仕向港 </th>
+        <th>届先</th>
+        <th> ETD </th>
+        <th> 取込日 </th>
+        <th> 条件 </th>
+        <th> 備考 </th>
+        <th> 40FT</th>
+        <th> 20FT</th>
+        </tr>
+	<td> {{ po.pod }} </td>
+	<td> {{ po.pon }} </td>
+	<td> {{ po.per }} </td>
+	<td> {{ po.port }}</td>
+	<td> {{ po.shipto }}</td>
+	<td> {{ po.etd }}</td>
+	<td> {{ po.delivery }}</td>
+	<td> {{ po.condition }}</td>
+	<td> {{ po.comment }}</td>
+	<td> {{ po.ft40 }}</td>
+	<td> {{ po.ft20 }}</td>
+        </tr>
+   </table>
+   <a class="btn btn-default" href="{% url 'po_update' po.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
+        <td><a class="btn btn-danger" href="{% url 'po_delete' po.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> 
+   <a class="btn btn-default" href="{% url 'make_po' po.pk  %} " >POダウンロード</a>
+
+
     <table border=1>
 	<tr>
 	<th> PO番号 </th>

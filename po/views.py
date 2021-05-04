@@ -132,6 +132,19 @@ class CodeDelete(LoginRequiredMixin, DeleteView):
         context['title']='TFCコード削除確認'
         return context
 
+class PoDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/po_confirm_delete.html'
+    model = Po
+    form_class = PoForm
+
+    def get_success_url(self):
+        return reverse('po_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO削除確認'
+        return context
+
 class CodeDetail(LoginRequiredMixin, DetailView):
     template_name = 'po/code_detail.html'
     model = TfcCode
@@ -383,6 +396,24 @@ class PoList(LoginRequiredMixin, ListView):
         context['title']='POリスト'
         return context
 
+class PoUpdate(LoginRequiredMixin, UpdateView):
+    context_object_name = 'pos'
+    template_name = 'po/po_update.html'
+    model = Po
+    form_class = PoForm
+
+    def get_success_url(self):
+        return reverse('poline_list', kwargs={'po_pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO編集'
+        return context
+
+    #def get_form(self):
+    #    form = super(PoUpdate, self).get_form()
+    #    return form
+
 class PolineList(LoginRequiredMixin, ListView):
     context_object_name = 'polines'
     template_name = 'po/poline_list.html'
@@ -396,6 +427,8 @@ class PolineList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='PO内容リスト'
+        po = Po.objects.get(pk=self.kwargs.get('po_pk'))
+        context['po']= po
         return context
 
 #POを作ってダウンロードします。

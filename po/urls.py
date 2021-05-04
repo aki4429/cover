@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('tfc_code', views.CodeList.as_view(), name='tfc_code'),
     path('code_update/<int:pk>/', views.CodeUpdate.as_view(), name='code_update'),
+    path('po_update/<int:pk>/', views.PoUpdate.as_view(), name='po_update'),
     path('<int:pk>/code_detail/', views.CodeDetail.as_view(), name='code_detail'),
     path('code_create/', views.CodeCreate.as_view(), name='code_create'),
     path('<int:condi_pk>/po_create/', views.PoCreate.as_view(), name='po_create'),
@@ -16,6 +17,7 @@ urlpatterns = [
     path('cart_list/', views.CartList.as_view(), name='cart_list'),
     path('<int:pk>/cart_delete/', views.CartDelete.as_view(), name='cart_delete'),
     path('<int:pk>/code_delete/', views.CodeDelete.as_view(), name='code_delete'),
+    path('<int:pk>/po_delete/', views.PoDelete.as_view(), name='po_delete'),
     path('<int:pk>/juchu_delete/', views.juchu_delete, name='juchu_delete'),
     path('cart_delete_all/', views.cart_delete_all, name='cart_delete_all'),
     path('condition_list/', views.ConditionList.as_view(), name='condition_list'),
