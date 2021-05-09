@@ -70,10 +70,10 @@ def write_po_excel(po):
     sheet.cell(row=7, column=10).value = po.pon
 
     #積載コメント挿入
-    if po.ft40 is not None and len(po.ft40) > 0 :
+    if po.ft40 is not None and len(str(po.ft40)) > 0 :
     #if po.ft40 is not None and po.ft40 > 0 :
         sheet.cell(row=r+1, column=3).value = "＊{}コンテナに積載してください。".format('40HC x ' + str(po.ft40))
-    elif po.ft20 is not None and len(po.ft20) > 0 :
+    elif po.ft20 is not None and len(str(po.ft20)) > 0 :
     #elif po.ft20 is not None and po.ft20 > 0 :
         sheet.cell(row=r+1, column=3).value = "＊{}コンテナに積載してください。".format('20ft x ' + str(po.ft20))
     else:
@@ -136,10 +136,10 @@ def write_po_excel(po):
         sheet.cell(row=r+6, column=5).value = po.condition.insurance
             
 
-    if po.ft40 is not None and len(po.ft40) > 0 :
+    if po.ft40 is not None and len(str(po.ft40)) > 0 :
     #if po.ft40 is not None and po.ft40 > 0 :
         via = '40x' + str(po.ft40)
-    elif po.ft20 is not None and len(po.ft20) > 0 :
+    elif po.ft20 is not None and len(str(po.ft20)) > 0 :
     #elif po.ft20 is not None and po.ft20 > 0 :
         via ='20x' + str(po.ft20)
     else:

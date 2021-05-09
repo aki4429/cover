@@ -1,0 +1,28 @@
+
+{% extends 'po/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+<table border=1>
+{% for od in orders %}
+<td>
+	od[0]
+</td>
+<td>
+	od[1]
+</td>
+
+{% endfor %}
+
+
+{% endblock %}
+</table>
+

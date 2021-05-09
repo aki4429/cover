@@ -41,6 +41,7 @@
    <a class="btn btn-default" href="{% url 'po_update' po.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
         <td><a class="btn btn-danger" href="{% url 'po_delete' po.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> 
    <a class="btn btn-default" href="{% url 'make_po' po.pk  %} " >POダウンロード</a>
+   <hr>
 
 
     <table border=1>
@@ -51,6 +52,8 @@
 	<th> 数量 </th>
 	<th> 受注番号 </th>
 	<th>残数</th>
+	<th>編集</th>
+	<th>削除</th>
 	</tr>
      {% for pl in polines %}
 	<tr>
@@ -61,6 +64,12 @@
         <td>{{ pl.qty }}</td>
         <td>{{ pl.om }}</td>
         <td>{{ pl.balance }}</td>
+        <td>
+   <a class="btn btn-default" href="{% url 'poline_update' pl.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
+        </td>
+        <td>
+	<a class="btn btn-danger" href="{% url 'poline_delete' pl.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> 
+        </td>
     </tr>
     {% endfor %}
 </table>

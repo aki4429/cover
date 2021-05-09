@@ -38,6 +38,7 @@ function allcheck( tf ) {
   <input type="button" value="全部ON！" onclick="allcheck(true);">
    <input type="button" value="全部OFF！" onclick="allcheck(false);">
 	</th>
+	<th>編集</th>
 	<th>削除</th>
     <form name="cart" action="" method="POST">
 	</tr>
@@ -61,6 +62,9 @@ function allcheck( tf ) {
         <td>
 	<input type="checkbox" name="order" value="{{ item.pk }}">
 	</td>
+	<td>
+	<a class="btn btn-default" href="{% url 'cart_update' pk=item.id %}"><span class="glyphicon glyphicon-pencyl"></span></a> 
+        </td>
 	<td>
 	<a class="btn btn-default" href="{% url 'cart_delete' pk=item.id %}"><span class="glyphicon glyphicon-remove"></span></a> 
         </td>

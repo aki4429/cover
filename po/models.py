@@ -27,8 +27,11 @@ class TfcCode(models.Model):
     hcode = models.TextField(blank=True, null=True, max_length=100, verbose_name="フクラ品番")
     cat = models.TextField(blank=True, null=True, max_length=20, verbose_name="分類")
 
+    def __str__(self):
+        return self.hinban
+
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tfc_code'
 
 
@@ -94,6 +97,26 @@ class Po(models.Model):
             ('1', '1'),
             ('2', '2'),
             ('3', '3'),
+            ('4', '4'),
+            ('5', '5'),
+            ('6', '6'),
+            ('7', '7'),
+            ('8', '8'),
+            ('9', '9'),
+            ('10', '10'),
+    )
+
+    FT20_CHOICES = (
+            ('1', '1'),
+            ('2', '2'),
+            ('3', '3'),
+            ('4', '4'),
+            ('5', '5'),
+            ('6', '6'),
+            ('7', '7'),
+            ('8', '8'),
+            ('9', '9'),
+            ('10', '10'),
     )
 
     pod = models.DateField(blank=True, null=True, verbose_name="発注日")
@@ -104,24 +127,29 @@ class Po(models.Model):
     etd = models.DateField(db_column='ETD', blank=True, null=True)  # Field name made lowercase.
     comment = models.TextField(blank=True, null=True)
     delivery = models.DateField(blank=True, null=True, verbose_name="取込日")
-    condition = models.ForeignKey(Condition, on_delete=models.PROTECT, blank=True, null=True)
+    condition = models.ForeignKey(Condition, on_delete=models.SET_NULL, blank=True, null=True, default=None)
     ft40 = models.TextField(blank=True, null=True, verbose_name="40f", choices=FT40_CHOICES)
-    ft20 = models.TextField(blank=True, null=True, verbose_name="20f")
+    ft20 = models.TextField(blank=True, null=True, verbose_name="20f", choices=FT20_CHOICES)
+
+    def __str__(self):
+        return self.pon
 
     class Meta:
         managed = True
         db_table = 'po'
 
 class Poline(models.Model):
-    code = models.ForeignKey(TfcCode, on_delete=models.PROTECT)
+    #code = models.ForeignKey(TfcCode, on_delete=models.PROTECT)
+    code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, null=True )
     remark = models.TextField(blank=True, null=True)
     om = models.TextField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
     balance = models.FloatField(blank=True, null=True)
-    po = models.ForeignKey(Po, on_delete=models.PROTECT)
+    #po = models.ForeignKey(Po, on_delete=models.PROTECT)
+    po = models.ForeignKey(Po, on_delete=models.SET_NULL, null=True )
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'poline'
 
 class Inv(models.Model):
@@ -130,20 +158,22 @@ class Inv(models.Model):
     delivery = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'inv'
 
 
 class Invline(models.Model):
-    code = models.ForeignKey(TfcCode, on_delete=models.PROTECT)
+    code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, null=True )
     qty = models.FloatField(blank=True, null=True)
     minashi = models.FloatField(blank=True, null=True)
-    inv = models.ForeignKey(Inv, on_delete=models.PROTECT)
-    poline = models.ManyToManyField(Poline)
+    #inv = models.ForeignKey(Inv, on_delete=models.PROTECT)
+    inv = models.ForeignKey(Inv, on_delete=models.SET_NULL, null=True)
+    #poline = models.ManyToManyField(Poline, null=True, blank=True)
+    poline = models.ForeignKey(Poline, on_delete=models.SET_NULL, null=True)
     item = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'invline'
 
 class Juchu(models.Model):
@@ -158,8 +188,8 @@ class Cart(models.Model):
     noki = models.DateField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
     flag = models.TextField(blank=True, null=True) #コードがあればok
-    code = models.TextField(blank=True, null=True) #TfcCodeのｐｋを持つ
     obic = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービックコード")
+    code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, null=True )
 
     class Meta:
         managed = True

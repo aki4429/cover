@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import TfcCode, Juchu, Cart, Condition, Po, Poline
-from .forms import CodeForm, JuchuForm, ConditionForm, PoForm
+from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -119,6 +119,34 @@ class CodeUpdate(LoginRequiredMixin, UpdateView):
         #context['last_id'] = TfcCode.objects.last().pk
         return context
 
+class PolineUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'po/poline_update.html'
+    model = Poline
+    form_class = PolineForm
+
+    def get_success_url(self):
+        return reverse('poline_list', kwargs={'po_pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO内容編集'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
+
+class CartUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'po/cart_update.html'
+    model = Cart
+    form_class = CartForm
+
+    def get_success_url(self):
+        return reverse('cart_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='カート編集'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
+
 class CodeDelete(LoginRequiredMixin, DeleteView):
     template_name = 'po/code_confirm_delete.html'
     model = TfcCode
@@ -145,6 +173,20 @@ class PoDelete(LoginRequiredMixin, DeleteView):
         context['title']='PO削除確認'
         return context
 
+class PolineDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/poline_confirm_delete.html'
+    model = Poline
+    #form_class = PolineForm
+
+    def get_success_url(self):
+        #return reverse('poline_list', kwargs={'po_pk': self.object.pk})
+        return reverse('po_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO行削除確認'
+        return context
+
 class CodeDetail(LoginRequiredMixin, DetailView):
     template_name = 'po/code_detail.html'
     model = TfcCode
@@ -158,6 +200,17 @@ class CodeCreate(LoginRequiredMixin, CreateView):
     template_name = 'po/code_create.html'
     model = TfcCode
     form_class = CodeForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='TFCコード作成'
+        return context
+
+
+class CartCreate(LoginRequiredMixin, CreateView):
+    template_name = 'po/cart_create.html'
+    model = Cart
+    form_class = CartForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -200,6 +253,14 @@ def juchu_delete(request, pk):
    juchu.delete()
    return redirect('juchu_list')
 
+#コードdetailからカートに追加
+@login_required
+def cart_append(request, pk):
+   code = get_object_or_404(TfcCode, id=pk)
+   cart = Cart(hinban=code.hinban, code=code)
+   cart.save()
+   return redirect('cart_update', pk = cart.pk)
+
 @login_required
 def make_cart(request, juchu_id):
     #Cart.objects.all().delete()
@@ -211,13 +272,24 @@ def make_cart(request, juchu_id):
 
     add_cart = []
     for row in jdata:
+        result = ''
+        if type(row[6]) == int :
+            result = TfcCode.objects.filter(pk=str(row[6]))
+        elif type(row[6]) and row[6].isdigit():
+            result = TfcCode.objects.filter(pk=str(row[6]))
+
+        if len(result) == 1:
+            code = result.first()
+        else:
+            code = None
+        
         cart = Cart(hinban = row[0], \
                 om = row[1],
                 juchubi = row[2].replace('/','-'),
                 noki = row[3].replace('/','-'),
                 qty = int(float(row[4])),
                 flag = row[5],
-                code = row[6],
+                code = code,
                 obic = row[7])
         add_cart.append(cart)
 
@@ -366,8 +438,9 @@ class PoCreate(LoginRequiredMixin, CreateView):
         #orders = self.request.session['orders']
         polines = []
         for cartpk in orders:
-            cart = Cart.objects.get(pk=cartpk)
-            tfccode  = TfcCode.objects.get(pk=cart.code)
+            #cart = Cart.objects.get(pk=cartpk)
+            #tfccode  = TfcCode.objects.get(pk=cart.code)
+            tfccode  = cart.code
             pl = Poline(
                 code = tfccode,
                 remark =tfccode.remarks,
@@ -441,3 +514,9 @@ def make_po(request, po_pk):
     wb.save(response)
     return response
 
+@login_required
+def order_list(request):
+    if request.session['orders'] :
+        orders = request['orders']
+        context['orders']= orders
+        return render(request, 'po/order_list.html', context)

@@ -42,6 +42,7 @@
 
     <a class="btn btn-default" href="{% url 'code_update' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a>
     <a class="btn btn-default" href="{% url 'code_copy' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span>コピー</a>
+    <a class="btn btn-default" href="{% url 'cart_append' pk=tfccode.pk %}"><span class="glyphicon glyphicon-pencil"></span>カートに追加</a>
     <a class="btn btn-default" href="{% url 'code_create' %}"><span class="glyphicon glyphicon-pencil"></span>新規</a>
     <a class="btn btn-danger" href="{% url 'code_delete' pk=tfccode.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a>
 

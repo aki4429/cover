@@ -1,5 +1,5 @@
 from django import forms
-from .models import TfcCode, Juchu, Condition, Po
+from .models import TfcCode, Juchu, Condition, Po, Poline, Cart
 from bootstrap_datepicker_plus import DatePickerInput
 
 
@@ -105,3 +105,49 @@ class PoForm(forms.ModelForm):
                 #'ft20': forms.Textarea(attrs={'rows':1, 'cols':15}),
             }
 
+class PolineForm(forms.ModelForm):
+    class Meta:
+        model = Poline
+        fields = [
+                #'code',
+                'remark',
+                'om',
+                'qty',
+                'balance',
+                'po',
+                ]
+        ### 追加 ###
+        widgets = {
+            'remark': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'om': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'qty': forms.Textarea(attrs={'rows':1, 'cols':5}),
+        }
+
+class CartForm(forms.ModelForm):
+    class Meta:
+        model = Cart
+        fields = [
+                'hinban',
+                'juchubi',
+                #'noki',
+                'om',
+                'qty',
+                'flag',
+                'code',
+                'obic',
+                ]
+        ### 追加 ###
+        widgets = {
+                'juchubi': DatePickerInput(
+                    format='%Y-%m-%d',
+                    options={
+                        'locale': 'ja',
+                        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                    }
+                ),
+            'hinban': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'obic': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'om': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'flag': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'qty': forms.Textarea(attrs={'rows':1, 'cols':5}),
+            }
