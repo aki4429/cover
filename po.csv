@@ -1,321 +1,367 @@
-id|pod|pon|per|port|ETD|comment|delivery|condition_id|ft20|ft40|shipto
-50|2019-01-09|H207449|Vessel|Nanno Factory|2019-02-28|||22|||Hukla Japan Inc.
-51|2019-01-15|H207450|Vessel|Nanno Factory|2019-03-02|||22|||Hukla Japan Inc.
-52|2019-01-15|H207451|||2019-01-15|||22|||
-53|2019-01-16|H207452|VESSEL|HAKATA|2019-03-02|||22|||the address listed above 
-54|2019-01-18|H207453|||2019-01-18|* クレーム分至急||22|||
-55|2019-01-18|H207454|||2019-01-18|||22|||
-56|2019-01-21|H207455|Vessel|Nanno Factory|2019-03-07|||22|||Hukla Japan Inc.
-57|2019-01-31|H207456|||2019-01-31|||22|||
-58|2019-04-02|H207496| Vessel| Nagoya Port|2019-05-18||2019-05-31|22||| The address listed above
-59|2019-04-09|H207497| DHL(Courier)| 240 Yoshida, Nanno-cho |2019-04-09| For Hukla Japan/Nanno Fac.||22||| Hukla Japan Inc. / Nanno Factory
-60|2019-04-09|H207498| Vessel| HAKATA Port|2019-05-25| To NIC Hakata 直送コンテナ||22||| The address listed above
-61|2019-04-09|H207499| Vessel| Nagoya Port|2019-05-25| To Hukla Japan/Nanno |2019-06-10|22||| The address listed above
-62|2019-04-10|H207500|Vessel| NAGOYA Port|2019-05-25| To Fujiei NAGOYA ||22||| The address listed above
-63|2019-04-15|H207501|Vessel| Nagoya Port|2019-04-18| To Hukla Japan/Nanno ||22||| The address listed above
-64|2019-04-15|H207502|DHL(Courier)| 240 Yoshida, Nanno-cho |2019-04-15| For Hukla Japan/Nanno Fac.||22||| Hukla Japan Inc. / Nanno Factory
-65|2019-04-15|H207503|DHL(Courier)| 240 Yoshida, Nanno-cho |2019-04-15| For Hukla Japan/Nanno Fac.||22||| Hukla Japan Inc. / Nanno Factory
-66|2019-04-16|H207504|  Vessel| HAKATA Port|2019-05-18| for f-grip||22||| The address listed above
-67|2019-04-16|H207505|Vessel| Nagoya Port|2019-06-01| To Hukla Japan/Nanno |2019-06-12|22||| The address listed above
-68|2019-04-23|H207506|Vessel| Nagoya Port|2019-06-01| To Hukla Japan/Nanno |2019-06-14|22||| The address listed above
-69|2019-04-23|H207507|DHL(Courier)| 240 Yoshida, Nanno-cho |2019-04-23| For Hukla Japan/Nanno Fac.||22||| Hukla Japan Inc. / Nanno Factory
-70|2019-04-24|H207508|DHL(Courier)| 240 Yoshida, Nanno-cho |2019-04-25| For Hukla Japan/Nanno Fac.||22||| Hukla Japan Inc. / Nanno Factory
-71|2019-03-18|H207485|||2019-03-18|||22|||
-72|2019-03-18|H207486|＊間に合う定期コンテナ便に混載|Vessel|2019-03-18|||22|||
-73|2019-03-18|H207487|Vessel|Nanno Factory|2019-04-27|||22|||Hukla Japan Inc.
-74|2019-03-19|H207488|||2019-03-19|||22|||＊間に合う定期コンテナ便に混載
-75|2019-03-22|H207489|||2019-03-22|||22|||
-76|2019-03-23|H207490|Vessel|Nanno Factory|2019-05-04|||22|||Hukla Japan Inc.
-77|2019-03-28|H207491|DHL (Courier)|Nanno Factory|2019-03-28|||22|||Hukla Japan Inc.
-78|2019-03-28|H207492|||2019-03-28|||22|||
-79|2019-03-28|H207493|||2019-03-28|||22|||
-80|2019-03-28|H207494|||2019-03-28|||22|||
-81|2019-03-05|H207478|||2019-03-05|||22|||
-82|2019-03-08|H207479|||2019-03-08|||22|||
-83|2019-03-09|H207480||Hukla Japan Inc.|2019-03-09|＊20FT x 1 コンテナに積載してください||22|||Vessel
-84|2019-03-10|H207481|||2019-03-10|||22|||
-85|2019-03-10|H207482|||2019-03-10|||22|||
-86|2019-03-10|H207483|||2019-03-10|||22|||
-87|2019-02-25|H207472|||2019-02-25|||22|||
-88|2019-02-26|H207473|||2019-02-26|||22|||
-89|2019-02-26|H207474||＊コンテナ出荷|2019-02-26|||22|||
-90|2019-02-26|H207475|||2019-02-26|||22|||
-91|2019-02-26|H207476|||2019-02-26|||22|||
-92|2019-02-18|H207463|VESSEL|HAKATA|2019-03-22|ベラカーサ直送コンテナ||22|||the address listed above 
-93|2019-02-18|H207464|Vessel|Nanno Factory|2019-03-28|||22|||Hukla Japan Inc.
-94|2019-02-19|H207465|||2019-02-19|||22|||
-95|2019-02-19|H207466|||2019-02-19|||22|||
-96|2019-02-18|H207467||Hukla Japan Inc.|2019-02-18|＊20FT x 1 コンテナに積載してください||22|||Vessel
-97|2019-02-18|H207468|||2019-02-18|||22|||＊コンテナ出荷
-98|2019-02-25|H207469|||2019-02-25|||22|||
-99|2019-02-25|H207470||(間に合う次の名古屋向けフクラ南濃行きコンテナに積載してください。）|2019-02-25|||22|||＊コンテナ出荷
-100|2019-02-02|H207457|Vessel|Nanno Factory|2019-03-14|||22|||Hukla Japan Inc.
-101|2019-02-12|H207462|Vessel|Nanno Factory|2019-03-21|||22|||Hukla Japan Inc.
-102|2019-02-25|H207471|Vessel|Nanno Factory|2019-04-06|||22|||Hukla Japan Inc.
-103|2019-03-04|H207477|Vessel|Nanno Factory|2019-04-06|||22|||Hukla Japan Inc.
-104|2019-03-10|H207484|Vessel|Nanno Factory|2019-04-20|||22|||Hukla Japan Inc.
-105|2019-03-28|H207495|||2019-03-28|||22|||
-106|2019-02-02|H207458|||2019-02-02|||22|||
-107|2019-02-03|H207459|||2019-02-03|||22|||
-108|2019-02-08|H207460|Vessel|Nanno Factory|2019-03-09|NIC様 直送コンテナ||22|||Hukla Japan Inc.
-109|2019-02-08|H207461|Vessel|Nanno Factory|2019-03-14|藤越様 直送コンテナ||22|||Hukla Japan Inc.
-111|2019-05-06|H207509|DHL(Courier)| NAGOYA air-port|2019-05-06| For Hukla Japan/Nanno Fac.||22||| Hukla Japan Inc. / Nanno Factory
-112|2019-05-07|H207510|Vessel| TOMAKOMAI Port|2019-06-15| for  Sapporo Furnishing||22||| The address listed above
-115|2019-05-07|H207511|Vessel| Nagoya Port|2019-06-15| To Hukla Japan/Nanno |2019-06-26|22||| The address listed above
-117|2019-05-08|H207512|Vessel|NAGOYA Port|2019-06-15|To Fujikoshi NAGOYA Direct|2019-07-03|22|||The address listed above
-123|2019-05-14|H207513|Vessel|Nagoya Port|2019-06-22|To Hukla Japan/Nanno |2019-07-03|22|||The address listed above
-124|2019-05-14|H207514|DHL(Courier)|NAGOYA air-port|2019-05-22|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-125|2019-05-21|H207515|Vessel|Nagoya Port|2019-05-02|To Hukla Japan/Nanno ||22|||The address listed above
-126|2019-05-21|H207516|Vessel|Nagoya Port|2019-05-21|To Hukla Japan/Nanno ||22|||The address listed above
-127|2019-05-21|H207517|Vessel|Nagoya Port|2019-06-29|To Hukla Japan/Nanno |2019-07-10|22|||The address listed above
-128|2019-05-23|H207518|DHL(Courier)|NAGOYA air-port|2019-06-14|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-129|2019-05-23|H207519|DHL(Courier)|NAGOYA air-port|2019-05-31|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-131|2019-05-28|H207520|Vessel|HAKATA Port|2019-07-06|for f-grip Direct||22|||The address listed above
-132|2019-05-28|H207521|DHL(Courier)|NAGOYA air-port|2019-06-12|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-138|2019-05-29|H207522|Vessel|Nagoya Port|2019-07-13|To Hukla Japan/Nanno |2019-07-24|22|||The address listed above
-139|2019-06-04|H207523|Vessel|Nagoya Port|2019-07-13|To Hukla Japan/Nanno |2019-07-29|22|||The address listed above
-140|2019-06-06|H207524|Vessel|HAKATA Port|2019-07-13|To NIC Hakata Direct||22|||The address listed above
-142|2019-06-06|H207525|Vessel|HAKATA Port|2019-07-20|for f-grip Direct|2019-08-02|22|||The address listed above
-143|2019-06-06|H207526|DHL(Courier)|NAGOYA air-port|2019-06-20|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-144|2019-06-06|H207527|DHL(Courier)|Nagoya airport|2019-06-17|Hukla Nanno|2019-06-18|22|||Hukla Nanno
-145|2019-06-11|H207528|Vessel|Nagoya Port|2019-07-20|To Hukla Japan/Nanno |2019-07-31|22|||The address listed above
-147|2019-06-18|H207530|Vessel|Nagoya Port|2019-07-25|To Hukla Japan/Nanno |2019-08-07|22|||The address listed above
-148|2019-06-25|H207531|Vessel|Nagoya Port|2019-08-01|To Hukla Japan/Nanno |2019-08-19|22|||The address listed above
-149|2019-06-25|H207532|Vessel|HAKATA Port|2019-07-27|To Fukuhaku Direct|2019-08-03|22|||The address listed above
-151|2019-07-02|H207535|Vessel|Nagoya Port|2019-08-08|To Hukla Japan/Nanno |2019-08-26|22|||The address listed above
-152|2019-07-09|H207536|Vessel|Nagoya Port|2019-08-22|To Hukla Japan/Nanno |2019-09-04|22|||The address listed above
-153|2019-07-16|H207538|Vessel|Nagoya Port|2019-08-29|To Hukla Japan/Nanno |2019-09-11|22|||The address listed above
-154|2019-07-22|H207540|DHL(Courier)| Air-port|2019-08-01|For Hukla Japan.||22|||IN HOUSE HISANAGA with Living House
-155|2019-07-23|H207539|DHL(Courier)|NAGOYA air-port|2019-08-01|For Hukla Japan/Nanno Fac.|2019-08-09|22|||Hukla Japan Inc. / Nanno Factory
-156|2019-07-23|H207541|Vessel|Nagoya Port|2019-08-08|To Hukla Japan/Nanno |2019-08-26|22|||The address listed above
-157|2019-07-23|H207542|Vessel|Nagoya Port|2019-09-05|To Hukla Japan/Nanno |2019-09-18|22|||The address listed above
-158|2019-07-23|H207543|Vessel|HAKATA Port|2019-08-22|for f-grip Direct||22|||The address listed above
-159|2019-06-18|H207529|DHL(Courier)|NAGOYA air-port|2019-08-06|For Hukla Japan/Nanno Fac.|2019-08-07|22|||Hukla Japan Inc. / Nanno Factory
-161|2019-07-30|H207544|Vessel|HAKATA Port|2019-09-12|To NIC Hakata Direct|2019-09-30|22|||The address listed above
-162|2019-07-30|H207545|Vessel|NAGOYA Port|2019-09-12|To Fujiei NAGOYA Direct |2019-09-30|22|||The address listed above
-163|2019-07-30|H207546|Vessel|Nagoya Port|2019-09-12|To Hukla Japan/Nanno |2019-09-25|22|||The address listed above
-164|2019-08-01|H207547|DHL(Courier)| Air-port|2019-08-02|For Hukla Japan.||22|||LIVING HOUSE HORIE Branch
-165|2019-08-06|H207548|Vessel|Nagoya Port|2019-09-19|To Hukla Japan/Nanno |2019-10-02|22|||The address listed above
-166|2019-08-09|H207551|Vessel|Nagoya Port|2019-09-05|To Hukla Japan/Nanno ||22|||The address listed above
-167|2019-08-19|H207552|DHL(Courier)|Air-port|2019-08-19|For Hukla Japan.||22|||Will advice
-168|2019-08-20|H207553|DHL(Courier)|NAGOYA air-port|2019-08-20|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-169|2019-08-20|H207554|Vessel|Nagoya Port|2019-08-29|To Hukla Japan/Nanno ||22|||The address listed above
-170|2019-08-20|H207555|Vessel|Nagoya Port|2019-09-26|To Hukla Japan/Nanno |2019-10-09|22|||The address listed above
-172|2019-08-21|H207556|Vessel|HAKATA Port|2019-09-21|for f-grip Direct||22|||The address listed above
-173|2019-08-21|H207557|Vessel|HAKATA Port|2019-09-26|To Fukuhaku Direct|2019-10-05|22|||The address listed above
-174|2019-08-23|H207558|Vessel|NAGOYA Port|2019-09-19|To Fujikoshi NAGOYA Direct|2019-09-30|22|||The address listed above
-175|2019-08-26|H207560|Vessel|Nagoya Port|2019-10-06|To Hukla Japan/Nanno |2019-10-16|22|||The address listed above
-176|2019-08-27|H207561|Vessel|Nagoya Port|2019-10-03|To Hukla Japan/Nanno |2019-10-16|22|||The address listed above
-177|2019-09-03|H207562|Vessel|Nagoya Port|2019-10-17|To Hukla Japan/Nanno |2019-10-30|22|||The address listed above
-178|2019-09-10|H207563|Vessel|NAGOYA Port|2019-10-17|To Daizen NAGOYA Direct |2019-10-17|22|||The address listed above
-179|2019-09-10|H207564|Vessel|Nagoya Port|2019-10-24|To Hukla Japan/Nanno |2019-11-06|22|||The address listed above
-180|2019-09-17|H207567|Vessel|Nagoya Port|2019-10-31|To Hukla Japan/Nanno |2019-11-13|22|||The address listed above
-181|2019-09-19|H207568|Vessel|Nagoya Port|2019-09-26|To Hukla Japan/Nanno |2019-09-26|22|||The address listed above
-182|2019-09-23|H207569|DHL(Courier)|NAGOYA air-port|2019-09-27|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-183|2019-09-23|H207570|DHL(Courier)|NAGOYA air-port|2019-09-27|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-184|2019-09-23|H207571|DHL(Courier)|NAGOYA air-port|2019-09-23|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-186|2019-09-24|H207572|Vessel|HAKATA Port|2019-11-02|for f-grip Direct|2019-11-15|22|||The address listed above
-187|2019-09-24|H207573|Vessel|HAKATA Port|2019-11-09|To NIC Hakata Direct|2019-11-25|22|||The address listed above
-188|2019-09-24|H207574|Vessel|NAGOYA Port|2019-11-14|To Fujiei NAGOYA Direct |2019-11-21|22|||The address listed above
-190|2019-09-24|H207575|Vessel|HAKATA Port|2019-11-12|To Fukuhaku Direct|2019-11-22|22|||The address listed above
-191|2019-09-24|H207576|Vessel|Nagoya Port|2019-11-07|To Hukla Japan/Nanno |2019-11-20|22|||The address listed above
-192|2019-09-26|H207577|Vessel|Nagoya Port|2019-10-17|To Hukla Japan/Nanno |2019-10-30|22|||The address listed above
-193|2019-09-30|H207578|Vessel|Nagoya Port|2019-10-17|To Hukla Japan/Nanno |2019-11-13|22|||The address listed above
-196|2019-10-01|H207579|Vessel|OSAKA Port|2019-11-15|To Fujishi Osaka Direct|2019-11-25|22|||The address listed above
-197|2019-10-01|H207580|Vessel|Nagoya Port|2019-11-16|To Hukla Japan/Nanno |2019-11-29|22|||The address listed above
-198|2019-10-04|H207581|Vessel|Nagoya Port|2019-10-24|To Hukla Japan/Nanno ||22|||The address listed above
-199|2019-10-07|H207582|DHL(Courier)|NAGOYA air-port|2019-10-07|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-200|2019-10-08|H207583|Vessel|NAGOYA Port|2019-11-19|To Fujikoshi NAGOYA Direct|2019-11-28|22|||The address listed above
-201|2019-10-10|H207584|Vessel|Nagoya Port|2019-10-17|To Hukla Japan/Nanno ||22|||The address listed above
-202|2019-10-10|H207585|Vessel|Nagoya Port|2019-10-24|To Hukla Japan/Nanno ||22|||The address listed above
-205|2019-10-15|H207586|Vessel|Nagoya Port|2019-11-21|To Hukla Japan/Nanno |2019-12-06|22|||The address listed above
-206|2019-10-24|H207587|Vessel|Nagoya Port|2019-11-30|To Hukla Japan/Nanno |2019-12-11|22|||The address listed above
-207|2019-10-24|H207588|Vessel|HAKATA Port|2019-11-30|To Livinghouse Hakata Direct|2019-12-12|22|||The address listed above
-208|2019-10-24|H207589|Vessel|NAGOYA Port|2019-11-30|To NIC Nagoya Direct|2019-12-13|22|||The address listed above
-210|2019-10-25|H207590|Vessel|HAKATA Port|2019-11-30|for f-grip Direct|2019-12-15|22|||The address listed above
-211|2019-10-28|H207591|Vessel|Nagoya Port|2019-10-28|To Hukla Japan/Nanno ||22|||The address listed above
-212|2019-10-29|H207592|Vessel|Nagoya Port|2019-12-05|To Hukla Japan/Nanno |2019-12-18|22|||The address listed above
-213|2019-10-30|H207593|Vessel|MOJI Port|2019-12-07|To NAFCO Moji Direct|2019-12-18|22|||The address listed above
-214|2019-10-30|H207594|Vessel|MOJI Port|2019-12-07|To NAFCO Moji Direct|2019-12-19|22|||The address listed above
-215|2019-10-30|H207595|Vessel|MOJI Port|2019-12-07|To NAFCO Moji Direct|2019-12-27|22|||The address listed above
-216|2019-10-31|H207596|Vessel|OSAKA Port|2019-12-19|To Fujishi Osaka Direct|2020-01-08|22|||The address listed above
-217|2019-11-01|H207597|Vessel|HAKATA Port|2019-12-28|To Livinghouse Hakata Direct|2020-01-14|22|||The address listed above
-218|2019-11-01|H207598|DHL(Courier)|NAGOYA air-port|2019-11-01|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-219|2019-11-05|H207599|Vessel|Nagoya Port|2019-12-12|To Hukla Japan/Nanno |2019-12-25|22|||The address listed above
-220|2019-11-11|H207601|DHL(Courier)|NAGOYA air-port|2019-11-11|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-222|2019-11-12|H207602|Vessel|Nagoya Port|2019-12-19|To Hukla Japan/Nanno |2020-01-06|22|||The address listed above
-223|2019-11-13|H207603|DHL(Courier)|NAGOYA air-port|2019-12-04|For Hukla Japan/Nanno Fac.|2019-12-04|22|||Hukla Japan Inc. / Nanno Factory
-225|2019-11-19|H207605|Vessel|Nagoya Port|2019-12-26|To Hukla Japan/Nanno |2020-01-10|22|||The address listed above
-226|2019-11-26|H207608|Vessel|Nagoya Port|2020-01-09|To Hukla Japan/Nanno |2020-01-22|22|||The address listed above
-227|2019-11-28|H207609|Vessel|Nagoya Port|2020-01-09|To Hukla Japan/Nanno |2020-01-24|22|||The address listed above
-228|2019-11-29|H207610|DHL(Courier)|NAGOYA air-port|2019-12-13|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-229|2019-12-03|H207611|Vessel|Nagoya Port|2020-01-16|To Hukla Japan/Nanno |2020-01-31|22|||The address listed above
-230|2019-12-03|H207612|Vessel|HAKATA Port|2020-01-18|for f-grip Direct|2020-01-30|22|||The address listed above
-231|2019-12-06|H207613|Vessel|NAGOYA Port|2020-01-16|To Fujikoshi NAGOYA Direct|2020-01-24|22|||The address listed above
-232|2019-12-10|H207614|Vessel|Nagoya Port|2020-01-23|To Hukla Japan/Nanno |2020-02-07|22|||The address listed above
-233|2019-12-10|H207615|Vessel|HAKATA Port|2020-01-25|To Fukuhaku Direct|2020-02-01|22|||The address listed above
-234|2019-12-11|H207616|DHL(Courier)| Fukuoka air-port|2019-12-18|For Hukla Japan/Nanno Fac.||22|||Fukuhaku-Konpo Inc.
-235|2019-12-17|H207617|Vessel|Nagoya Port|2020-02-08|To Hukla Japan/Nanno |2020-03-16|22|||The address listed above
-236|2019-12-17|H207618|Vessel|Nagoya Port|2020-01-16|To Hukla Japan/Nanno |2020-02-05|22|||The address listed above
-237|2019-12-19|H207619|DHL(Courier)|NAGOYA air-port|2019-12-26|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-238|2019-12-19|H207620|Vessel|Nagoya Port|2020-01-09|To Hukla Japan/Nanno |2020-01-18|22|||The address listed above
-239|2019-12-20|H207621|DHL(Courier)|NAGOYA air-port|2019-12-26|For Hukla Japan/Nanno Fac.|2020-01-08|22|||Hukla Japan Inc. / Nanno Factory
-240|2019-12-20|H207622|Vessel|NAGOYA Port|2020-03-05|To Fujiei NAGOYA Direct |--|22|||The address listed above
-241|2019-12-24|H207623|Vessel|Nagoya Port|2020-03-12|To Hukla Japan/Nanno |2020-03-25|22|||The address listed above
-242|2020-01-07|H207624|Vessel|Nagoya Port|2020-03-19|To Hukla Japan/Nanno |2020-03-30|22|||The address listed above
-243|2020-01-07|H207625|Vessel|Nagoya Port|2020-03-21|To Hukla Japan/Nanno |2020-04-01|22|||The address listed above
-244|2020-01-07|H207626|Vessel|Nagoya Port|2020-03-26|To Hukla Japan/Nanno |2020-04-08|22|||The address listed above
-245|2020-01-08|H207627|Vessel|HAKATA Port|2020-02-22|To NIC Hakata Direct||22|||The address listed above
-246|2020-01-09|H207628|Vessel|Nagoya Port|2020-02-08|To Hukla Japan/Nanno |--|22|||The address listed above
-247|2020-01-10|H207629|DHL(Courier)| Air-port|2020-01-17|For Hukla Japan.||22|||Hukla Japan Inc. Fukuoka Branch
-248|2020-01-17|H207630|Vessel|HAKATA Port|2020-02-29|To Fukuhaku Direct||22|||The address listed above
-249|2020-01-22|H207631|DHL(Courier)| Air-port|2020-02-07|For Hukla Japan.||22|||Hukla Japan Inc. Osaka Branch
-250|2020-02-07|H207632|Vessel|Nagoya Port|2020-04-02|To Hukla Japan/Nanno |2020-04-15|22|||The address listed above
-251|2020-02-07|H207633|Vessel|NAGOYA Port|2020-04-02|To Fujikoshi NAGOYA Direct||22|||The address listed above
-252|2020-02-11|H207634|Vessel|Nagoya Port|2020-04-04|To Hukla Japan/Nanno |2020-04-17|22|||The address listed above
-253|2020-02-20|H207635|Vessel|Nagoya Port|2020-04-11|To Hukla Japan/Nanno |2020-04-22|22|||The address listed above
-254|2020-02-20|H207636|Vessel|OSAKA Port|2020-03-26|To Fujishi Osaka Direct||22|||The address listed above
-255|2020-02-26|H207637|Vessel|Nagoya Port|2020-04-16|To Hukla Japan/Nanno |2020-04-27|22|||The address listed above
-256|2020-02-26|H207638|Vessel|Nagoya Port|2020-04-02|To Hukla Japan/Nanno ||22|||The address listed above
-257|2020-02-28|H207639|Vessel|Nagoya Port|2020-02-28|To Hukla Japan/Nanno ||22|||The address listed above
-259|2020-03-03|H207641|Vessel|Nagoya Port|2020-04-18|To Hukla Japan/Nanno |2020-04-29|22|||The address listed above
-260|2020-03-10|H207643|Vessel|Nagoya Port|2020-04-21|To Hukla Japan/Nanno |2020-05-01|22|||The address listed above
-261|2020-03-11|H207644|Vessel|Nagoya Port|2020-04-16|To Hukla Japan/Nanno ||22|||The address listed above
-262|2020-03-17|H207645|Vessel|Nagoya Port|2020-04-25|To Hukla Japan/Nanno |2020-05-11|22|||The address listed above
-263|2020-03-24|H207646|Vessel|Nagoya Port|2020-04-30|To Hukla Japan/Nanno |2020-05-13|22|||The address listed above
-264|2020-03-24|H207647|DHL(Courier)|NAGOYA air-port|2020-03-24|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-265|2020-03-30|H207648|Vessel|MOJI Port|2020-05-02|To NAFCO Moji Direct||22|||The address listed above
-266|2020-03-30|H207649|Vessel|MOJI Port|2020-05-02|To NAFCO Moji Direct||22|||The address listed above
-267|2020-03-30|H207650|Vessel|MOJI Port|2020-05-02|To NAFCO Moji Direct||22|||The address listed above
-268|2020-03-30|H207651|Vessel|MOJI Port|2020-05-16|To NAFCO Moji Direct||22|||The address listed above
-269|2020-03-31|H207652|Vessel|Nagoya Port|2020-05-14|To Hukla Japan/Nanno |2020-05-25|22|||The address listed above
-270|2020-03-31|H207653|Vessel|NAGOYA Port|2020-05-14|To Fujikoshi NAGOYA Direct||22|||The address listed above
-271|2020-03-31|H207654|Vessel|HAKATA Port|2020-05-09|To Fukuhaku Direct||22|||The address listed above
-272|2020-04-07|H207655|Vessel|Nagoya Port|2020-05-21|To Hukla Japan/Nanno |2020-06-03|22|||The address listed above
-273|2020-04-08|H207656|DHL(Courier)|NAGOYA air-port|2020-04-08|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-274|2020-04-14|H207657|Vessel|Nagoya Port|2020-05-28|To Hukla Japan/Nanno |2020-06-10|22|||The address listed above
-275|2020-04-21|H207658|Vessel|Nagoya Port|2020-06-04|To Hukla Japan/Nanno |2020-06-17|22|||The address listed above
-276|2020-04-27|H207659|DHL(Courier)|NAGOYA air-port|2020-05-01|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-277|2020-04-28|H207660|DHL(Courier)|NAGOYA air-port|2020-04-28|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-278|2020-04-28|H207661|Vessel|Nagoya Port|2020-06-11|To Hukla Japan/Nanno |2020-06-24|22|||The address listed above
-280|2020-05-12|H207662|Vessel|Nagoya Port|2020-06-18|To Hukla Japan/Nanno |2020-07-01|22|||The address listed above
-282|2020-05-15|H207663|Vessel|MOJI Port|2020-06-20|To NAFCO Moji Direct||22|||The address listed above
-283|2020-05-16|H207664|Vessel|NAGOYA Port|2020-08-06|To Fujiei NAGOYA Direct |2020-08-17|22|||The address listed above
-284|2020-05-19|H207665|Vessel|Nagoya Port|2020-06-25|To Hukla Japan/Nanno |2020-07-08|22|||The address listed above
-285|2020-05-21|H207666|Vessel|Nagoya Port|2020-05-21|To Hukla Japan/Nanno ||22|||The address listed above
-286|2020-05-26|H207667|Vessel|Nagoya Port|2020-07-02|To Hukla Japan/Nanno |2020-07-15|22|||The address listed above
-287|2020-05-26|H207668|Vessel|NAGOYA Port|2020-07-02|To Daizen NAGOYA Direct |--|22|||The address listed above
-290|2020-06-02|H207670|Vessel|Nagoya Port|2020-07-09|To Hukla Japan/Nanno |2020-07-22|22|||The address listed above
-292|2020-06-09|H207671|Vessel|Nagoya Port|2020-07-16|To Hukla Japan/Nanno |2020-07-29|22|||The address listed above
-293|2020-06-09|H207672|Vessel|MOJI Port|2020-07-11|To NAFCO Moji Direct|2020-07-18|22|||The address listed above
-295|2020-06-10|H207673|Vessel|Nagoya Port|2020-06-18|To Hukla Japan/Nanno ||22|||The address listed above
-297|2020-06-11|H207674|Vessel|HAKATA Port|2020-07-18|To Fukuhaku Direct||22|||The address listed above
-298|2020-06-16|H207675|Vessel|Nagoya Port|2020-07-23|To Hukla Japan/Nanno |2020-08-05|22|||The address listed above
-299|2020-06-17|H207676|Vessel|Nagoya Port|2020-06-24|To Hukla Japan/Nanno ||22|||The address listed above
-300|2020-06-19|H207677|DHL(Courier)|NAGOYA air-port|2020-06-24|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-301|2020-06-23|H207678|Vessel|Nagoya Port|2020-07-30|To Hukla Japan/Nanno |2020-08-19|22|||The address listed above
-302|2020-06-23|H207679|Vessel|HAKATA Port|2020-08-01|To NIC Hakata Direct|2020-08-19|22|||The address listed above
-303|2020-06-23|H207680|DHL(Courier)|NAGOYA air-port|2020-06-26|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-304|2020-06-30|H207681|Vessel|Nagoya Port|2020-08-06|To Hukla Japan/Nanno |2020-08-26|22|||The address listed above
-305|2020-07-01|H207682|Vessel|Nagoya Port|2020-07-01|To Hukla Japan/Nanno ||22|||The address listed above
-306|2020-07-03|H207683|Vessel|HAKATA Port|2020-08-22|To Livinghouse Hakata Direct|2020-08-31|22|||The address listed above
-307|2020-07-07|H207684|Vessel|Nagoya Port|2020-08-20|To Hukla Japan/Nanno |2020-09-04|22|||The address listed above
-308|2020-07-10|H207685|DHL(Courier)|NAGOYA air-port|2020-07-10|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-309|2020-07-11|H207686|Vessel|OSAKA Port|2020-08-15|To Fujishi Osaka Direct||22|||The address listed above
-310|2020-07-11|H207687|Vessel|Nagoya Port|2020-08-20|To Hukla Japan/Nanno ||22|||The address listed above
-311|2020-07-14|H207688|Vessel|Nagoya Port|2020-08-27|To Hukla Japan/Nanno |2020-09-11|22|||The address listed above
-312|2020-07-14|H207689|Vessel|HAKATA Port|2020-08-25|To Fukuhaku Direct|2020-09-05|22|||The address listed above
-313|2020-07-15|H207690|Vessel|Nagoya Port|2020-07-23|To Hukla Japan/Nanno ||22|||The address listed above
-314|2020-07-17|H207691|DHL(Courier)|NAGOYA air-port|2020-07-17|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-315|2020-07-21|H207692|Vessel|Nagoya Port|2020-09-03|To Hukla Japan/Nanno |2020-09-16|22|||The address listed above
-316|2020-07-22|H207693|DHL(Courier)|NAGOYA air-port|2020-07-22|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-317|2020-07-23|H207694|DHL(Courier)|NAGOYA air-port|2020-07-29|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-318|2020-07-28|H207695|Vessel|Nagoya Port|2020-09-10|To Hukla Japan/Nanno |2020-09-25|22|||The address listed above
-319|2020-08-04|H207696|Vessel|Nagoya Port|2020-09-17|To Hukla Japan/Nanno |2020-10-02|22|||The address listed above
-320|2020-08-05|H207697|DHL(Courier)|NAGOYA air-port|2020-09-02|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-321|2020-08-06|H207698|DHL(Courier)|NAGOYA air-port|2020-08-20|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-322|2020-08-07|H207699|Vessel|Nagoya Port|2020-09-10|To Hukla Japan/Nanno |2020-09-23|22|||The address listed above
-323|2020-08-07|H207700|Vessel|Nagoya Port|2020-09-17|To Hukla Japan/Nanno |2020-10-05|22|||The address listed above
-324|2020-08-07|H207701|Vessel|Nagoya Port|2020-09-24|To Hukla Japan/Nanno |2020-10-09|22|||The address listed above
-325|2020-08-17|H207702|DHL(Courier)| Air-port|2020-08-27|For Hukla Japan.||22|||Hukla Japan Inc. Fukuoka Branch
-326|2020-08-18|H207703|Vessel|HAKATA Port|2020-09-26|To Fukuhaku Direct||22|||The address listed above
-327|2020-08-18|H207704|Vessel|MOJI Port|2020-09-26|To NAFCO Moji Direct|2020-10-08|22|||The address listed above
-328|2020-08-18|H207705|Vessel|Nagoya Port|2020-09-24|To Hukla Japan/Nanno |2020-10-07|22|||The address listed above
-329|2020-08-20|H207706|Vessel|Nagoya Port|2020-09-24|To Hukla Japan/Nanno |--|22|||The address listed above
-330|2020-08-25|H207707|Vessel|Nagoya Port|2020-10-01|To Hukla Japan/Nanno |2020-10-16|22|||The address listed above
-331|2020-08-27|H207708|DHL(Courier)|NAGOYA air-port|2020-09-08|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-332|2020-08-27|H207709|Vessel|Nagoya Port|2020-10-01|To Hukla Japan/Nanno ||22|||The address listed above
-333|2020-08-27|H207710|DHL(Courier)|NAGOYA air-port|2020-09-11|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-334|2020-08-28|H207711|Vessel|Nagoya Port|2020-09-09|To Hukla Japan/Nanno ||22|||The address listed above
-335|2020-09-01|H207712|Vessel|Nagoya Port|2020-10-15|To Hukla Japan/Nanno |2020-10-30|22|||The address listed above
-336|2020-09-01|H207713|Vessel|Nagoya Port|2020-09-01|To Hukla Japan/Nanno ||22|||The address listed above
-337|2020-09-03|H207714|DHL(Courier)|NAGOYA air-port|2020-09-11|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-338|2020-09-08|H207715|Vessel|Nagoya Port|2020-10-22|To Hukla Japan/Nanno |2020-11-04|22|||The address listed above
-339|2020-09-14|H207716|Vessel|Nagoya Port|2020-10-22|To Hukla Japan/Nanno ||22|||The address listed above
-340|2020-09-15|H207717|Vessel|Nagoya Port|2020-10-29|To Hukla Japan/Nanno |2020-11-11|22|||The address listed above
-341|2020-09-16|H207718|DHL(Courier)|NAGOYA air-port|2020-09-25|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-342|2020-09-18|H207719|Vessel|Nagoya Port|2020-10-24|To Hukla Japan/Nanno |2020-11-06|22|||The address listed above
-344|2020-09-22|H207720|Vessel|Nagoya Port|2020-11-05|To Hukla Japan/Nanno |2020-11-18|22|||The address listed above
-345|2020-09-23|H207721|Vessel|HAKATA Port|2020-11-07|To NIC Hakata Direct|2020-11-27|22|||The address listed above
-346|2020-09-23|H207722|Vessel|NAGOYA Port|2020-11-12|To Fujiei NAGOYA Direct ||22|||The address listed above
-347|2020-09-23|H207723|Vessel|HAKATA Port|2020-11-07|To Sakoda Direct||22|||The address listed above
-348|2020-09-25|H207724|DHL(Courier)|NAGOYA air-port|2020-09-25|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-349|2020-09-25|H207725|Vessel|Nagoya Port|2020-09-25|To Hukla Japan/Nanno ||22|||The address listed above
-350|2020-09-29|H207726|Vessel|Nagoya Port|2020-11-12|To Hukla Japan/Nanno |2020-11-27|22|||The address listed above
-351|2020-10-09|H207727|Vessel|HAKATA Port|2020-11-14|To Livinghouse Hakata Direct||22|||The address listed above
-352|2020-10-09|H207728|Vessel|NAGOYA Port|2020-11-12|To Daizen NAGOYA Direct |2020-11-24|22|||The address listed above
-353|2020-10-09|H207729|Vessel|OSAKA Port|2020-11-19|To Fujishi Osaka Direct|2020-12-08|22|||The address listed above
-354|2020-10-13|H207730|Vessel|Nagoya Port|2020-11-19|To Hukla Japan/Nanno |2020-12-04|22|||The address listed above
-355|2020-10-14|H207731|Vessel|Nagoya Port|2020-11-26|To Hukla Japan/Nanno ||22|||The address listed above
-356|2020-10-14|H207732|DHL(Courier)|NAGOYA air-port|2020-10-14|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-357|2020-10-16|H207734|DHL(Courier)|NAGOYA air-port|2020-10-23|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-359|2020-10-20|H207735|Vessel|Nagoya Port|2020-11-26|To Hukla Japan/Nanno |2020-12-11|22|||The address listed above
-360|2020-10-20|H207736|Vessel|Nagoya Port|2020-11-26|To Hukla Japan/Nanno ||22|||The address listed above
-361|2020-10-21|H207737|Vessel|MOJI Port|2020-11-28|To NAFCO Moji Direct||22|||The address listed above
-362|2020-10-27|H207738|Vessel|Nagoya Port|2020-12-03|To Hukla Japan/Nanno |2020-12-16|22|||The address listed above
-363|2020-10-28|H207739|DHL(Courier)|NAGOYA air-port|2020-10-30|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-364|2020-11-03|H207740|Vessel|Nagoya Port|2020-12-10|To Hukla Japan/Nanno |2020-12-25|22|||The address listed above
-365|2020-11-06|H207741|DHL(Courier)|NAGOYA air-port|2020-11-13|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-366|2020-11-10|H207742|Vessel|Nagoya Port|2020-12-17|To Hukla Japan/Nanno |2021-01-08|22|||The address listed above
-367|2020-11-12|H207743|Vessel|Nagoya Port|2020-12-29|To Hukla Japan/Nanno ||22|||The address listed above
-368|2020-11-12|H207744|Vessel|Nagoya Port|2021-01-18|To Hukla Japan/Nanno ||22|||The address listed above
-369|2020-11-12|H207745|Vessel|Nagoya Port|2021-02-04|To Hukla Japan/Nanno ||22|||The address listed above
-370|2020-11-13|H207746|Vessel|OSAKA Port|2020-12-24|To Fujishi Osaka Direct||22|||The address listed above
-371|2020-11-17|H207747|Vessel|HAKATA Port|2020-12-24|To NIC Hakata Direct||22|||The address listed above
-372|2020-11-17|H207748|Vessel|Nagoya Port|2020-12-24|To Hukla Japan/Nanno |2021-01-15|22|||The address listed above
-373|2020-11-18|H207749|Vessel|HAKATA Port|2020-12-26|To Fukuhaku Direct||22|||The address listed above
-374|2020-11-24|H207750|Vessel|Nagoya Port|2020-11-24|To Hukla Japan/Nanno ||22|||The address listed above
-375|2020-11-24|H207751|Vessel|Nagoya Port|2021-01-09|To Hukla Japan/Nanno |2021-01-22|22|||The address listed above
-376|2020-11-26|H207752|DHL(Courier)|NAGOYA air-port|2020-11-26|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-377|2020-11-26|H207753|Vessel|Nagoya Port|2020-11-26|To Hukla Japan/Nanno ||22|||The address listed above
-378|2020-12-01|H207754|Vessel|Nagoya Port|2021-01-14|To Hukla Japan/Nanno |2021-01-29|22|||The address listed above
-379|2020-12-04|H207755|DHL(Courier)|NAGOYA air-port|2020-12-11|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-380|2020-12-07|H207756|Vessel|MOJI Port|2021-01-23|To NAFCO Moji Direct||22|||The address listed above
-381|2020-12-07|H207757|Vessel|NAGOYA Port|2021-03-11|To Fujiei NAGOYA Direct ||22|||The address listed above
-382|2020-12-07|H207758|Vessel|HAKATA Port|2021-01-23|To Livinghouse Hakata Direct||22|||The address listed above
-383|2020-12-08|H207759|Vessel|Nagoya Port|2021-01-21|To Hukla Japan/Nanno |2021-02-05|22|||The address listed above
-384|2020-12-14|H207760|Vessel|HAKATA Port|2021-01-30|To Fukuhaku Direct||22|||The address listed above
-385|2020-12-15|H207761|Vessel|Nagoya Port|2020-12-15|To Hukla Japan/Nanno ||22|||The address listed above
-386|2020-12-15|H207762|Vessel|Nagoya Port|2021-01-28|To Hukla Japan/Nanno |2021-02-12|22|||The address listed above
-387|2020-12-18|H207763|Vessel|Nagoya Port|2021-01-14|To Hukla Japan/Nanno ||22|||The address listed above
-388|2020-12-18|H207764|DHL(Courier)|NAGOYA air-port|2020-12-18|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-389|2020-12-22|H207765|Vessel|Nagoya Port|2021-02-04|To Hukla Japan/Nanno |2021-02-22|22|||The address listed above
-390|2020-12-22|H207766|DHL(Courier)|NAGOYA air-port|2021-02-04|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-391|2020-12-24|H207767|Vessel|Nagoya Port|2021-02-04|To Hukla Japan/Nanno ||22|||The address listed above
-392|2020-12-25|H207768|Vessel|Nagoya Port|2021-01-14|To Hukla Japan/Nanno ||22|||The address listed above
-393|2020-12-25|H207769|Vessel|OSAKA Port|2021-02-11|To Fujishi Osaka Direct||22|||The address listed above
-395|2021-01-12|H207770|Vessel|Nagoya Port|2021-02-25|To Hukla Japan/Nanno |2021-03-12|22|||The address listed above
-396|2021-01-18|H207771|Vessel|Nagoya Port|2021-01-18|To Hukla Japan/Nanno ||22|||The address listed above
-397|2021-01-19|H207772|Vessel|Nagoya Port|2021-03-04|To Hukla Japan/Nanno |2021-03-22|22|||The address listed above
-398|2021-01-19|H207773|Vessel|HAKATA Port|2021-03-13|To Livinghouse Hakata Direct||22|||The address listed above
-399|2021-01-25|H207774|Vessel|Nagoya Port|2021-01-25|To Hukla Japan/Nanno ||22|||The address listed above
-400|2021-01-26|H207775|Vessel|Nagoya Port|2021-03-11|To Hukla Japan/Nanno |2021-03-29|22|||The address listed above
-401|2021-02-01|H207776|Vessel|Nagoya Port|2021-02-01|To Hukla Japan/Nanno ||22|||The address listed above
-402|2021-02-02|H207777|Vessel|Nagoya Port|2021-03-18|To Hukla Japan/Nanno |2021-04-02|22|||The address listed above
-403|2021-02-02|H207778|DHL(Courier)|NAGOYA air-port|2021-02-02|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-404|2021-02-02|H207779|DHL(Courier)|NAGOYA air-port|2021-02-19|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-405|2021-02-03|H207780|Vessel|NAGOYA Port|2021-04-08|To Fujikoshi NAGOYA Direct||22|||The address listed above
-406|2021-02-03|H207781|Vessel|HAKATA Port|2021-03-20|To NIC Hakata Direct||22|||The address listed above
-407|2021-02-09|H207782|DHL(Courier)|NAGOYA air-port|2021-02-09|For Hukla Japan/Nanno Fac.||22|||Hukla Japan Inc. / Nanno Factory
-408|2021-02-09|H207783|Vessel|Nagoya Port|2021-03-25|To Hukla Japan/Nanno |2021-04-09|22|||The address listed above
-409|2021-02-13|H207784|Vessel|NAGOYA Port|2021-02-20||2021-02-27|1|||The address listed above
+50,2019-01-09,H207449,Vessel,Nanno Factory,Hukla Japan Inc.,2019-02-28,,
+51,2019-01-15,H207450,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-02,,
+52,2019-01-15,H207451,,,,2019-01-15,,
+53,2019-01-16,H207452,VESSEL,HAKATA,the address listed above ,2019-03-02,,
+54,2019-01-18,H207453,,,,2019-01-18,* クレーム分至急,
+55,2019-01-18,H207454,,,,2019-01-18,,
+56,2019-01-21,H207455,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-07,,
+57,2019-01-31,H207456,,,,2019-01-31,,
+58,2019-04-02,H207496, Vessel, Nagoya Port, The address listed above,2019-05-18,,2019-05-31
+59,2019-04-09,H207497, DHL(Courier)," 240 Yoshida, Nanno-cho ", Hukla Japan Inc. / Nanno Factory,2019-04-09, For Hukla Japan/Nanno Fac.,
+60,2019-04-09,H207498, Vessel, HAKATA Port, The address listed above,2019-05-25, To NIC Hakata 直送コンテナ,
+61,2019-04-09,H207499, Vessel, Nagoya Port, The address listed above,2019-05-25, To Hukla Japan/Nanno ,2019-06-10
+62,2019-04-10,H207500,Vessel, NAGOYA Port, The address listed above,2019-05-25, To Fujiei NAGOYA ,
+63,2019-04-15,H207501,Vessel, Nagoya Port, The address listed above,2019-04-18, To Hukla Japan/Nanno ,
+64,2019-04-15,H207502,DHL(Courier)," 240 Yoshida, Nanno-cho ", Hukla Japan Inc. / Nanno Factory,2019-04-15, For Hukla Japan/Nanno Fac.,
+65,2019-04-15,H207503,DHL(Courier)," 240 Yoshida, Nanno-cho ", Hukla Japan Inc. / Nanno Factory,2019-04-15, For Hukla Japan/Nanno Fac.,
+66,2019-04-16,H207504,  Vessel, HAKATA Port, The address listed above,2019-05-18, for f-grip,
+67,2019-04-16,H207505,Vessel, Nagoya Port, The address listed above,2019-06-01, To Hukla Japan/Nanno ,2019-06-12
+68,2019-04-23,H207506,Vessel, Nagoya Port, The address listed above,2019-06-01, To Hukla Japan/Nanno ,2019-06-14
+69,2019-04-23,H207507,DHL(Courier)," 240 Yoshida, Nanno-cho ", Hukla Japan Inc. / Nanno Factory,2019-04-23, For Hukla Japan/Nanno Fac.,
+70,2019-04-24,H207508,DHL(Courier)," 240 Yoshida, Nanno-cho ", Hukla Japan Inc. / Nanno Factory,2019-04-25, For Hukla Japan/Nanno Fac.,
+71,2019-03-18,H207485,,,,2019-03-18,,
+72,2019-03-18,H207486,＊間に合う定期コンテナ便に混載,Vessel,,2019-03-18,,
+73,2019-03-18,H207487,Vessel,Nanno Factory,Hukla Japan Inc.,2019-04-27,,
+74,2019-03-19,H207488,,,＊間に合う定期コンテナ便に混載,2019-03-19,,
+75,2019-03-22,H207489,,,,2019-03-22,,
+76,2019-03-23,H207490,Vessel,Nanno Factory,Hukla Japan Inc.,2019-05-04,,
+77,2019-03-28,H207491,DHL (Courier),Nanno Factory,Hukla Japan Inc.,2019-03-28,,
+78,2019-03-28,H207492,,,,2019-03-28,,
+79,2019-03-28,H207493,,,,2019-03-28,,
+80,2019-03-28,H207494,,,,2019-03-28,,
+81,2019-03-05,H207478,,,,2019-03-05,,
+82,2019-03-08,H207479,,,,2019-03-08,,
+83,2019-03-09,H207480,,Hukla Japan Inc.,Vessel,2019-03-09,＊20FT x 1 コンテナに積載してください,
+84,2019-03-10,H207481,,,,2019-03-10,,
+85,2019-03-10,H207482,,,,2019-03-10,,
+86,2019-03-10,H207483,,,,2019-03-10,,
+87,2019-02-25,H207472,,,,2019-02-25,,
+88,2019-02-26,H207473,,,,2019-02-26,,
+89,2019-02-26,H207474,,＊コンテナ出荷,,2019-02-26,,
+90,2019-02-26,H207475,,,,2019-02-26,,
+91,2019-02-26,H207476,,,,2019-02-26,,
+92,2019-02-18,H207463,VESSEL,HAKATA,the address listed above ,2019-03-22,ベラカーサ直送コンテナ,
+93,2019-02-18,H207464,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-28,,
+94,2019-02-19,H207465,,,,2019-02-19,,
+95,2019-02-19,H207466,,,,2019-02-19,,
+96,2019-02-18,H207467,,Hukla Japan Inc.,Vessel,2019-02-18,＊20FT x 1 コンテナに積載してください,
+97,2019-02-18,H207468,,,＊コンテナ出荷,2019-02-18,,
+98,2019-02-25,H207469,,,,2019-02-25,,
+99,2019-02-25,H207470,,(間に合う次の名古屋向けフクラ南濃行きコンテナに積載してください。）,＊コンテナ出荷,2019-02-25,,
+100,2019-02-02,H207457,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-14,,
+101,2019-02-12,H207462,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-21,,
+102,2019-02-25,H207471,Vessel,Nanno Factory,Hukla Japan Inc.,2019-04-06,,
+103,2019-03-04,H207477,Vessel,Nanno Factory,Hukla Japan Inc.,2019-04-06,,
+104,2019-03-10,H207484,Vessel,Nanno Factory,Hukla Japan Inc.,2019-04-20,,
+105,2019-03-28,H207495,,,,2019-03-28,,
+106,2019-02-02,H207458,,,,2019-02-02,,
+107,2019-02-03,H207459,,,,2019-02-03,,
+108,2019-02-08,H207460,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-09,NIC様 直送コンテナ,
+109,2019-02-08,H207461,Vessel,Nanno Factory,Hukla Japan Inc.,2019-03-14,藤越様 直送コンテナ,
+111,2019-05-06,H207509,DHL(Courier), NAGOYA air-port, Hukla Japan Inc. / Nanno Factory,2019-05-06, For Hukla Japan/Nanno Fac.,
+112,2019-05-07,H207510,Vessel, TOMAKOMAI Port, The address listed above,2019-06-15, for  Sapporo Furnishing,
+115,2019-05-07,H207511,Vessel, Nagoya Port, The address listed above,2019-06-15, To Hukla Japan/Nanno ,2019-06-26
+117,2019-05-08,H207512,Vessel,NAGOYA Port,The address listed above,2019-06-15,To Fujikoshi NAGOYA Direct,2019-07-03
+123,2019-05-14,H207513,Vessel,Nagoya Port,The address listed above,2019-06-22,To Hukla Japan/Nanno ,2019-07-03
+124,2019-05-14,H207514,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-05-22,For Hukla Japan/Nanno Fac.,
+125,2019-05-21,H207515,Vessel,Nagoya Port,The address listed above,2019-05-02,To Hukla Japan/Nanno ,
+126,2019-05-21,H207516,Vessel,Nagoya Port,The address listed above,2019-05-21,To Hukla Japan/Nanno ,
+127,2019-05-21,H207517,Vessel,Nagoya Port,The address listed above,2019-06-29,To Hukla Japan/Nanno ,2019-07-10
+128,2019-05-23,H207518,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-06-14,For Hukla Japan/Nanno Fac.,
+129,2019-05-23,H207519,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-05-31,For Hukla Japan/Nanno Fac.,
+131,2019-05-28,H207520,Vessel,HAKATA Port,The address listed above,2019-07-06,for f-grip Direct,
+132,2019-05-28,H207521,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-06-12,For Hukla Japan/Nanno Fac.,
+138,2019-05-29,H207522,Vessel,Nagoya Port,The address listed above,2019-07-13,To Hukla Japan/Nanno ,2019-07-24
+139,2019-06-04,H207523,Vessel,Nagoya Port,The address listed above,2019-07-13,To Hukla Japan/Nanno ,2019-07-29
+140,2019-06-06,H207524,Vessel,HAKATA Port,The address listed above,2019-07-13,To NIC Hakata Direct,
+142,2019-06-06,H207525,Vessel,HAKATA Port,The address listed above,2019-07-20,for f-grip Direct,2019-08-02
+143,2019-06-06,H207526,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-06-20,For Hukla Japan/Nanno Fac.,
+144,2019-06-06,H207527,DHL(Courier),Nagoya airport,Hukla Nanno,2019-06-17,Hukla Nanno,2019-06-18
+145,2019-06-11,H207528,Vessel,Nagoya Port,The address listed above,2019-07-20,To Hukla Japan/Nanno ,2019-07-31
+147,2019-06-18,H207530,Vessel,Nagoya Port,The address listed above,2019-07-25,To Hukla Japan/Nanno ,2019-08-07
+148,2019-06-25,H207531,Vessel,Nagoya Port,The address listed above,2019-08-01,To Hukla Japan/Nanno ,2019-08-19
+149,2019-06-25,H207532,Vessel,HAKATA Port,The address listed above,2019-07-27,To Fukuhaku Direct,2019-08-03
+151,2019-07-02,H207535,Vessel,Nagoya Port,The address listed above,2019-08-08,To Hukla Japan/Nanno ,2019-08-26
+152,2019-07-09,H207536,Vessel,Nagoya Port,The address listed above,2019-08-22,To Hukla Japan/Nanno ,2019-09-04
+153,2019-07-16,H207538,Vessel,Nagoya Port,The address listed above,2019-08-29,To Hukla Japan/Nanno ,2019-09-11
+154,2019-07-22,H207540,DHL(Courier), Air-port,IN HOUSE HISANAGA with Living House,2019-08-01,For Hukla Japan.,
+155,2019-07-23,H207539,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-08-01,For Hukla Japan/Nanno Fac.,2019-08-09
+156,2019-07-23,H207541,Vessel,Nagoya Port,The address listed above,2019-08-08,To Hukla Japan/Nanno ,2019-08-26
+157,2019-07-23,H207542,Vessel,Nagoya Port,The address listed above,2019-09-05,To Hukla Japan/Nanno ,2019-09-18
+158,2019-07-23,H207543,Vessel,HAKATA Port,The address listed above,2019-08-22,for f-grip Direct,
+159,2019-06-18,H207529,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-08-06,For Hukla Japan/Nanno Fac.,2019-08-07
+161,2019-07-30,H207544,Vessel,HAKATA Port,The address listed above,2019-09-12,To NIC Hakata Direct,2019-09-30
+162,2019-07-30,H207545,Vessel,NAGOYA Port,The address listed above,2019-09-12,To Fujiei NAGOYA Direct ,2019-09-30
+163,2019-07-30,H207546,Vessel,Nagoya Port,The address listed above,2019-09-12,To Hukla Japan/Nanno ,2019-09-25
+164,2019-08-01,H207547,DHL(Courier), Air-port,LIVING HOUSE HORIE Branch,2019-08-02,For Hukla Japan.,
+165,2019-08-06,H207548,Vessel,Nagoya Port,The address listed above,2019-09-19,To Hukla Japan/Nanno ,2019-10-02
+166,2019-08-09,H207551,Vessel,Nagoya Port,The address listed above,2019-09-05,To Hukla Japan/Nanno ,
+167,2019-08-19,H207552,DHL(Courier),Air-port,Will advice,2019-08-19,For Hukla Japan.,
+168,2019-08-20,H207553,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-08-20,For Hukla Japan/Nanno Fac.,
+169,2019-08-20,H207554,Vessel,Nagoya Port,The address listed above,2019-08-29,To Hukla Japan/Nanno ,
+170,2019-08-20,H207555,Vessel,Nagoya Port,The address listed above,2019-09-26,To Hukla Japan/Nanno ,2019-10-09
+172,2019-08-21,H207556,Vessel,HAKATA Port,The address listed above,2019-09-21,for f-grip Direct,
+173,2019-08-21,H207557,Vessel,HAKATA Port,The address listed above,2019-09-26,To Fukuhaku Direct,2019-10-05
+174,2019-08-23,H207558,Vessel,NAGOYA Port,The address listed above,2019-09-19,To Fujikoshi NAGOYA Direct,2019-09-30
+175,2019-08-26,H207560,Vessel,Nagoya Port,The address listed above,2019-10-06,To Hukla Japan/Nanno ,2019-10-16
+176,2019-08-27,H207561,Vessel,Nagoya Port,The address listed above,2019-10-03,To Hukla Japan/Nanno ,2019-10-16
+177,2019-09-03,H207562,Vessel,Nagoya Port,The address listed above,2019-10-17,To Hukla Japan/Nanno ,2019-10-30
+178,2019-09-10,H207563,Vessel,NAGOYA Port,The address listed above,2019-10-17,To Daizen NAGOYA Direct ,2019-10-17
+179,2019-09-10,H207564,Vessel,Nagoya Port,The address listed above,2019-10-24,To Hukla Japan/Nanno ,2019-11-06
+180,2019-09-17,H207567,Vessel,Nagoya Port,The address listed above,2019-10-31,To Hukla Japan/Nanno ,2019-11-13
+181,2019-09-19,H207568,Vessel,Nagoya Port,The address listed above,2019-09-26,To Hukla Japan/Nanno ,2019-09-26
+182,2019-09-23,H207569,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-09-27,For Hukla Japan/Nanno Fac.,
+183,2019-09-23,H207570,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-09-27,For Hukla Japan/Nanno Fac.,
+184,2019-09-23,H207571,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-09-23,For Hukla Japan/Nanno Fac.,
+186,2019-09-24,H207572,Vessel,HAKATA Port,The address listed above,2019-11-02,for f-grip Direct,2019-11-15
+187,2019-09-24,H207573,Vessel,HAKATA Port,The address listed above,2019-11-09,To NIC Hakata Direct,2019-11-25
+188,2019-09-24,H207574,Vessel,NAGOYA Port,The address listed above,2019-11-14,To Fujiei NAGOYA Direct ,2019-11-21
+190,2019-09-24,H207575,Vessel,HAKATA Port,The address listed above,2019-11-12,To Fukuhaku Direct,2019-11-22
+191,2019-09-24,H207576,Vessel,Nagoya Port,The address listed above,2019-11-07,To Hukla Japan/Nanno ,2019-11-20
+192,2019-09-26,H207577,Vessel,Nagoya Port,The address listed above,2019-10-17,To Hukla Japan/Nanno ,2019-10-30
+193,2019-09-30,H207578,Vessel,Nagoya Port,The address listed above,2019-10-17,To Hukla Japan/Nanno ,2019-11-13
+196,2019-10-01,H207579,Vessel,OSAKA Port,The address listed above,2019-11-15,To Fujishi Osaka Direct,2019-11-25
+197,2019-10-01,H207580,Vessel,Nagoya Port,The address listed above,2019-11-16,To Hukla Japan/Nanno ,2019-11-29
+198,2019-10-04,H207581,Vessel,Nagoya Port,The address listed above,2019-10-24,To Hukla Japan/Nanno ,
+199,2019-10-07,H207582,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-10-07,For Hukla Japan/Nanno Fac.,
+200,2019-10-08,H207583,Vessel,NAGOYA Port,The address listed above,2019-11-19,To Fujikoshi NAGOYA Direct,2019-11-28
+201,2019-10-10,H207584,Vessel,Nagoya Port,The address listed above,2019-10-17,To Hukla Japan/Nanno ,
+202,2019-10-10,H207585,Vessel,Nagoya Port,The address listed above,2019-10-24,To Hukla Japan/Nanno ,
+205,2019-10-15,H207586,Vessel,Nagoya Port,The address listed above,2019-11-21,To Hukla Japan/Nanno ,2019-12-06
+206,2019-10-24,H207587,Vessel,Nagoya Port,The address listed above,2019-11-30,To Hukla Japan/Nanno ,2019-12-11
+207,2019-10-24,H207588,Vessel,HAKATA Port,The address listed above,2019-11-30,To Livinghouse Hakata Direct,2019-12-12
+208,2019-10-24,H207589,Vessel,NAGOYA Port,The address listed above,2019-11-30,To NIC Nagoya Direct,2019-12-13
+210,2019-10-25,H207590,Vessel,HAKATA Port,The address listed above,2019-11-30,for f-grip Direct,2019-12-15
+211,2019-10-28,H207591,Vessel,Nagoya Port,The address listed above,2019-10-28,To Hukla Japan/Nanno ,
+212,2019-10-29,H207592,Vessel,Nagoya Port,The address listed above,2019-12-05,To Hukla Japan/Nanno ,2019-12-18
+213,2019-10-30,H207593,Vessel,MOJI Port,The address listed above,2019-12-07,To NAFCO Moji Direct,2019-12-18
+214,2019-10-30,H207594,Vessel,MOJI Port,The address listed above,2019-12-07,To NAFCO Moji Direct,2019-12-19
+215,2019-10-30,H207595,Vessel,MOJI Port,The address listed above,2019-12-07,To NAFCO Moji Direct,2019-12-27
+216,2019-10-31,H207596,Vessel,OSAKA Port,The address listed above,2019-12-19,To Fujishi Osaka Direct,2020-01-08
+217,2019-11-01,H207597,Vessel,HAKATA Port,The address listed above,2019-12-28,To Livinghouse Hakata Direct,2020-01-14
+218,2019-11-01,H207598,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-11-01,For Hukla Japan/Nanno Fac.,
+219,2019-11-05,H207599,Vessel,Nagoya Port,The address listed above,2019-12-12,To Hukla Japan/Nanno ,2019-12-25
+220,2019-11-11,H207601,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-11-11,For Hukla Japan/Nanno Fac.,
+222,2019-11-12,H207602,Vessel,Nagoya Port,The address listed above,2019-12-19,To Hukla Japan/Nanno ,2020-01-06
+223,2019-11-13,H207603,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-12-04,For Hukla Japan/Nanno Fac.,2019-12-04
+225,2019-11-19,H207605,Vessel,Nagoya Port,The address listed above,2019-12-26,To Hukla Japan/Nanno ,2020-01-10
+226,2019-11-26,H207608,Vessel,Nagoya Port,The address listed above,2020-01-09,To Hukla Japan/Nanno ,2020-01-22
+227,2019-11-28,H207609,Vessel,Nagoya Port,The address listed above,2020-01-09,To Hukla Japan/Nanno ,2020-01-24
+228,2019-11-29,H207610,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-12-13,For Hukla Japan/Nanno Fac.,
+229,2019-12-03,H207611,Vessel,Nagoya Port,The address listed above,2020-01-16,To Hukla Japan/Nanno ,2020-01-31
+230,2019-12-03,H207612,Vessel,HAKATA Port,The address listed above,2020-01-18,for f-grip Direct,2020-01-30
+231,2019-12-06,H207613,Vessel,NAGOYA Port,The address listed above,2020-01-16,To Fujikoshi NAGOYA Direct,2020-01-24
+232,2019-12-10,H207614,Vessel,Nagoya Port,The address listed above,2020-01-23,To Hukla Japan/Nanno ,2020-02-07
+233,2019-12-10,H207615,Vessel,HAKATA Port,The address listed above,2020-01-25,To Fukuhaku Direct,2020-02-01
+234,2019-12-11,H207616,DHL(Courier), Fukuoka air-port,Fukuhaku-Konpo Inc.,2019-12-18,For Hukla Japan/Nanno Fac.,
+235,2019-12-17,H207617,Vessel,Nagoya Port,The address listed above,2020-02-08,To Hukla Japan/Nanno ,2020-03-16
+236,2019-12-17,H207618,Vessel,Nagoya Port,The address listed above,2020-01-16,To Hukla Japan/Nanno ,2020-02-05
+237,2019-12-19,H207619,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-12-26,For Hukla Japan/Nanno Fac.,
+238,2019-12-19,H207620,Vessel,Nagoya Port,The address listed above,2020-01-09,To Hukla Japan/Nanno ,2020-01-18
+239,2019-12-20,H207621,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2019-12-26,For Hukla Japan/Nanno Fac.,2020-01-08
+240,2019-12-20,H207622,Vessel,NAGOYA Port,The address listed above,2020-03-05,To Fujiei NAGOYA Direct ,--
+241,2019-12-24,H207623,Vessel,Nagoya Port,The address listed above,2020-03-12,To Hukla Japan/Nanno ,2020-03-25
+242,2020-01-07,H207624,Vessel,Nagoya Port,The address listed above,2020-03-19,To Hukla Japan/Nanno ,2020-03-30
+243,2020-01-07,H207625,Vessel,Nagoya Port,The address listed above,2020-03-21,To Hukla Japan/Nanno ,2020-04-01
+244,2020-01-07,H207626,Vessel,Nagoya Port,The address listed above,2020-03-26,To Hukla Japan/Nanno ,2020-04-08
+245,2020-01-08,H207627,Vessel,HAKATA Port,The address listed above,2020-02-22,To NIC Hakata Direct,
+246,2020-01-09,H207628,Vessel,Nagoya Port,The address listed above,2020-02-08,To Hukla Japan/Nanno ,--
+247,2020-01-10,H207629,DHL(Courier), Air-port,Hukla Japan Inc. Fukuoka Branch,2020-01-17,For Hukla Japan.,
+248,2020-01-17,H207630,Vessel,HAKATA Port,The address listed above,2020-02-29,To Fukuhaku Direct,
+249,2020-01-22,H207631,DHL(Courier), Air-port,Hukla Japan Inc. Osaka Branch,2020-02-07,For Hukla Japan.,
+250,2020-02-07,H207632,Vessel,Nagoya Port,The address listed above,2020-04-02,To Hukla Japan/Nanno ,2020-04-15
+251,2020-02-07,H207633,Vessel,NAGOYA Port,The address listed above,2020-04-02,To Fujikoshi NAGOYA Direct,
+252,2020-02-11,H207634,Vessel,Nagoya Port,The address listed above,2020-04-04,To Hukla Japan/Nanno ,2020-04-17
+253,2020-02-20,H207635,Vessel,Nagoya Port,The address listed above,2020-04-11,To Hukla Japan/Nanno ,2020-04-22
+254,2020-02-20,H207636,Vessel,OSAKA Port,The address listed above,2020-03-26,To Fujishi Osaka Direct,
+255,2020-02-26,H207637,Vessel,Nagoya Port,The address listed above,2020-04-16,To Hukla Japan/Nanno ,2020-04-27
+256,2020-02-26,H207638,Vessel,Nagoya Port,The address listed above,2020-04-02,To Hukla Japan/Nanno ,
+257,2020-02-28,H207639,Vessel,Nagoya Port,The address listed above,2020-02-28,To Hukla Japan/Nanno ,
+259,2020-03-03,H207641,Vessel,Nagoya Port,The address listed above,2020-04-18,To Hukla Japan/Nanno ,2020-04-29
+260,2020-03-10,H207643,Vessel,Nagoya Port,The address listed above,2020-04-21,To Hukla Japan/Nanno ,2020-05-01
+261,2020-03-11,H207644,Vessel,Nagoya Port,The address listed above,2020-04-16,To Hukla Japan/Nanno ,
+262,2020-03-17,H207645,Vessel,Nagoya Port,The address listed above,2020-04-25,To Hukla Japan/Nanno ,2020-05-11
+263,2020-03-24,H207646,Vessel,Nagoya Port,The address listed above,2020-04-30,To Hukla Japan/Nanno ,2020-05-13
+264,2020-03-24,H207647,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-03-24,For Hukla Japan/Nanno Fac.,
+265,2020-03-30,H207648,Vessel,MOJI Port,The address listed above,2020-05-02,To NAFCO Moji Direct,
+266,2020-03-30,H207649,Vessel,MOJI Port,The address listed above,2020-05-02,To NAFCO Moji Direct,
+267,2020-03-30,H207650,Vessel,MOJI Port,The address listed above,2020-05-02,To NAFCO Moji Direct,
+268,2020-03-30,H207651,Vessel,MOJI Port,The address listed above,2020-05-16,To NAFCO Moji Direct,
+269,2020-03-31,H207652,Vessel,Nagoya Port,The address listed above,2020-05-14,To Hukla Japan/Nanno ,2020-05-25
+270,2020-03-31,H207653,Vessel,NAGOYA Port,The address listed above,2020-05-14,To Fujikoshi NAGOYA Direct,
+271,2020-03-31,H207654,Vessel,HAKATA Port,The address listed above,2020-05-09,To Fukuhaku Direct,
+272,2020-04-07,H207655,Vessel,Nagoya Port,The address listed above,2020-05-21,To Hukla Japan/Nanno ,2020-06-03
+273,2020-04-08,H207656,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-04-08,For Hukla Japan/Nanno Fac.,
+274,2020-04-14,H207657,Vessel,Nagoya Port,The address listed above,2020-05-28,To Hukla Japan/Nanno ,2020-06-10
+275,2020-04-21,H207658,Vessel,Nagoya Port,The address listed above,2020-06-04,To Hukla Japan/Nanno ,2020-06-17
+276,2020-04-27,H207659,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-05-01,For Hukla Japan/Nanno Fac.,
+277,2020-04-28,H207660,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-04-28,For Hukla Japan/Nanno Fac.,
+278,2020-04-28,H207661,Vessel,Nagoya Port,The address listed above,2020-06-11,To Hukla Japan/Nanno ,2020-06-24
+280,2020-05-12,H207662,Vessel,Nagoya Port,The address listed above,2020-06-18,To Hukla Japan/Nanno ,2020-07-01
+282,2020-05-15,H207663,Vessel,MOJI Port,The address listed above,2020-06-20,To NAFCO Moji Direct,
+283,2020-05-16,H207664,Vessel,NAGOYA Port,The address listed above,2020-08-06,To Fujiei NAGOYA Direct ,2020-08-17
+284,2020-05-19,H207665,Vessel,Nagoya Port,The address listed above,2020-06-25,To Hukla Japan/Nanno ,2020-07-08
+285,2020-05-21,H207666,Vessel,Nagoya Port,The address listed above,2020-05-21,To Hukla Japan/Nanno ,
+286,2020-05-26,H207667,Vessel,Nagoya Port,The address listed above,2020-07-02,To Hukla Japan/Nanno ,2020-07-15
+287,2020-05-26,H207668,Vessel,NAGOYA Port,The address listed above,2020-07-02,To Daizen NAGOYA Direct ,--
+290,2020-06-02,H207670,Vessel,Nagoya Port,The address listed above,2020-07-09,To Hukla Japan/Nanno ,2020-07-22
+292,2020-06-09,H207671,Vessel,Nagoya Port,The address listed above,2020-07-16,To Hukla Japan/Nanno ,2020-07-29
+293,2020-06-09,H207672,Vessel,MOJI Port,The address listed above,2020-07-11,To NAFCO Moji Direct,2020-07-18
+295,2020-06-10,H207673,Vessel,Nagoya Port,The address listed above,2020-06-18,To Hukla Japan/Nanno ,
+297,2020-06-11,H207674,Vessel,HAKATA Port,The address listed above,2020-07-18,To Fukuhaku Direct,
+298,2020-06-16,H207675,Vessel,Nagoya Port,The address listed above,2020-07-23,To Hukla Japan/Nanno ,2020-08-05
+299,2020-06-17,H207676,Vessel,Nagoya Port,The address listed above,2020-06-24,To Hukla Japan/Nanno ,
+300,2020-06-19,H207677,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-06-24,For Hukla Japan/Nanno Fac.,
+301,2020-06-23,H207678,Vessel,Nagoya Port,The address listed above,2020-07-30,To Hukla Japan/Nanno ,2020-08-19
+302,2020-06-23,H207679,Vessel,HAKATA Port,The address listed above,2020-08-01,To NIC Hakata Direct,2020-08-19
+303,2020-06-23,H207680,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-06-26,For Hukla Japan/Nanno Fac.,
+304,2020-06-30,H207681,Vessel,Nagoya Port,The address listed above,2020-08-06,To Hukla Japan/Nanno ,2020-08-26
+305,2020-07-01,H207682,Vessel,Nagoya Port,The address listed above,2020-07-01,To Hukla Japan/Nanno ,
+306,2020-07-03,H207683,Vessel,HAKATA Port,The address listed above,2020-08-22,To Livinghouse Hakata Direct,2020-08-31
+307,2020-07-07,H207684,Vessel,Nagoya Port,The address listed above,2020-08-20,To Hukla Japan/Nanno ,2020-09-04
+308,2020-07-10,H207685,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-07-10,For Hukla Japan/Nanno Fac.,
+309,2020-07-11,H207686,Vessel,OSAKA Port,The address listed above,2020-08-15,To Fujishi Osaka Direct,
+310,2020-07-11,H207687,Vessel,Nagoya Port,The address listed above,2020-08-20,To Hukla Japan/Nanno ,
+311,2020-07-14,H207688,Vessel,Nagoya Port,The address listed above,2020-08-27,To Hukla Japan/Nanno ,2020-09-11
+312,2020-07-14,H207689,Vessel,HAKATA Port,The address listed above,2020-08-25,To Fukuhaku Direct,2020-09-05
+313,2020-07-15,H207690,Vessel,Nagoya Port,The address listed above,2020-07-23,To Hukla Japan/Nanno ,
+314,2020-07-17,H207691,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-07-17,For Hukla Japan/Nanno Fac.,
+315,2020-07-21,H207692,Vessel,Nagoya Port,The address listed above,2020-09-03,To Hukla Japan/Nanno ,2020-09-16
+316,2020-07-22,H207693,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-07-22,For Hukla Japan/Nanno Fac.,
+317,2020-07-23,H207694,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-07-29,For Hukla Japan/Nanno Fac.,
+318,2020-07-28,H207695,Vessel,Nagoya Port,The address listed above,2020-09-10,To Hukla Japan/Nanno ,2020-09-25
+319,2020-08-04,H207696,Vessel,Nagoya Port,The address listed above,2020-09-17,To Hukla Japan/Nanno ,2020-10-02
+320,2020-08-05,H207697,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-09-02,For Hukla Japan/Nanno Fac.,
+321,2020-08-06,H207698,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-08-20,For Hukla Japan/Nanno Fac.,
+322,2020-08-07,H207699,Vessel,Nagoya Port,The address listed above,2020-09-10,To Hukla Japan/Nanno ,2020-09-23
+323,2020-08-07,H207700,Vessel,Nagoya Port,The address listed above,2020-09-17,To Hukla Japan/Nanno ,2020-10-05
+324,2020-08-07,H207701,Vessel,Nagoya Port,The address listed above,2020-09-24,To Hukla Japan/Nanno ,2020-10-09
+325,2020-08-17,H207702,DHL(Courier), Air-port,Hukla Japan Inc. Fukuoka Branch,2020-08-27,For Hukla Japan.,
+326,2020-08-18,H207703,Vessel,HAKATA Port,The address listed above,2020-09-26,To Fukuhaku Direct,
+327,2020-08-18,H207704,Vessel,MOJI Port,The address listed above,2020-09-26,To NAFCO Moji Direct,2020-10-08
+328,2020-08-18,H207705,Vessel,Nagoya Port,The address listed above,2020-09-24,To Hukla Japan/Nanno ,2020-10-07
+329,2020-08-20,H207706,Vessel,Nagoya Port,The address listed above,2020-09-24,To Hukla Japan/Nanno ,--
+330,2020-08-25,H207707,Vessel,Nagoya Port,The address listed above,2020-10-01,To Hukla Japan/Nanno ,2020-10-16
+331,2020-08-27,H207708,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-09-08,For Hukla Japan/Nanno Fac.,
+332,2020-08-27,H207709,Vessel,Nagoya Port,The address listed above,2020-10-01,To Hukla Japan/Nanno ,
+333,2020-08-27,H207710,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-09-11,For Hukla Japan/Nanno Fac.,
+334,2020-08-28,H207711,Vessel,Nagoya Port,The address listed above,2020-09-09,To Hukla Japan/Nanno ,
+335,2020-09-01,H207712,Vessel,Nagoya Port,The address listed above,2020-10-15,To Hukla Japan/Nanno ,2020-10-30
+336,2020-09-01,H207713,Vessel,Nagoya Port,The address listed above,2020-09-01,To Hukla Japan/Nanno ,
+337,2020-09-03,H207714,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-09-11,For Hukla Japan/Nanno Fac.,
+338,2020-09-08,H207715,Vessel,Nagoya Port,The address listed above,2020-10-22,To Hukla Japan/Nanno ,2020-11-04
+339,2020-09-14,H207716,Vessel,Nagoya Port,The address listed above,2020-10-22,To Hukla Japan/Nanno ,
+340,2020-09-15,H207717,Vessel,Nagoya Port,The address listed above,2020-10-29,To Hukla Japan/Nanno ,2020-11-11
+341,2020-09-16,H207718,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-09-25,For Hukla Japan/Nanno Fac.,
+342,2020-09-18,H207719,Vessel,Nagoya Port,The address listed above,2020-10-24,To Hukla Japan/Nanno ,2020-11-06
+344,2020-09-22,H207720,Vessel,Nagoya Port,The address listed above,2020-11-05,To Hukla Japan/Nanno ,2020-11-18
+345,2020-09-23,H207721,Vessel,HAKATA Port,The address listed above,2020-11-07,To NIC Hakata Direct,2020-11-27
+346,2020-09-23,H207722,Vessel,NAGOYA Port,The address listed above,2020-11-12,To Fujiei NAGOYA Direct ,
+347,2020-09-23,H207723,Vessel,HAKATA Port,The address listed above,2020-11-07,To Sakoda Direct,
+348,2020-09-25,H207724,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-09-25,For Hukla Japan/Nanno Fac.,
+349,2020-09-25,H207725,Vessel,Nagoya Port,The address listed above,2020-09-25,To Hukla Japan/Nanno ,
+350,2020-09-29,H207726,Vessel,Nagoya Port,The address listed above,2020-11-12,To Hukla Japan/Nanno ,2020-11-27
+351,2020-10-09,H207727,Vessel,HAKATA Port,The address listed above,2020-11-14,To Livinghouse Hakata Direct,
+352,2020-10-09,H207728,Vessel,NAGOYA Port,The address listed above,2020-11-12,To Daizen NAGOYA Direct ,2020-11-24
+353,2020-10-09,H207729,Vessel,OSAKA Port,The address listed above,2020-11-19,To Fujishi Osaka Direct,2020-12-08
+354,2020-10-13,H207730,Vessel,Nagoya Port,The address listed above,2020-11-19,To Hukla Japan/Nanno ,2020-12-04
+355,2020-10-14,H207731,Vessel,Nagoya Port,The address listed above,2020-11-26,To Hukla Japan/Nanno ,
+356,2020-10-14,H207732,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-10-14,For Hukla Japan/Nanno Fac.,
+357,2020-10-16,H207734,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-10-23,For Hukla Japan/Nanno Fac.,
+359,2020-10-20,H207735,Vessel,Nagoya Port,The address listed above,2020-11-26,To Hukla Japan/Nanno ,2020-12-11
+360,2020-10-20,H207736,Vessel,Nagoya Port,The address listed above,2020-11-26,To Hukla Japan/Nanno ,
+361,2020-10-21,H207737,Vessel,MOJI Port,The address listed above,2020-11-28,To NAFCO Moji Direct,
+362,2020-10-27,H207738,Vessel,Nagoya Port,The address listed above,2020-12-03,To Hukla Japan/Nanno ,2020-12-16
+363,2020-10-28,H207739,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-10-30,For Hukla Japan/Nanno Fac.,
+364,2020-11-03,H207740,Vessel,Nagoya Port,The address listed above,2020-12-10,To Hukla Japan/Nanno ,2020-12-25
+365,2020-11-06,H207741,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-11-13,For Hukla Japan/Nanno Fac.,
+366,2020-11-10,H207742,Vessel,Nagoya Port,The address listed above,2020-12-17,To Hukla Japan/Nanno ,2021-01-08
+367,2020-11-12,H207743,Vessel,Nagoya Port,The address listed above,2020-12-29,To Hukla Japan/Nanno ,
+368,2020-11-12,H207744,Vessel,Nagoya Port,The address listed above,2021-01-18,To Hukla Japan/Nanno ,
+369,2020-11-12,H207745,Vessel,Nagoya Port,The address listed above,2021-02-04,To Hukla Japan/Nanno ,
+370,2020-11-13,H207746,Vessel,OSAKA Port,The address listed above,2020-12-24,To Fujishi Osaka Direct,
+371,2020-11-17,H207747,Vessel,HAKATA Port,The address listed above,2020-12-24,To NIC Hakata Direct,
+372,2020-11-17,H207748,Vessel,Nagoya Port,The address listed above,2020-12-24,To Hukla Japan/Nanno ,2021-01-15
+373,2020-11-18,H207749,Vessel,HAKATA Port,The address listed above,2020-12-26,To Fukuhaku Direct,
+374,2020-11-24,H207750,Vessel,Nagoya Port,The address listed above,2020-11-24,To Hukla Japan/Nanno ,
+375,2020-11-24,H207751,Vessel,Nagoya Port,The address listed above,2021-01-09,To Hukla Japan/Nanno ,2021-01-22
+376,2020-11-26,H207752,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-11-26,For Hukla Japan/Nanno Fac.,
+377,2020-11-26,H207753,Vessel,Nagoya Port,The address listed above,2020-11-26,To Hukla Japan/Nanno ,
+378,2020-12-01,H207754,Vessel,Nagoya Port,The address listed above,2021-01-14,To Hukla Japan/Nanno ,2021-01-29
+379,2020-12-04,H207755,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-12-11,For Hukla Japan/Nanno Fac.,
+380,2020-12-07,H207756,Vessel,MOJI Port,The address listed above,2021-01-23,To NAFCO Moji Direct,
+381,2020-12-07,H207757,Vessel,NAGOYA Port,The address listed above,2021-03-11,To Fujiei NAGOYA Direct ,
+382,2020-12-07,H207758,Vessel,HAKATA Port,The address listed above,2021-01-23,To Livinghouse Hakata Direct,
+383,2020-12-08,H207759,Vessel,Nagoya Port,The address listed above,2021-01-21,To Hukla Japan/Nanno ,2021-02-05
+384,2020-12-14,H207760,Vessel,HAKATA Port,The address listed above,2021-01-30,To Fukuhaku Direct,
+385,2020-12-15,H207761,Vessel,Nagoya Port,The address listed above,2020-12-15,To Hukla Japan/Nanno ,
+386,2020-12-15,H207762,Vessel,Nagoya Port,The address listed above,2021-01-28,To Hukla Japan/Nanno ,2021-02-12
+387,2020-12-18,H207763,Vessel,Nagoya Port,The address listed above,2021-01-14,To Hukla Japan/Nanno ,
+388,2020-12-18,H207764,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2020-12-18,For Hukla Japan/Nanno Fac.,
+389,2020-12-22,H207765,Vessel,Nagoya Port,The address listed above,2021-02-04,To Hukla Japan/Nanno ,2021-02-22
+390,2020-12-22,H207766,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-02-04,For Hukla Japan/Nanno Fac.,
+391,2020-12-24,H207767,Vessel,Nagoya Port,The address listed above,2021-02-04,To Hukla Japan/Nanno ,
+392,2020-12-25,H207768,Vessel,Nagoya Port,The address listed above,2021-01-14,To Hukla Japan/Nanno ,
+393,2020-12-25,H207769,Vessel,OSAKA Port,The address listed above,2021-02-11,To Fujishi Osaka Direct,
+395,2021-01-12,H207770,Vessel,Nagoya Port,The address listed above,2021-02-25,To Hukla Japan/Nanno ,2021-03-12
+396,2021-01-18,H207771,Vessel,Nagoya Port,The address listed above,2021-01-18,To Hukla Japan/Nanno ,
+397,2021-01-19,H207772,Vessel,Nagoya Port,The address listed above,2021-03-04,To Hukla Japan/Nanno ,2021-03-22
+398,2021-01-19,H207773,Vessel,HAKATA Port,The address listed above,2021-03-13,To Livinghouse Hakata Direct,
+399,2021-01-25,H207774,Vessel,Nagoya Port,The address listed above,2021-01-25,To Hukla Japan/Nanno ,
+400,2021-01-26,H207775,Vessel,Nagoya Port,The address listed above,2021-03-11,To Hukla Japan/Nanno ,2021-03-29
+401,2021-02-01,H207776,Vessel,Nagoya Port,The address listed above,2021-02-01,To Hukla Japan/Nanno ,
+402,2021-02-02,H207777,Vessel,Nagoya Port,The address listed above,2021-03-18,To Hukla Japan/Nanno ,2021-04-02
+403,2021-02-02,H207778,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-02-02,For Hukla Japan/Nanno Fac.,
+404,2021-02-02,H207779,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-02-19,For Hukla Japan/Nanno Fac.,
+405,2021-02-03,H207780,Vessel,NAGOYA Port,The address listed above,2021-04-08,To Fujikoshi NAGOYA Direct,
+406,2021-02-03,H207781,Vessel,HAKATA Port,The address listed above,2021-03-20,To NIC Hakata Direct,
+407,2021-02-09,H207782,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-02-09,For Hukla Japan/Nanno Fac.,
+408,2021-02-09,H207783,Vessel,Nagoya Port,The address listed above,2021-03-25,To Hukla Japan/Nanno ,2021-04-09
+409,2021-02-22,H207784,DHL(Courier), Air-port,Hukla Japan Inc. Fukuoka Branch,2021-03-03,For Hukla Japan.,
+410,2021-02-23,H207785,Vessel,Nagoya Port,The address listed above,2021-04-01,To Hukla Japan/Nanno ,2021-04-16
+412,2021-02-23,H207786,Vessel,Nagoya Port,The address listed above,2021-04-08,To Hukla Japan/Nanno ,2021-04-30
+413,2021-02-24,H207787,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-03-10,For Hukla Japan/Nanno Fac.,
+414,2021-02-24,H207788,Vessel,Nagoya Port,The address listed above,2021-04-22,To Hukla Japan/Nanno ,2021-05-21
+415,2021-02-24,H207789,Vessel,Nagoya Port,The address listed above,2021-03-25,To Hukla Japan/Nanno ,
+416,2021-02-26,H207790,Vessel,NAGOYA Port,The address listed above,2021-05-13,To Fujiei NAGOYA Direct ,
+417,2021-02-26,H207791,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-03-04,For Hukla Japan/Nanno Fac.,
+419,2021-03-02,H207792,Vessel,Nagoya Port,The address listed above,2021-04-10,To Hukla Japan/Nanno ,2021-04-23
+420,2021-03-02,H207793,Vessel,OSAKA Port,The address listed above,2021-04-10,To Fujishi Osaka Direct,
+421,2021-03-05,H207794,Vessel,Nagoya Port,The address listed above,2021-04-01,To Hukla Japan/Nanno ,2021-04-19
+422,2021-03-09,H207795,Vessel,Nagoya Port,The address listed above,2021-04-15,To Hukla Japan/Nanno ,2021-04-30
+423,2021-03-11,H207796,Vessel,Nagoya Port,The address listed above,2021-04-01,To Hukla Japan/Nanno ,
+424,2021-03-16,H207797,Vessel,Nagoya Port,The address listed above,2021-04-22,To Hukla Japan/Nanno ,2021-05-14
+425,2021-03-23,H207798,Vessel,Nagoya Port,The address listed above,2021-04-29,To Hukla Japan/Nanno ,2021-05-21
+426,2021-03-25,H207800,Vessel,Nagoya Port,The address listed above,2021-03-25,To Hukla Japan/Nanno ,
+427,2021-03-30,H207801,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-03-30,For Hukla Japan/Nanno Fac.,
+428,2021-03-30,H207802,DHL(Courier), Air-port,Hukla Japan Inc. Fukuoka Branch,2021-03-30,For Hukla Japan.,
+429,2021-03-30,H207803,Vessel,Nagoya Port,The address listed above,2021-05-13,To Hukla Japan/Nanno ,2021-05-28
+430,2021-03-31,H207804,Vessel,Nagoya Port,The address listed above,2021-05-13,To Hukla Japan/Nanno ,
+431,2021-03-31,H207805,Vessel,Nagoya Port,The address listed above,2021-03-31,To Hukla Japan/Nanno ,
+432,2021-04-02,H207806,Vessel,HAKATA Port,The address listed above,2021-05-15,To Fukuhaku Direct,
+433,2021-04-02,H207807,Vessel,Nagoya Port,The address listed above,2021-04-22,To Hukla Japan/Nanno ,
+434,2021-04-06,H207808,Vessel,Nagoya Port,The address listed above,2021-05-20,To Hukla Japan/Nanno ,2021-06-04
+435,2021-04-06,H207809,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-04-06,For Hukla Japan/Nanno Fac.,
+436,2021-04-08,H207810,DHL(Courier), Air-port,Hukla Japan Inc. Fukuoka Branch,2021-04-08,For Hukla Japan.,
+437,2021-04-12,H207811,Vessel,Nagoya Port,The address listed above,2021-04-12,To Hukla Japan/Nanno ,
+438,2021-04-13,H207812,Vessel,Nagoya Port,The address listed above,2021-05-27,To Hukla Japan/Nanno ,2021-06-11
+439,2021-04-13,H207813,Vessel,Nagoya Port,The address listed above,2021-04-15,For Scroll R&D ,
+440,2021-04-13,H207814,Vessel,Nagoya Port,The address listed above,2021-04-15,For Scroll R&D ,
+441,2021-04-13,H207815,Vessel,Nagoya Port,The address listed above,2021-04-29,For Scroll R&D ,
+442,2021-04-13,H207816,Vessel,Nagoya Port,The address listed above,2021-05-06,For Scroll R&D ,
+443,2021-04-13,H207817,Vessel,Nagoya Port,The address listed above,2021-05-13,For Scroll R&D ,
+444,2021-04-13,H207818,Vessel,Nagoya Port,The address listed above,2021-05-20,For Scroll R&D ,
+445,2021-04-13,H207819,Vessel,Nagoya Port,The address listed above,2021-05-27,For Scroll R&D ,
+446,2021-04-16,H207820,Vessel,Nagoya Port,The address listed above,2021-05-27,To Hukla Japan/Nanno ,
+447,2021-04-20,H207821,Vessel,Nagoya Port,The address listed above,2021-06-03,To Hukla Japan/Nanno ,2021-06-18
+448,2021-04-20,H207822,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-04-30,For Hukla Japan/Nanno Fac.,
+449,2021-04-23,H207823,Vessel,Nagoya Port,The address listed above,2021-05-20,For Scroll R&D ,
+450,2021-04-23,H207824,Vessel,Nagoya Port,The address listed above,2021-05-20,For Scroll R&D ,
+451,2021-04-23,H207825,Vessel,Nagoya Port,The address listed above,2021-05-22,For Scroll R&D ,
+452,2021-04-23,H207826,Vessel,Nagoya Port,The address listed above,2021-05-27,For Scroll R&D ,
+453,2021-04-23,H207828,Vessel,Nagoya Port,The address listed above,2021-06-17,For Scroll R&D ,
+454,2021-04-23,H207827,Vessel,Nagoya Port,The address listed above,2021-06-10,For Scroll R&D ,
+456,2021-04-27,H207829,Vessel,Nagoya Port,The address listed above,2021-04-27,To Hukla Japan/Nanno ,
+457,2021-04-27,H207830,DHL(Courier),NAGOYA air-port,Hukla Japan Inc. / Nanno Factory,2021-04-27,For Hukla Japan/Nanno Fac.,
+458,2021-04-27,H207831,Vessel,OSAKA Port,The address listed above,2021-06-12,To Fujishi Osaka Direct,
+459,2021-04-27,H207832,Vessel,Nagoya Port,The address listed above,2021-06-10,To Hukla Japan/Nanno ,2021-06-25

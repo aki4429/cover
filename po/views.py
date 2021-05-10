@@ -430,15 +430,15 @@ class PoCreate(LoginRequiredMixin, CreateView):
         return context
 
     def get_success_url(self):
-        carts = Cart.objects.filter(flag='order')
-        orders = []
-        for cart in carts:
-            orders.append(cart.pk)
+        #carts = Cart.objects.filter(flag='order')
+        #orders = []
+        #for cart in carts:
+        #    orders.append(cart.pk)
 
-        #orders = self.request.session['orders']
+        orders = self.request.session['orders']
         polines = []
         for cartpk in orders:
-            #cart = Cart.objects.get(pk=cartpk)
+            cart = Cart.objects.get(pk=cartpk)
             #tfccode  = TfcCode.objects.get(pk=cart.code)
             tfccode  = cart.code
             pl = Poline(

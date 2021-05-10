@@ -1,0 +1,5 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS "cart" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "hinban" text NULL, "om" text NULL, "juchubi" date NULL, "noki" date NULL, "qty" real NULL, "flag" text NULL, "obic" text NULL, "code_id" integer NULL REFERENCES "tfc_code" ("id") DEFERRABLE INITIALLY DEFERRED);
+CREATE INDEX "cart_code_id_67c7e6f3" ON "cart" ("code_id");
+COMMIT;

@@ -2,8 +2,8 @@ anywhere側DB (tfc.sqlite)
 sqlite3 コマンドライン
 sqlite> update po set delivery='' where delivery like '%--%';
 sqlite> alter table po add column condition_id integer;
-sqlite> alter table po add column ft40 integer;
-sqlite> alter table po add column ft20 integer;
+sqlite> alter table po add column ft40 text;
+sqlite> alter table po add column ft20 text;
 sqlite>.output ./anywhere.dump
 sqlite>.dump
 
@@ -32,5 +32,18 @@ rm 0008_auto_20210213_1712.py
 cp ~/Downloads/tfc_cover.sqlite .
 python manage.py makemigrations
 python manage.py migrate
+
+[テーブルがお菓子っくなった!]
+Cart の field code を ForeignKey にしたら、
+foreign key mismatch となって、migrate できなくなった。
+=初期化して対応 ==
+python manage.py migrate po zero
+migration フォルダで init 以外ファイル削除
+cp tfc_cover.sqlite tfc_cover.sqlite20210509
+sqlite3 tfc_cover.sqlite
+drop table inv, invline, po, poline ...(po関連削除)
+python manage.py makemigrations
+python manage.py migrate
+
 
 
