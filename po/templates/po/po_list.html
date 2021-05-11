@@ -23,7 +23,7 @@
 	<th>40f</th>
 	<th>20ft</th>
 	<th>条件</th>
-	<th>詳細</th>
+	<th>追加</th>
 	</tr>
      {% for po in pos %}
 	<tr>
@@ -39,7 +39,7 @@
         <td>{{ po.ft20 }}</td>
         <td>{{ po.condition.name }}</td>
 	<td>
-<a class="btn btn-default" href="{% url 'make_po' po.pk  %} " >POダウンロード</a>
+<a class="btn btn-default" href="{% url 'add_order' po.pk  %} " >追加</a>
 	</td>
     </tr>
     {% endfor %}

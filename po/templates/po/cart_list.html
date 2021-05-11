@@ -20,9 +20,16 @@ function allcheck( tf ) {
 }
  </script>
 
-
+    <form action="" method="get">
+            品番: <input name="qh" value="{{ request.GET.qh }}" type="text">
+            OM: <input name="qj" value="{{ request.GET.qj }}" type="text">
+            フラグ: <input name="qf" value="{{ request.GET.qf }}" type="text">
+            オービックコード: <input name="qo" value="{{ request.GET.qo }}" type="text">
+        <button type="submit">検索する</button>
+    </form>
 
     <a class="btn btn-default" href="{% url 'juchu_upload'  %}">受注アップロード</a>
+    <a class="btn btn-default" href="{% url 'kento_upload'  %}">検討表アップロード</a>
     <a class="btn btn-default" href="{% url 'cart_delete_all'  %}">カート全削除</a>
     <table border=1>
 	<tr>
@@ -72,7 +79,8 @@ function allcheck( tf ) {
     {% endfor %}
 </table>
 {% csrf_token %}
-<button type="submit">発注</button>
+<button type="submit" name="new_order">新規発注</button>
+<button type="submit" name="add_order">追加発注</button>
 </form>
 
 {% endblock %}

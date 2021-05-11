@@ -1,0 +1,18 @@
+{% extends 'po/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+	<p>検討表: <input type="file" name="excel" value="" required></p>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+{% endblock %}

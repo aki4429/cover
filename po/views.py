@@ -11,6 +11,7 @@ from .make_po import write_po_excel
 import datetime
 from django.http import HttpResponse
 from bootstrap_datepicker_plus import DateTimePickerInput
+import openpyxl
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -303,13 +304,61 @@ class CartList(LoginRequiredMixin, ListView):
     template_name = 'po/cart_list.html'
     model = Cart
 
+    #paginate_by = 10
+    #検索語とフィールド名を指定して、その言葉がフィールドに
+    #含まれるクエリーセットを返す関数。
+    #検索語はスペースで区切って、リストでANDでつなげる
+    def make_q(self,query, q_word, f_word):
+        #(2)キーワードをリスト化させる(複数指定の場合に対応させるため)
+        search      = self.request.GET[q_word].replace("　"," ")
+        search_list = search.split(" ")
+        filter = f_word + '__' + 'contains' #name__containsを作る
+        #(例)info=members.filter(**{ filter: search_string })
+        #(3)クエリを作る
+        for word in search_list:
+        #TIPS:AND検索の場合は&を、OR検索の場合は|を使用する。
+            query &= Q(**{ filter: word })
+            #(4)作ったクエリを返す
+        return query
+
+    def get_queryset(self):
+        query = Q()
+        flag = 0 #一つも検索語がなければ、flag==0
+        if 'qh' in self.request.GET:
+            query = self.make_q(query, 'qh', 'hinban')
+            flag += 1
+
+        if 'qj' in self.request.GET:
+            query = self.make_q(query, 'qj', 'om')
+            flag += 1
+
+        if 'qf' in self.request.GET:
+            query = self.make_q(query, 'qf', 'flag')
+            flag += 1
+
+        if 'qo' in self.request.GET:
+            query = self.make_q(query, 'qo', 'obic')
+            flag += 1
+
+        if flag == 0:
+            cart = Cart.objects.order_by('om')
+        else:
+            print('Query',query)
+            cart= Cart.objects.filter(query).order_by('om')
+
+        return cart
+
     def post(self, request):
         orders = request.POST.getlist('order')  # <input type="checkbox" name="delete"のnameに対応
-        for cpk in orders:
-            Cart.objects.filter(pk=cpk).update(flag='order') 
         #POSTされたorderの配列をセッションに保存
         request.session['orders'] = orders
-        return redirect('condition_list')  # 一覧ページにリダイレクト
+        for cpk in orders:
+            Cart.objects.filter(pk=cpk).update(flag='order') 
+
+        if 'new_order' in request.POST:
+            return redirect('condition_list')  # 一覧ページにリダイレクト
+        elif 'add_order' in request.POST:
+            return redirect('po_list')  # 一覧ページにリダイレクト
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -467,6 +516,12 @@ class PoList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='POリスト'
+        #add_ordersセッションが存在しないか、空のときorder_exitはFalse
+        if 'add_orders' in self.request.session and len(self.request.session['add_orders']) > 0:
+            context['add_order_exist']= True
+        else:
+            context['add_order_exist']= False
+
         return context
 
 class PoUpdate(LoginRequiredMixin, UpdateView):
@@ -520,3 +575,73 @@ def order_list(request):
         orders = request['orders']
         context['orders']= orders
         return render(request, 'po/order_list.html', context)
+
+#検討表をアップロードします。
+@login_required
+def kento_upload(request):
+    context={}
+    if request.method == 'POST' and request.FILES['excel']:
+        excel = request.FILES['excel']
+        #excelの読み込み
+        wb = openpyxl.load_workbook(excel)
+        sheet = wb['kento']
+
+        #max行取得
+        max = sheet.max_row
+
+        #行列番号は1始まり、Row 5から、Col 2=コード、25=(Y列)今回発注
+        #発注辞書に保存
+        add_cart = []
+
+        i=0
+        while((i+5) <= max):
+            code = sheet.cell(row=i+5, column=2).value
+            #qty = sheet.cell(row=i+5, column=26).value  #Z
+            #qty = sheet.cell(row=i+5, column=25).value  #Y
+            #qty = sheet.cell(row=i+5, column=27).value  #AA
+            #qty = sheet.cell(row=i+5, column=28).value  #AB
+            #qty = sheet.cell(row=i+5, column=29).value  #AC
+            qty = sheet.cell(row=i+5, column=30).value  #AD
+            #qty = sheet.cell(row=i+5, column=31).value  #AE
+            #print(type(qty), qty, not qty)
+            if qty :
+                tc = TfcCode.objects.filter(hcode__iexact=code)[0]
+                cart = Cart(hinban = tc.hinban, \
+                    qty = int(float(qty)),
+                    code = tc
+                    )
+                add_cart.append(cart)
+            i += 1
+
+        Cart.objects.bulk_create(add_cart)
+
+        context = {
+            'title' : '検討表アップロード',
+            }
+
+    return render(request, 'po/kento_upload.html', context )
+
+@login_required
+def add_order(request, po_pk):
+    po = get_object_or_404(Po, pk=po_pk)
+    #orders = request.session['add_orders']
+    orders = request.session['orders']
+    polines = []
+    for cartpk in orders:
+        cart = Cart.objects.get(pk=cartpk)
+        tfccode  = cart.code
+        pl = Poline(
+        code = tfccode,
+        remark =tfccode.remarks,
+        om =cart.om,
+        qty =cart.qty,
+        balance =cart.qty,
+        po = po
+        )
+
+        polines.append(pl)
+
+    Poline.objects.bulk_create(polines)
+    return redirect('poline_list', po_pk = po.pk)
+
+
