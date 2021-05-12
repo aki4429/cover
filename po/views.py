@@ -469,6 +469,7 @@ class PoCreate(LoginRequiredMixin, CreateView):
          initial["port"] = condi.via
          initial["per"] = condi.shipment_per
          initial["shipto"] = condi.shipto_1
+         initial["comment"] = condi.comment
          return initial
 
     def get_context_data(self, **kwargs):
