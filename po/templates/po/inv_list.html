@@ -1,0 +1,33 @@
+
+{% extends 'po/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+<a class="btn btn-default" href="{% url 'upload_poinv'  %}">INVアップロード</a>
+
+
+    <table border=1>
+	<tr>
+	<th>INV番号</th>
+	<th>ETD</th>
+	<th>取込日</th>
+	</tr>
+     {% for inv in invs %}
+	<tr>
+
+        <td><a href="{% url 'invline_list' inv_pk=inv.pk %}"> {{ inv.invn }}</a></td>
+        <td>{{ inv.etd |date:"Y/m/d" }} </td>
+	<td>{{ inv.delivery |date:"Y/m/d" }} </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

@@ -11,13 +11,16 @@
 
 {% block content %}
 
+<a class="btn btn-default" href="{% url 'upload_poinv'  %}">INVアップロード</a>
+
+
     <table border=1>
 	<tr>
 	<th> PO番号 </th>
 	<th>発注日</th>
 	<th> 輸送手段 </th>
 	<th> 仕向港 </th>
-	<th>届け先</th>
+	<th>コメント</th>
 	<th>ETD</th>
 	<th>取込日</th>
 	<th>40f</th>
@@ -32,7 +35,7 @@
         <td>{{ po.pod |date:"y/m/d" }}</td>
         <td>{{ po.per }}</td>
         <td>{{ po.port }}</td>
-        <td>{{ po.shipto }}</td>
+        <td>{{ po.comment }}</td>
         <td>{{ po.etd |date:"y/m/d" }}</td>
         <td>{{ po.delivery |date:"y/m/d" }}</td>
         <td>{{ po.ft40 }}</td>

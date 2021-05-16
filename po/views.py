@@ -1,17 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode, Juchu, Cart, Condition, Po, Poline
-from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm
+from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline
+from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from .juchu_read_2 import JuchuRead
 from .make_po import write_po_excel
-import datetime
+import datetime, os
 from django.http import HttpResponse
 from bootstrap_datepicker_plus import DateTimePickerInput
 import openpyxl
+from .read_inv import ReadInv
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -126,7 +127,7 @@ class PolineUpdate(LoginRequiredMixin, UpdateView):
     form_class = PolineForm
 
     def get_success_url(self):
-        return reverse('poline_list', kwargs={'po_pk': self.object.pk})
+        return reverse('poline_list', kwargs={'po_pk': self.object.po_id})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -180,8 +181,8 @@ class PolineDelete(LoginRequiredMixin, DeleteView):
     #form_class = PolineForm
 
     def get_success_url(self):
-        #return reverse('poline_list', kwargs={'po_pk': self.object.pk})
-        return reverse('po_list')
+        return reverse('poline_list', kwargs={'po_pk': self.object.po_id})
+        #return reverse('po_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -246,7 +247,6 @@ class JuchuList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title']='受注データリスト'
         return context
-
 
 @login_required
 def juchu_delete(request, pk):
@@ -645,4 +645,119 @@ def add_order(request, po_pk):
     Poline.objects.bulk_create(polines)
     return redirect('poline_list', po_pk = po.pk)
 
+
+@login_required
+def upload_inv(request):
+    INVN = (2,0) #inv.#位置
+    form = InvUpForm()
+
+    if request.method == 'POST':
+        form = InvUpForm(request.POST, request.FILES)  # Do not forget to add: request.FILES
+        if form.is_valid():
+            file, download_url = form.save()
+            r = ReadInv(file.name)
+            context = {
+                'invn': r.invn,
+                'etd': r.etd,
+                'form': form,
+                }
+            os.remove(file.name)
+            return render(request, 'po/upload_inv.html', context)
+    return render(request, 'po/upload_inv.html', locals())
+
+
+class InvList(LoginRequiredMixin, ListView):
+    context_object_name = 'invs'
+    template_name = 'po/inv_list.html'
+    model = Inv
+    #form_class = PoForm
+
+    def get_queryset(self):
+        return Inv.objects.filter(etd__gte='2020-01-01').order_by('-etd')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='INVリスト'
+        return context
+
+class InvlineList(LoginRequiredMixin, ListView):
+    context_object_name = 'invlines'
+    template_name = 'po/invline_list.html'
+    model = Invline
+
+    def get_queryset(self):
+        inv = Inv.objects.get(pk=self.kwargs.get('inv_pk'))
+        return Invline.objects.filter(inv=inv)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='INV内容リスト'
+        inv = Inv.objects.get(pk=self.kwargs.get('inv_pk'))
+        context['inv']= inv
+        return context
+
+class InvUpdate(LoginRequiredMixin, UpdateView):
+    context_object_name = 'invs'
+    template_name = 'po/inv_update.html'
+    model = Inv
+    form_class = InvForm
+
+    def get_success_url(self):
+        return reverse('invline_list', kwargs={'inv_pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='INV編集'
+
+class InvDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/inv_confirm_delete.html'
+    model = Inv
+    form_class = InvForm
+
+    def get_success_url(self):
+        return reverse('inv_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='INV削除確認'
+        return context
+
+class InvineUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'po/invline_update.html'
+    model = Invline
+    form_class = InvlineForm
+
+    def get_success_url(self):
+        return reverse('invline_list', kwargs={'inv_pk': self.object.inv.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='Inv内容編集'
+        return context
+
+class InvlineDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'po/invline_confirm_delete.html'
+    model = Invline
+    #form_class = PolineForm
+
+    def get_success_url(self):
+        return reverse('invline_list', kwargs={'inv_pk': self.object.inv_id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='INV行削除確認'
+        return context
+
+class InvlineUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'po/invline_update.html'
+    model = Invline
+    form_class = InvlineForm
+
+    def get_success_url(self):
+        return reverse('invline_list', kwargs={'inv_pk': self.object.inv_id})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='INV内容編集'
+        return context
 

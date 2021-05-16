@@ -88,6 +88,9 @@ class Condition(models.Model):
     comment = models.TextField(blank=True, null=True, max_length=100, verbose_name="備考")
     nic = models.TextField(blank=True, null=True, max_length=50, verbose_name="ニックネーム")
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         db_table = 'condition'
 
@@ -154,8 +157,11 @@ class Poline(models.Model):
 
 class Inv(models.Model):
     invn = models.TextField(blank=True, null=True)
-    etd = models.TextField(blank=True, null=True)
-    delivery = models.TextField(blank=True, null=True)
+    etd = models.DateField(blank=True, null=True)
+    delivery = models.DateField(blank=True, null=True)
+
+    def __str__(self):
+        return self.invn
 
     class Meta:
         managed = True

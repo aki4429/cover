@@ -1,0 +1,56 @@
+
+{% extends 'po/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+   <table border=1>
+        <tr>
+        <th> Inv# </th>
+        <th> ETD </th>
+        <th> 取込日 </th>
+        </tr>
+	<td> {{ inv.invn }} </td>
+	<td> {{ inv.etd }} </td>
+	<td> {{ inv.delivery }} </td>
+        </tr>
+   </table>
+   <a class="btn btn-default" href="{% url 'inv_update' inv.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
+        <td><a class="btn btn-danger" href="{% url 'inv_delete' inv.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a>  
+		<hr> 
+
+
+    <table border=1>
+	<tr>
+	<th> 品番 </th>
+	<th> item </th>
+	<th> 数量 </th>
+	<th> 受注番号 </th>
+	<th>編集</th>
+	<th>削除</th>
+	</tr>
+     {% for il in invlines %}
+	<tr>
+
+        <td>{{ il.code.hinban }}</td>
+        <td>{{ il.item }}</td>
+        <td>{{ il.qty }}</td>
+        <td>{{ il.poline.om }}</td>
+        <td>
+   <a class="btn btn-default" href="{% url 'invline_update' il.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
+        </td>
+        <td>
+	<a class="btn btn-danger" href="{% url 'invline_delete' il.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> 
+        </td> 
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

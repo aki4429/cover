@@ -1,6 +1,8 @@
 from django import forms
-from .models import TfcCode, Juchu, Condition, Po, Poline, Cart
+from .models import TfcCode, Juchu, Condition, Po, Poline, Cart, Inv, Invline
 from bootstrap_datepicker_plus import DatePickerInput
+from django.core.validators import FileExtensionValidator
+from django.core.files.storage import default_storage
 
 
 class CodeForm(forms.ModelForm):
@@ -69,6 +71,7 @@ class PoForm(forms.ModelForm):
                 'port',
                 'shipto',
                 'etd',
+                'comment',
                 'delivery',
                 'condition',
                 'ft40',
@@ -100,7 +103,7 @@ class PoForm(forms.ModelForm):
                 'per': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 'port': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
-                'shipto': forms.Textarea(attrs={'rows':1, 'cols':50}),
+                'comment': forms.Textarea(attrs={'rows':1, 'cols':20}),
                 #'ft40': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 #'ft20': forms.Textarea(attrs={'rows':1, 'cols':15}),
             }
@@ -151,3 +154,63 @@ class CartForm(forms.ModelForm):
             'flag': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'qty': forms.Textarea(attrs={'rows':1, 'cols':5}),
             }
+
+class InvUpForm(forms.Form):
+    invf = forms.FileField(label='入荷インボイス',
+        validators=[FileExtensionValidator(['xls' ])],
+        #拡張子バリデーター。アップロードファイルの拡張子が違う時にエラー
+        )
+
+    def save(self):
+        upload_file = self.cleaned_data['invf']
+        #default_storage.location = os.path.join(settings.MEDIA_ROOT, 'inv')
+        file_name = default_storage.save(upload_file.name, upload_file)
+        #return default_storage.url(file_name)
+        #file属性で返す。
+        return default_storage.open(file_name), default_storage.url(file_name)
+
+class InvForm(forms.ModelForm):
+    class Meta:
+        model = Inv
+        fields = [
+                'invn',
+                'etd',
+                'delivery',
+                ]
+        widgets = {
+                'etd': DatePickerInput(
+                    format='%Y-%m-%d',
+                    options={
+                        'locale': 'ja',
+                        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                    }
+                ),
+                'delivery': DatePickerInput(
+                    format='%Y-%m-%d',
+                    options={
+                        'locale': 'ja',
+                        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                    }
+                ),
+                'invn': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            }
+
+
+class InvlineForm(forms.ModelForm):
+    class Meta:
+        model = Invline
+        fields = [
+                'item',
+                'qty',
+                'minashi',
+                'code',
+                'inv',
+                'poline',
+                ]
+        ### 追加 ###
+        widgets = {
+            'item': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'qty': forms.Textarea(attrs={'rows':1, 'cols':5}),
+            'minashi': forms.Textarea(attrs={'rows':1, 'cols':5}),
+        }
+
