@@ -173,7 +173,7 @@ class Invline(models.Model):
     qty = models.FloatField(blank=True, null=True)
     minashi = models.FloatField(blank=True, null=True)
     #inv = models.ForeignKey(Inv, on_delete=models.PROTECT)
-    inv = models.ForeignKey(Inv, on_delete=models.SET_NULL, null=True)
+    inv = models.ForeignKey(Inv, on_delete=models.CASCADE, null=True)
     #poline = models.ManyToManyField(Poline, null=True, blank=True)
     poline = models.ForeignKey(Poline, on_delete=models.SET_NULL, null=True)
     item = models.TextField(blank=True, null=True)

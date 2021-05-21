@@ -46,7 +46,6 @@
 
     <table border=1>
 	<tr>
-	<th> PO番号 </th>
 	<th> 品番 </th>
 	<th>備考</th>
 	<th> 数量 </th>
@@ -54,22 +53,14 @@
 	<th>残数</th>
 	<th>編集</th>
 	<th>削除</th>
+	<th colspan=8>インボイス引当データ</th>
 	</tr>
-     {% for pl in polines %}
-	<tr>
 
-        <td>{{ pl.po.pon }}</td>
-        <td>{{ pl.code.hinban }}</td>
-        <td>{{ pl.remark }}</td>
-        <td>{{ pl.qty }}</td>
-        <td>{{ pl.om }}</td>
-        <td>{{ pl.balance }}</td>
-        <td>
-   <a class="btn btn-default" href="{% url 'poline_update' pl.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
-        </td>
-        <td>
-	<a class="btn btn-danger" href="{% url 'poline_delete' pl.pk %}"><span class="glyphicon glyphicon-remove">削除</span></a> 
-        </td>
+     {% for row in data %}
+	<tr>
+	{% for item in row %}
+	<td> {{ item }} </td>
+    	{% endfor %}
     </tr>
     {% endfor %}
 </table>

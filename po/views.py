@@ -12,7 +12,7 @@ import datetime, os
 from django.http import HttpResponse
 from bootstrap_datepicker_plus import DateTimePickerInput
 import openpyxl
-from .read_inv import ReadInv
+from .read_inv_3 import ReadInv
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -557,7 +557,36 @@ class PolineList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title']='PO内容リスト'
         po = Po.objects.get(pk=self.kwargs.get('po_pk'))
+        data=[]
+        pls = Poline.objects.filter(po=po)
+        pl_update =[] #bulk 一括update用にクラスを格納
+        for pl in pls:
+            ils = Invline.objects.filter(poline = pl)
+            #引当済みのインボイス#と数量をinv_dataに追加代入
+            inv_data=[]
+            sum = 0
+            for il in ils:
+                inv_data.append(il.inv.invn)
+                inv_data.append(il.qty)
+                sum += il.qty
+            line = []
+            #残数を計算して更新
+            pl.balance = pl.qty - sum
+            pl_update.append(pl)
+            #polineのpkは配列の[0]に代入
+            line.append(pl.code.hinban)
+            line.append(pl.remark)
+            line.append(pl.qty)
+            line.append(pl.om)
+            line.append(pl.balance)
+            #インボイスデータを追加
+            line.extend(inv_data)
+
+            data.append(line)
+
+        Poline.objects.bulk_update(pl_update, fields=['balance'])
         context['po']= po
+        context['data']= data
         return context
 
 #POを作ってダウンロードします。

@@ -29,9 +29,9 @@
 
     <table border=1>
 	<tr>
-	<th> 品番 </th>
 	<th> item </th>
 	<th> 数量 </th>
+	<th> PO# </th>
 	<th> 受注番号 </th>
 	<th>編集</th>
 	<th>削除</th>
@@ -39,10 +39,16 @@
      {% for il in invlines %}
 	<tr>
 
-        <td>{{ il.code.hinban }}</td>
         <td>{{ il.item }}</td>
         <td>{{ il.qty }}</td>
-        <td>{{ il.poline.om }}</td>
+	{% if il.poline is not None %}
+	<td>{{ il.poline.po.pon }}</td> 
+	<td>{{ il.poline.om }}</td>  
+	{% else %}
+	<td> </td>
+	<td> </td>
+	{% endif %}
+
         <td>
    <a class="btn btn-default" href="{% url 'invline_update' il.pk %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> </td>
         </td>
