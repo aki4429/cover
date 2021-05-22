@@ -86,6 +86,22 @@ class ReadInv:
             #PO NO. ブランク行は、上のセルのPO NO.
             if len(pon) != 0:
                 keep_pon = pon
+                #poのbalanceを初期化しておく。
+                po = Po.objects.filter(pon=pon).first()
+                data=[]
+                pls = Poline.objects.filter(po=po)
+                pl_update =[] #bulk 一括update用にクラスを格納
+                for pl in pls:
+                    ils = Invline.objects.filter(poline = pl)
+                    #引当インボイスの数量の合計
+                    sum = 0
+                    for il in ils:
+                        sum += il.qty
+                    #残数を計算して更新
+                    pl.balance = pl.qty - sum
+                    pl_update.append(pl)
+                Poline.objects.bulk_update(pl_update, fields=['balance'])
+
             else:
                 pon = keep_pon
 
