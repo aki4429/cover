@@ -1,12 +1,11 @@
 {% extends 'po/po_base.html' %}
 
-{% block extrahead %}
-{{ form.media }}
-{% endblock %}
-
 {% block page %}
 {{ title }}
 {% endblock page %}
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
 
 {% block content %}
     <form method="POST" class="loc-form">

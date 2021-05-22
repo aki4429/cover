@@ -3,6 +3,7 @@ from .models import TfcCode, Juchu, Condition, Po, Poline, Cart, Inv, Invline
 from bootstrap_datepicker_plus import DatePickerInput
 from django.core.validators import FileExtensionValidator
 from django.core.files.storage import default_storage
+from django.contrib.admin.widgets import AdminDateWidget
 
 
 class CodeForm(forms.ModelForm):
@@ -179,21 +180,23 @@ class InvForm(forms.ModelForm):
                 ]
         widgets = {
                 'invn': forms.Textarea(attrs={'rows':1, 'cols':15}),
+                #'etd': AdminDateWidget(),
                 'etd': DatePickerInput(
-                    format='%Y-%m-%d',
-                    options={
-                        'locale': 'ja',
-                        'dayViewHeaderFormat': 'YYYY年 MMMM',
-                    }
-                ),
+                format='%Y-%m-%d',
+                options={
+                     'locale': 'ja',
+                     'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            	),
+                #'delivery':AdminDateWidget(), 
                 'delivery': DatePickerInput(
-                    format='%Y-%m-%d',
-                    options={
-                        'locale': 'ja',
-                        'dayViewHeaderFormat': 'YYYY年 MMMM',
-                    }
-                ),
-            }
+                format='%Y-%m-%d',
+                options={
+                     'locale': 'ja',
+                     'dayViewHeaderFormat': 'YYYY年 MMMM',
+                }
+            	),
+            	}
 
 
 class InvlineForm(forms.ModelForm):
