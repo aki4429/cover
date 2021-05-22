@@ -726,10 +726,20 @@ class InvlineList(LoginRequiredMixin, ListView):
         return context
 
 class InvUpdate(LoginRequiredMixin, UpdateView):
-    context_object_name = 'invs'
     template_name = 'po/inv_update.html'
     model = Inv
     form_class = InvForm
+
+    #fields = ['invn', 'etd', 'delivery']
+ 
+    """
+    def get_form(self):
+        form = super(InvUpdate, self).get_form()
+        form.fields['invn'].label = 'インボイスNo.'
+        form.fields['etd'].label = 'ETD'
+        form.fields['delivery'].label = '取込日'
+        return form
+   """
 
     def get_success_url(self):
         return reverse('invline_list', kwargs={'inv_pk': self.object.pk})
@@ -737,6 +747,7 @@ class InvUpdate(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='INV編集'
+        return context
 
 class InvDelete(LoginRequiredMixin, DeleteView):
     template_name = 'po/inv_confirm_delete.html'

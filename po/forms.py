@@ -178,6 +178,7 @@ class InvForm(forms.ModelForm):
                 'delivery',
                 ]
         widgets = {
+                'invn': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 'etd': DatePickerInput(
                     format='%Y-%m-%d',
                     options={
@@ -192,7 +193,6 @@ class InvForm(forms.ModelForm):
                         'dayViewHeaderFormat': 'YYYY年 MMMM',
                     }
                 ),
-                'invn': forms.Textarea(attrs={'rows':1, 'cols':15}),
             }
 
 

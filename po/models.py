@@ -156,9 +156,9 @@ class Poline(models.Model):
         db_table = 'poline'
 
 class Inv(models.Model):
-    invn = models.TextField(blank=True, null=True)
-    etd = models.DateField(blank=True, null=True)
-    delivery = models.DateField(blank=True, null=True)
+    invn = models.TextField(blank=True, null=True, verbose_name="インボイスNo.")
+    etd = models.DateField(blank=True, null=True, verbose_name="ETD")
+    delivery = models.DateField(blank=True, null=True, verbose_name="取込日")
 
     def __str__(self):
         return self.invn
