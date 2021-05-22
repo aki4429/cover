@@ -189,13 +189,7 @@ class InvForm(forms.ModelForm):
                 }
             	),
                 #'delivery':AdminDateWidget(), 
-                'delivery': DatePickerInput(
-                format='%Y-%m-%d',
-                options={
-                     'locale': 'ja',
-                     'dayViewHeaderFormat': 'YYYY年 MMMM',
-                }
-            	),
+                'delivery':forms.DateInput(attrs={"type":"date"}),
             	}
 
 
