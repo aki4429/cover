@@ -1,5 +1,9 @@
 {% extends 'po/po_base.html' %}
 
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
 {% block page %}
 {{ title }}
 {% endblock page %}
