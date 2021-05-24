@@ -70,10 +70,10 @@ function allcheck( tf ) {
 	<input type="checkbox" name="order" value="{{ item.pk }}">
 	</td>
 	<td>
-	<a class="btn btn-default" href="{% url 'cart_update' pk=item.id %}"><span class="glyphicon glyphicon-pencyl"></span></a> 
+	<a class="btn btn-default" href="{% url 'cart_update' pk=item.id %}"><span class="glyphicon glyphicon-pencil"></span>編集</a> 
         </td>
 	<td>
-	<a class="btn btn-default" href="{% url 'cart_delete' pk=item.id %}"><span class="glyphicon glyphicon-remove"></span></a> 
+	<a class="btn btn-default" href="{% url 'cart_delete' pk=item.id %}"><span class="glyphicon glyphicon-remove"></span>削除</a> 
         </td>
     </tr>
     {% endfor %}

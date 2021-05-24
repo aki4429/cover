@@ -10,42 +10,10 @@
     <head>
 {% block extrahead %}
 {% endblock %}
-	    <!--
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css">
- 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    -->
     <link rel="stylesheet" href="{% static 'css/loc.css' %}"> 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">  
         <title>{% block title %} {% endblock title %}</title>
-	<!--
-        <script>
-          $(function () {
-              // 日付は、年-月-日 の形式でお願いする。
-              let dateFormat = 'yy-mm-dd';
-              $('#id_created_at').datepicker({
-                  dateFormat: dateFormat
-              });
-          });
-      </script>
-	  -->
-	  {#
-	     <!-- for admin widgets 
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}"/>
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}"/>
- 
-    <script type="text/javascript" src="{% url 'admin:jsi18n' %}"></script> 
-    -->
-    {{ form.media }}
-    <!--
-    <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
-    <script type="text/javascript" src="{% static 'admin/js/admin/RelatedObjectLookups.js' %}"></script>
-    end for admin widgets --> #}
     </head>
     <body>
 

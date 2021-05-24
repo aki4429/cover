@@ -22,6 +22,7 @@ urlpatterns = [
     path('po_list/', views.PoList.as_view(), name='po_list'),
     path('po/inv_list/', views.InvList.as_view(), name='inv_list'),
     path('<int:po_pk>/poline_list/', views.PolineList.as_view(), name='poline_list'),
+    path('<int:po_pk>/poline_list_2/', views.PolineList_2.as_view(), name='poline_list_2'),
     path('<int:inv_pk>/invline_list/', views.InvlineList.as_view(), name='invline_list'),
     path('<int:juchu_id>/make_cart/', views.make_cart, name='make_cart'),
     path('<int:pk>/cart_apend/', views.cart_append, name='cart_append'),

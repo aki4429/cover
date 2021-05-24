@@ -249,6 +249,21 @@ class JuchuList(LoginRequiredMixin, ListView):
         context['title']='受注データリスト'
         return context
 
+class PolineList_2(LoginRequiredMixin, ListView):
+    context_object_name = 'polines'
+    template_name = 'po/poline_list_2.html'
+    model = Poline
+    form_class = PolineForm
+
+    def get_queryset(self):
+        po = Po.objects.get(pk=self.kwargs.get('po_pk'))
+        return Poline.objects.filter(po=po)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='PO明細リスト'
+        return context
+
 class KentoList(LoginRequiredMixin, ListView):
     context_object_name = 'kentos'
     template_name = 'po/kento_list.html'

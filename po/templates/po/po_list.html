@@ -42,7 +42,9 @@
         <td>{{ po.ft20 }}</td>
         <td>{{ po.condition.name }}</td>
 	<td>
+	{% if add_order_exist  %}
 <a class="btn btn-default" href="{% url 'add_order' po.pk  %} " >追加</a>
+    {% endif %}
 	</td>
     </tr>
     {% endfor %}
