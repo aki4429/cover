@@ -45,5 +45,9 @@ drop table inv, invline, po, poline ...(po関連削除)
 python manage.py makemigrations
 python manage.py migrate
 
+sqlite3 tfc_cover.sqlite
+sqlite> delete from poline where code_id not in (select id from tfc_code);
+sqlite> delete from invline where poline_id not in (select id from poline);
+sqlite> delete from invline where code_id not in (select id from tfc_code);
 
 

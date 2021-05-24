@@ -1,0 +1,24 @@
+{% extends 'po/po_base.html' %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+{% block extrahead %}
+{{ form.media }}
+{% endblock %}
+
+{% block content %}
+    <a class="btn btn-default" href="{% url 'zkento_upload'  %}">検討表アップロード</a>
+
+    <p> アップロードされた発注検討表の基準日は:
+    {{ kijunbi }} {{ data.0 }} です。</p>
+
+    <p> 南濃取込み日何日以降を表示するか設定してください。 </p>
+    <form method="POST" class="loc-form">
+	{% csrf_token %}
+        {{ form }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+    <p> {{ bigin_date }} </p>
+{% endblock %}
+

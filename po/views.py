@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline
-from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm
+from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline, Kento
+from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm, MakezaikoForm, KentoForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -13,6 +13,7 @@ from django.http import HttpResponse
 from bootstrap_datepicker_plus import DateTimePickerInput
 import openpyxl
 from .read_inv_3 import ReadInv
+from .get_kh import read_kh
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -248,11 +249,28 @@ class JuchuList(LoginRequiredMixin, ListView):
         context['title']='受注データリスト'
         return context
 
+class KentoList(LoginRequiredMixin, ListView):
+    context_object_name = 'kentos'
+    template_name = 'po/kento_list.html'
+    model = Kento
+    form_class = KentoForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='発注検討表アップロードリスト'
+        return context
+
 @login_required
 def juchu_delete(request, pk):
    juchu = get_object_or_404(Juchu, id=pk)
    juchu.delete()
    return redirect('juchu_list')
+
+@login_required
+def zkento_delete(request, pk):
+   kento = get_object_or_404(Kento, id=pk)
+   kento.delete()
+   return redirect('kento_list')
 
 #コードdetailからカートに追加
 @login_required
@@ -646,8 +664,9 @@ def kento_upload(request):
         Cart.objects.bulk_create(add_cart)
 
         context = {
-            'title' : '検討表アップロード',
+            'title' : '発注検討表アップロード',
             }
+        os.remove(excel)
 
     return render(request, 'po/kento_upload.html', context )
 
@@ -673,7 +692,6 @@ def add_order(request, po_pk):
 
     Poline.objects.bulk_create(polines)
     return redirect('poline_list', po_pk = po.pk)
-
 
 @login_required
 def upload_inv(request):
@@ -801,4 +819,42 @@ class InvlineUpdate(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         context['title']='INV内容編集'
         return context
+
+
+@login_required
+def make_zaiko(request, kento_id):
+    params = {'begin_date': '', 'kijunbi': '', 'title':'在庫表作成', 'form': None}
+    kento = get_object_or_404(Kento, id=kento_id)
+
+    kento_file_name =  kento.file_name.path
+    data, kijunbi = read_kh(kento_file_name)
+
+    if request.method == 'POST':
+        form = MakezaikoForm(request.POST)
+        params['begin_date'] = request.POST['begin_date']
+        params['data'] = data
+        params['kijunbi'] = kijunbi
+        params['form'] = form
+    else:
+        params['data'] = data
+        params['kijunbi'] = kijunbi
+        params['form'] = MakezaikoForm()
+    return render(request, 'po/make_zaiko.html', params)
+
+@login_required
+def zkento_upload(request):
+    if request.method == 'POST':
+        form = KentoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('kento_list')
+    else:
+        form = KentoForm()
+
+    context = {
+        'title' : '在庫表用検討表データアップロード',
+        'form': form
+        }
+
+    return render(request, 'po/zkento_upload.html', context )
 

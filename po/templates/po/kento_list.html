@@ -1,0 +1,37 @@
+
+{% extends 'po/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+    <a class="btn btn-default" href="{% url 'zkento_upload'  %}">検討表アップロード</a>
+    <table border=1>
+	<tr>
+	<th>読込</th>
+	<th> 検討表ファイル名 </th>
+	<th> アップロード日 </th>
+	<th>削除</th>
+	</tr>
+     {% for kento in kentos %}
+    <tr>
+        <td>
+		<a class="btn btn-default" href="{% url 'make_zaiko' kento_id=kento.id %}"><span class="glyphicon glyphicon-pencil"></span></a> 
+        </td>
+        <td>{{ kento.file_name }}</td>
+        <td>{{ kento.uploaded_at }}</td>
+        <td>
+	<a class="btn btn-default" href="{% url 'zkento_delete' pk=kento.pk %}"><span class="glyphicon glyphicon-remove"></span></a> 
+        </td>
+    </tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}

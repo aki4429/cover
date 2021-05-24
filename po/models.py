@@ -143,7 +143,7 @@ class Po(models.Model):
 
 class Poline(models.Model):
     #code = models.ForeignKey(TfcCode, on_delete=models.PROTECT)
-    code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, null=True )
+    code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, blank= True, null=True )
     remark = models.TextField(blank=True, null=True)
     om = models.TextField(blank=True, null=True)
     qty = models.FloatField(blank=True, null=True)
@@ -186,6 +186,9 @@ class Juchu(models.Model):
     file_name = models.FileField(upload_to='juchu/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
+class Kento(models.Model):
+    file_name = models.FileField(upload_to='kento/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class Cart(models.Model):
     hinban = models.TextField(blank=True, null=True, max_length=100, verbose_name="品番")

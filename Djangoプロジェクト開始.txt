@@ -709,3 +709,62 @@ INSTALLED_APPS = [ ...
 config/settings.py
 SITE_ID = 1
 
+■　在庫表作成
+po/forms.py
+(追加)
+#widgetでカレンダー入力
+class MakezaikoForm(forms.Form):
+    begin_date = forms.DateField(label='取込開始日', \
+            widget = forms.DateInput(attrs={"type":"date"}))
+
+po/views 追加
+@login_required
+def make_zaiko(request):
+        params = {'begin_date': '', 'form': None}
+    if request.method == 'POST':
+        form = MakezaikoForm(request.POST)
+        params['begin_date'] = request.POST['begin_date']
+        params['form'] = form
+    else:
+        params['form'] = UserForm()
+    return render(request, 'po/make_zaiko.html', params)
+
+■検討表アップロード
+po/forms.py
+class KentoUpForm(forms.Form):  
+    kentof = forms.FileField(label='在庫表作成用TFC発注検討表',
+        validators=[FileExtensionValidator(['csv' ])],
+        #拡張子バリデーター。アップロードファイルの拡張子が違う時にエラー
+        )
+
+    def save(self):
+        upload_file = self.cleaned_data['kentof']
+        #default_storage.location = os.path.join(settings.MEDIA_ROOT, 'inv')
+        file_name = default_storage.save(upload_file.name, upload_file)
+        #return default_storage.url(file_name)
+        #file属性で返す。 
+        return default_storage.open(file_name), default_storage.url(file_name)
+
+po/views.py
+@login_required
+def upload_zkento(request):
+    form = KentoUpForm()
+
+    if request.method == 'POST':
+        form = KentoUpForm(request.POST, request.FILES)  # Do not forget to add: request.FILES
+        if form.is_valid():
+            file, download_url = form.save()
+            data, kijunbi = read_kh(file.name)
+            context = {
+                'data': data,
+                'kijunbi': kijunbi,
+                'form': form,
+                }
+            os.remove(file.name)
+            return render(request, 'po/upload_zkento.html', context)
+    return render(request, 'po/upload_zkento.html', locals())
+
+
+
+
+

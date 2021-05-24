@@ -1,5 +1,5 @@
 from django import forms
-from .models import TfcCode, Juchu, Condition, Po, Poline, Cart, Inv, Invline
+from .models import TfcCode, Juchu, Condition, Po, Poline, Cart, Inv, Invline, Kento
 from bootstrap_datepicker_plus import DatePickerInput
 from django.core.validators import FileExtensionValidator
 from django.core.files.storage import default_storage
@@ -40,6 +40,10 @@ class JuchuForm(forms.ModelForm):
         model = Juchu
         fields = ('file_name', )
 
+class KentoForm(forms.ModelForm):
+    class Meta:
+        model = Kento
+        fields = ('file_name', )
 
 class ConditionForm(forms.ModelForm):
     class Meta:
@@ -79,27 +83,16 @@ class PoForm(forms.ModelForm):
                 'ft20',
                 ]
         widgets = {
-                'pod': DatePickerInput(
-                    format='%Y-%m-%d',
-                    options={
-                        'locale': 'ja',
-                        'dayViewHeaderFormat': 'YYYY年 MMMM',
-                    }
-                ),
-                'etd': DatePickerInput(
-                    format='%Y-%m-%d',
-                    options={
-                        'locale': 'ja',
-                        'dayViewHeaderFormat': 'YYYY年 MMMM',
-                    }
-                ),
-                'delivery': DatePickerInput(
-                    format='%Y-%m-%d',
-                    options={
-                        'locale': 'ja',
-                        'dayViewHeaderFormat': 'YYYY年 MMMM',
-                    }
-                ),
+                'pod':forms.DateInput(attrs={"type":"date"}),
+                #'pod': DatePickerInput(
+                #    format='%Y-%m-%d',
+                #    options={
+                #        'locale': 'ja',
+                #        'dayViewHeaderFormat': 'YYYY年 MMMM',
+                #    }
+                #),
+                'etd':forms.DateInput(attrs={"type":"date"}),
+                'delivery':forms.DateInput(attrs={"type":"date"}),
                 'pon': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 'per': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 'port': forms.Textarea(attrs={'rows':1, 'cols':15}),
@@ -142,13 +135,7 @@ class CartForm(forms.ModelForm):
                 ]
         ### 追加 ###
         widgets = {
-                'juchubi': DatePickerInput(
-                    format='%Y-%m-%d',
-                    options={
-                        'locale': 'ja',
-                        'dayViewHeaderFormat': 'YYYY年 MMMM',
-                    }
-                ),
+            'juchubi':forms.DateInput(attrs={"type":"date"}),
             'hinban': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'obic': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'om': forms.Textarea(attrs={'rows':1, 'cols':15}),
@@ -181,13 +168,14 @@ class InvForm(forms.ModelForm):
         widgets = {
                 'invn': forms.Textarea(attrs={'rows':1, 'cols':15}),
                 #'etd': AdminDateWidget(),
-                'etd': DatePickerInput(
-                format='%Y-%m-%d',
-                options={
-                     'locale': 'ja',
-                     'dayViewHeaderFormat': 'YYYY年 MMMM',
-                }
-            	),
+                'etd':forms.DateInput(attrs={"type":"date"}),
+                #'etd': DatePickerInput(
+                #format='%Y-%m-%d',
+                #options={
+                #     'locale': 'ja',
+                #     'dayViewHeaderFormat': 'YYYY年 MMMM',
+                #}
+            	#),
                 #'delivery':AdminDateWidget(), 
                 'delivery':forms.DateInput(attrs={"type":"date"}),
             	}
@@ -210,4 +198,9 @@ class InvlineForm(forms.ModelForm):
             'qty': forms.Textarea(attrs={'rows':1, 'cols':5}),
             'minashi': forms.Textarea(attrs={'rows':1, 'cols':5}),
         }
+
+class MakezaikoForm(forms.Form):
+    begin_date = forms.DateField(label='取込開始日', \
+            widget = forms.DateInput(attrs={"type":"date"}))
+
 
