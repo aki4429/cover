@@ -25,7 +25,7 @@ INVN = (2,0) #inv.#位置
 ETD = (9,0) #ETD位置
 
 SHEET_NAME = "INVOCE"
-SFILE = "tfc_cover.sqlite"
+SFILE = "../tfc_cover.sqlite"
 
 class ReadInv:
     def __init__(self, fname):

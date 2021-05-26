@@ -551,7 +551,8 @@ class PoList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['title']='POリスト'
         #add_ordersセッションが存在しないか、空のときorder_exitはFalse
-        if 'add_orders' in self.request.session and len(self.request.session['add_orders']) > 0:
+        #if 'add_orders' in self.request.session and len(self.request.session['add_orders']) > 0:
+        if 'orders' in self.request.session and len(self.request.session['orders']) > 0:
             context['add_order_exist']= True
         else:
             context['add_order_exist']= False
@@ -681,7 +682,7 @@ def kento_upload(request):
         context = {
             'title' : '発注検討表アップロード',
             }
-        os.remove(excel)
+        #os.remove(excel)
 
     return render(request, 'po/kento_upload.html', context )
 
