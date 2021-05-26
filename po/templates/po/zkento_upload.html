@@ -10,7 +10,7 @@
 
 
 {% block content %}
-    <a  href="{% url 'juchu_list'  %}">検討表データリストへ</a>
+    <a  href="{% url 'kento_list'  %}">検討表データリストへ</a>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

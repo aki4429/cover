@@ -11,14 +11,23 @@
     <a class="btn btn-default" href="{% url 'zkento_upload'  %}">検討表アップロード</a>
 
     <p> アップロードされた発注検討表の基準日は:
-    {{ kijunbi }} {{ data.0 }} です。</p>
+    {{ kijunbi|date:"Y-m-d(D)"}}  です。</p>
+    <p> TFC縫製品カバーの更新日は: 
+    {{ koshinbi|date:"Y-m-d(D)"}}  です。</p>
+    <p> TFC縫製品カバーの製造指示データの日付は: 
+    {{ shijibi|date:"Y-m-d(D)"}}  です。</p>
 
     <p> 南濃取込み日何日以降を表示するか設定してください。 </p>
     <form method="POST" class="loc-form">
 	{% csrf_token %}
         {{ form }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-default">在庫表作成</button>
     </form>
-    <p> {{ bigin_date }} </p>
+    <p> {{ message }} </p>
+    <p> {{ begin_date|date:"Y年m月d日" }} </p>
+    <p> {{ begin_date }} </p>
+    <p> {{ data.10.0 }} </p>
+    <p> {{ data.10.1 }} </p>
+    <p> {{ data.10.2 }} </p>
 {% endblock %}
 

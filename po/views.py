@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline, Kento
+from loc.models import LocStatus
 from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm, MakezaikoForm, KentoForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -14,6 +15,7 @@ from bootstrap_datepicker_plus import DateTimePickerInput
 import openpyxl
 from .read_inv_3 import ReadInv
 from .get_kh import read_kh
+import datetime
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -844,15 +846,26 @@ def make_zaiko(request, kento_id):
 
     kento_file_name =  kento.file_name.path
     data, kijunbi = read_kh(kento_file_name)
+    kijunbi = datetime.datetime.strptime(kijunbi, '%Y/%m/%d')
+
+    status = LocStatus.objects.get(pk=1)
+    shijibi = status.shijibi
+    shijibi = datetime.datetime.strptime(shijibi, '%Y%m%d')
+    koshinbi = status.koshinbi
 
     if request.method == 'POST':
         form = MakezaikoForm(request.POST)
         params['begin_date'] = request.POST['begin_date']
         params['data'] = data
+        params['shijibi'] = shijibi
+        params['koshinbi'] = koshinbi
         params['kijunbi'] = kijunbi
         params['form'] = form
+        params['message'] = 'POSTされました！'
     else:
         params['data'] = data
+        params['shijibi'] = shijibi
+        params['koshinbi'] = koshinbi
         params['kijunbi'] = kijunbi
         params['form'] = MakezaikoForm()
     return render(request, 'po/make_zaiko.html', params)
