@@ -3,27 +3,20 @@
 
 #在庫報告/発注検討表を作成するプログラム。
 
-MENU ="""
-作成する表を選んでください。
-===========================
-1) TFC在庫表
-2) TFC検討表
---------------------------
-番号で選んでください。(1/2/.. or q=終了): """
-
 ZEXCEL = 'TFC_zaiko.xlsx'
 KEXCEL = 'TFC_kento_template2.xlsx'
 
 import openpyxl
 import csv
+import os
+from django.conf import settings
 
-from get_code import get_k, get_z, ori_sort
-from get_kh import read_kh
-from make_balance import MakeBalance
-from index_tool import get_xindex, get_yindex
+from .get_code import get_k, get_z, ori_sort
+from .make_balance import MakeBalance
+from .index_tool import get_xindex, get_yindex
 
-import get_shouhi_new
-import get_shouhi
+from .get_shouhi_new import make_shouhi
+#import get_shouhi
 
 def join_data(c_data, k_data):
     #同じコードのコードデータに検討表データを繋ぐ(左結合)
@@ -66,11 +59,11 @@ def make_hyo(nolist, codelist, totallist):
         hyo[2][i+l] = num[0]
 
     #print('hyo_final', hyo)
-    with open('hyo_final.csv', 'w', encoding='CP932') as f:
-        writer = csv.writer(f)
-        writer.writerows(hyo)
+    #with open('hyo_final.csv', 'w', encoding='CP932') as f:
+    #    writer = csv.writer(f)
+    #    writer.writerows(hyo)
 
-    print('hyo_final.csv を書き出しました。')
+    #print('hyo_final.csv を書き出しました。')
 
     for row in totallist: #着日, etd, PO No. コード　残数
         yindex = get_yindex(hyo, row[3])
@@ -89,7 +82,8 @@ def make_hyo(nolist, codelist, totallist):
     return hyo
 
 def write_zexcel(hyo, kijunbi, nolist):
-    wb = openpyxl.load_workbook(ZEXCEL)
+    filename = os.path.join(settings.MEDIA_ROOT, 'template', ZEXCEL)
+    wb = openpyxl.load_workbook(filename)
     sheet = wb['zaiko']
     sheet['C1'] = kijunbi
 
@@ -97,8 +91,10 @@ def write_zexcel(hyo, kijunbi, nolist):
     n = 0 #7列目からスタート
     while n < len(nolist) :
         sheet.cell(row=1, column=n+7, value = nolist[n][2]) #po no.
-        sheet.cell(row=2, column=n+7, value = nolist[n][1][5:]) #ETD
-        sheet.cell(row=3, column=n+7, value = nolist[n][0][5:]) #delivery
+        #etd, delivery の日付はdatetime.dateなので、strで変換して、
+        #何月何日だけ取り出す。
+        sheet.cell(row=2, column=n+7, value = str(nolist[n][1])[5:]) #ETD
+        sheet.cell(row=3, column=n+7, value = str(nolist[n][0])[5:]) #delivery
         n += 1
     
 
@@ -119,12 +115,15 @@ def write_zexcel(hyo, kijunbi, nolist):
         i += 1
         j += 1
 
-    save_file = 'zaikohyo/N_TFC_zaiko_{0}.xlsx'.format(kijunbi.replace('/', '-'))
-    wb.save(save_file)
-    print("{}を保存しました。".format(save_file))
+    save_file = 'TFC_zaiko_{0}.xlsx'.format(str(kijunbi).replace('/', '-'))
+    #wb.save(save_file)
+    #print("{}を保存しました。".format(save_file))
+
+    return wb, save_file
 
 def write_kexcel(hyo, kijunbi, nolist):
-    wb = openpyxl.load_workbook(KEXCEL)
+    filename = os.path.join(settings.MEDIA_ROOT, 'template', KEXCEL)
+    wb = openpyxl.load_workbook(filename)
     sheet = wb['kento']
     sheet['D2'] = kijunbi
 
@@ -132,8 +131,8 @@ def write_kexcel(hyo, kijunbi, nolist):
     n = 0 #9列目からスタート
     while n < len(nolist) :
         sheet.cell(row=2, column=n+11, value = nolist[n][2]) #po no.
-        sheet.cell(row=3, column=n+11, value = nolist[n][1][5:]) #ETD
-        sheet.cell(row=4, column=n+11, value = nolist[n][0][5:]) #delivery
+        sheet.cell(row=3, column=n+11, value = str(nolist[n][1])[5:]) #ETD
+        sheet.cell(row=4, column=n+11, value = str(nolist[n][0])[5:]) #delivery
         n += 1
     
 
@@ -167,26 +166,27 @@ def write_kexcel(hyo, kijunbi, nolist):
     #消費実績表作成 
 
     #obic 旧データの消費実績取り出し
-    shouhi_hyo_old = get_shouhi.make_shouhi(codelist)
+    #shouhi_hyo_old = get_shouhi.make_shouhi(codelist)
     #obic 新データの消費実績取り出し
-    shouhi_hyo_new = get_shouhi_new.make_shouhi(codelist)
+    shouhi_hyo_new = make_shouhi(codelist)
 
     #それぞれのヘッダ行を取り出して
-    h_o = shouhi_hyo_old.pop(0)
-    h_n = shouhi_hyo_new.pop(0)
-    h_line = h_o + h_n[1:] #ヘッダを結合しておく 
+    #h_o = shouhi_hyo_old.pop(0)
+    #h_n = shouhi_hyo_new.pop(0)
+    #h_line = h_o + h_n[1:] #ヘッダを結合しておく 
+    #h_line =  h_n[1:] #ヘッダを結合しておく 
 
     #旧消費データ(2次元配列)の品名が同じ新消費データのデータを
     #つなげて shouhi_hyo に代入。
-    shouhi_hyo = []
+    shouhi_hyo = shouhi_hyo_new
 
-    for row_o in shouhi_hyo_old:
-        for row_n in shouhi_hyo_new:
-            if row_o[0] == row_n[0] :
-                shouhi_hyo.append(row_o + row_n[1:])
+    #for row_o in shouhi_hyo_old:
+    #    for row_n in shouhi_hyo_new:
+    #        if row_o[0] == row_n[0] :
+    #            shouhi_hyo.append(row_o + row_n[1:])
 
     #さっきのヘッダを1行目に置く。
-    shouhi_hyo.insert(0, h_line)
+    #shouhi_hyo.insert(0, h_line)
 
     i=0 #1行目からスタート
     ylength = len(shouhi_hyo)
@@ -198,47 +198,45 @@ def write_kexcel(hyo, kijunbi, nolist):
             j += 1
         i += 1
 
-    save_file = 'zaikohyo/TFC_kento_{0}.xlsx'.format(kijunbi.replace('/', '-'))
-    wb.save(save_file)
-    print("{}を保存しました。".format(save_file))
+    save_file = 'TFC_kento_{0}.xlsx'.format(str(kijunbi).replace('/', '-'))
+    #wb.save(save_file)
+    #print("{}を保存しました。".format(save_file))
 
-def write_zk():
+    return wb, save_file
 
-    data = read_kh()
-    k_data =  data[0]
-    kijunbi = data[1]
-    mb = MakeBalance()
+def write_zaiko(data, kijunbi, begin_day):
+
+    k_data =  data #発注検討表データ取込み
+    mb = MakeBalance(begin_day)
     nolist = mb.make_nolist()
 
-    ans = ''
-    while ans != 'q':
-        ans = input(MENU)
-        #検討表から在庫と受注数をとりだす。
-        if ans == '1':
-            print("在庫表を作成します")
-            #在庫コードデータを取り出し。
-            c_data = ori_sort(get_z())
-            zdata=join_data(c_data, k_data)
-            #旧モデルで在庫と受注の無いものは省きます。
-            zdata = [e for e in zdata if not (e[1] == '旧モデル' and e[2] == 0 and e[3] == 0)]
-            #print('mb', mb.totallist)
-            #print('nolist', nolist)
-            hyo = make_hyo(nolist, zdata, mb.totallist)
-            write_zexcel(hyo, kijunbi, nolist)
+    #在庫コードデータを取り出し。 get_zは在庫フラグ1のコードとカテゴリリスト
+    c_data = ori_sort(get_z()) 
+    zdata=join_data(c_data, k_data)
+    #旧モデルで在庫と受注の無いものは省きます。
+    zdata = [e for e in zdata if not (e[1] == '旧モデル' and e[2] == 0 and e[3] == 0)]
+    #print('mb', mb.totallist)
+    #print('nolist', nolist)
+    hyo = make_hyo(nolist, zdata, mb.totallist)
+    return write_zexcel(hyo, kijunbi, nolist)
         
-            with open('zdata.csv', 'w', encoding='CP932') as f:
-                writer = csv.writer(f)
-                writer.writerows(hyo)
+    #with open('zdata.csv', 'w', encoding='CP932') as f:
+    #    writer = csv.writer(f)
+    #    writer.writerows(hyo)
 
-        elif ans == '2':
-            print("検討表を作成します")
-            c_data = ori_sort(get_k())
-            kdata=join_data(c_data, k_data)
-            hyo = make_hyo(nolist, kdata, mb.totallist)
-            write_kexcel(hyo, kijunbi, nolist)
+def write_kento(data, kijunbi, begin_day):
 
-            with open('kdata.csv', 'w', encoding='CP932') as f:
-                writer = csv.writer(f)
-                writer.writerows(hyo)
+    k_data =  data #発注検討表データ取込み
+    mb = MakeBalance(begin_day)
+    nolist = mb.make_nolist()
+
+    c_data = ori_sort(get_k())
+    kdata=join_data(c_data, k_data)
+    hyo = make_hyo(nolist, kdata, mb.totallist)
+    return write_kexcel(hyo, kijunbi, nolist)
+
+    #with open('kdata.csv', 'w', encoding='CP932') as f:
+    #    writer = csv.writer(f)
+    #    writer.writerows(hyo)
 
 

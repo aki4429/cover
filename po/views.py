@@ -16,6 +16,7 @@ import openpyxl
 from .read_inv_3 import ReadInv
 from .get_kh import read_kh
 import datetime
+from .write_zk import write_zaiko, write_kento
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -846,7 +847,7 @@ def make_zaiko(request, kento_id):
 
     kento_file_name =  kento.file_name.path
     data, kijunbi = read_kh(kento_file_name)
-    kijunbi = datetime.datetime.strptime(kijunbi, '%Y/%m/%d')
+    kijunbi = datetime.datetime.strptime(kijunbi, '%Y/%m/%d').date()
 
     status = LocStatus.objects.get(pk=1)
     shijibi = status.shijibi
@@ -855,13 +856,27 @@ def make_zaiko(request, kento_id):
 
     if request.method == 'POST':
         form = MakezaikoForm(request.POST)
-        params['begin_date'] = request.POST['begin_date']
+        begin_day = request.POST['begin_date']
+        params['begin_date'] = begin_day
         params['data'] = data
         params['shijibi'] = shijibi
         params['koshinbi'] = koshinbi
         params['kijunbi'] = kijunbi
         params['form'] = form
         params['message'] = 'POSTされました！'
+        print('begin_day', begin_day)
+        if 'zaiko' in request.POST:
+            wb, file_name = write_zaiko(data, kijunbi, begin_day)
+            response = HttpResponse(content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename={}'.format(file_name)
+            wb.save(response)
+            return response
+        elif 'kento' in request.POST:
+            wb, file_name = write_kento(data, kijunbi, begin_day)
+            response = HttpResponse(content_type='application/vnd.ms-excel')
+            response['Content-Disposition'] = 'attachment; filename={}'.format(file_name)
+            wb.save(response)
+            return response
     else:
         params['data'] = data
         params['shijibi'] = shijibi
