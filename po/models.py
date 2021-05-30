@@ -208,3 +208,9 @@ class Fabric(models.Model):
     code = models.TextField(blank=True, null=True, max_length=100, verbose_name="コード")
     name = models.TextField(blank=True, null=True, max_length=300, verbose_name="名前")
 
+class Shouhi(models.Model):
+    month = models.TextField(blank=True, null=True, verbose_name="消費月")
+    code = models.TextField(blank=True, null=True, verbose_name="コード")
+    qty = models.FloatField(blank=True, null=True, verbose_name="消費数量")
+
+

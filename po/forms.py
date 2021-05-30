@@ -204,3 +204,15 @@ class MakezaikoForm(forms.Form):
             widget = forms.DateInput(attrs={"type":"date"}))
 
 
+class SokoUpForm(forms.Form):
+    sokof = forms.FileField(label='倉庫別在庫表',
+        validators=[FileExtensionValidator(['csv' ])],
+        #拡張子バリデーター。アップロードファイルの拡張子が違う時にエラー
+        )
+
+    def save(self):
+        upload_file = self.cleaned_data['sokof']
+        file_name = default_storage.save(upload_file.name, upload_file)
+        #file属性で返す。
+        return default_storage.open(file_name), default_storage.url(file_name)
+

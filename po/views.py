@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
-from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline, Kento
+from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline, Kento, Shouhi
 from loc.models import LocStatus
-from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm, MakezaikoForm, KentoForm
+from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm, MakezaikoForm, KentoForm, SokoUpForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -17,6 +17,8 @@ from .read_inv_3 import ReadInv
 from .get_kh import read_kh
 import datetime
 from .write_zk import write_zaiko, write_kento
+from .get_shouhi_new import read_shouhi
+from .get_shouhi import read_shouhi_old
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -240,6 +242,24 @@ def juchu_upload(request):
 
     return render(request, 'po/juchu_upload.html', context )
 
+@login_required
+def soko_upload(request):
+    if request.method == 'POST':
+        form = SokoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('soko_list')
+
+    else:
+        form = SokoForm()
+
+    context = {
+        'title' : '倉庫別在庫表アップロード',
+        'form': form
+        }
+
+    return render(request, 'po/soko_upload.html', context )
+
 
 class JuchuList(LoginRequiredMixin, ListView):
     context_object_name = 'juchus'
@@ -250,6 +270,22 @@ class JuchuList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='受注データリスト'
+        return context
+
+class ShouhiList(LoginRequiredMixin, ListView):
+    context_object_name = 'shouhis'
+    template_name = 'po/shouhi_list.html'
+    model = Shouhi
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        ms = Shouhi.objects.all().order_by('month').values_list('month').distinct() 
+        months = []
+        for mt in ms:
+            months.append(mt[0])
+
+        context['title']='消費データリスト'
+        context['months']= months
         return context
 
 class PolineList_2(LoginRequiredMixin, ListView):
@@ -728,9 +764,36 @@ def upload_inv(request):
                 'form': form,
                 }
             os.remove(file.name)
-            return render(request, 'po/upload_inv.html', context)
+            return redirect('inv_list')
     return render(request, 'po/upload_inv.html', locals())
 
+#倉庫別在庫表をアップロードして消費実績DB登録
+@login_required
+def upload_soko(request):
+    form = SokoUpForm()
+
+    if request.method == 'POST':
+        form = SokoUpForm(request.POST, request.FILES)  # Do not forget to add: request.FILES
+        if form.is_valid():
+            file, download_url = form.save()
+            read_shouhi(file.name)
+            os.remove(file.name)
+            return redirect('shouhi_list')
+    return render(request, 'po/upload_soko.html', locals())
+
+#旧倉庫別在庫表をアップロードして消費実績DB登録
+@login_required
+def upload_soko_old(request):
+    form = SokoUpForm()
+
+    if request.method == 'POST':
+        form = SokoUpForm(request.POST, request.FILES)  # Do not forget to add: request.FILES
+        if form.is_valid():
+            file, download_url = form.save()
+            read_shouhi_old(file.name)
+            os.remove(file.name)
+            return redirect('shouhi_list')
+    return render(request, 'po/upload_soko_old.html', locals())
 
 class InvList(LoginRequiredMixin, ListView):
     context_object_name = 'invs'

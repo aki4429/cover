@@ -15,8 +15,8 @@ from .get_code import get_k, get_z, ori_sort
 from .make_balance import MakeBalance
 from .index_tool import get_xindex, get_yindex
 
-from .get_shouhi_new import make_shouhi
-#import get_shouhi
+from po.models import Shouhi
+
 
 def join_data(c_data, k_data):
     #同じコードのコードデータに検討表データを繋ぐ(左結合)
@@ -154,55 +154,62 @@ def write_kexcel(hyo, kijunbi, nolist):
         i += 1
         j += 1
 
-    
     sheet2 = wb['jisseki']
-    #コード他記入(実績シートに)
     #コードリスト取り出し
+    #検討表書き込み用データhyoからコードだけの
+    #リスト(codelist)を取り出す。
     codelist = []
     for i, row in enumerate(hyo):
         if i >2 :
             codelist.append(row[0])
 
+    #重複しない会計年月取得、こんな感じ=>[('1912',), ('2001',), ('2002',)]
+    month_list = Shouhi.objects.all().order_by('month').distinct().values_list('month')
+
     #消費実績表作成 
+    #表を２次元配列として初期化しておく
+    row_max = len(codelist)
+    col_max = len(month_list)
+    shouhi_hyo = [[''] * (col_max+1) for i in range(row_max+1)]
 
-    #obic 旧データの消費実績取り出し
-    #shouhi_hyo_old = get_shouhi.make_shouhi(codelist)
-    #obic 新データの消費実績取り出し
-    shouhi_hyo_new = make_shouhi(codelist)
+    #1行目は２列目以降にmonthヘッダを
+    for i in range(col_max ):
+        shouhi_hyo[0][i+1] = month_list[i][0]
 
-    #それぞれのヘッダ行を取り出して
-    #h_o = shouhi_hyo_old.pop(0)
-    #h_n = shouhi_hyo_new.pop(0)
-    #h_line = h_o + h_n[1:] #ヘッダを結合しておく 
-    #h_line =  h_n[1:] #ヘッダを結合しておく 
+    #1列目は２行目以降にcodelistのコードを
+    for j in range(row_max ):
+        shouhi_hyo[j+1][0] = codelist[j]
 
-    #旧消費データ(2次元配列)の品名が同じ新消費データのデータを
-    #つなげて shouhi_hyo に代入。
-    shouhi_hyo = shouhi_hyo_new
+    #Shouhiデータから、該当する消費数量を記入する。
+    shouhis = Shouhi.objects.all()
+    for i in range(col_max):
+        for j in range(row_max):
+            for shouhi in shouhis:
+                if shouhi_hyo[0][i+1] == shouhi.month and shouhi_hyo[j+1][0] == shouhi.code :
+                    shouhi_hyo[j+1][i+1] = shouhi.qty
 
-    #for row_o in shouhi_hyo_old:
-    #    for row_n in shouhi_hyo_new:
-    #        if row_o[0] == row_n[0] :
-    #            shouhi_hyo.append(row_o + row_n[1:])
-
-    #さっきのヘッダを1行目に置く。
-    #shouhi_hyo.insert(0, h_line)
-
-    i=0 #1行目からスタート
-    ylength = len(shouhi_hyo)
-    xlength = len(shouhi_hyo[0])
-    while i < ylength:
-        j=0 #1列目からスタート
-        while j < xlength :
-            sheet2.cell(row=i+1, column=j+1, value = shouhi_hyo[i][j])
-            j += 1
-        i += 1
+    #エクセルsheet2 に書き込み
+    for i in range(col_max+1):
+        for j in range(row_max+1):
+            sheet2.cell(row=j+1, column=i+1, value = shouhi_hyo[j][i])
 
     save_file = 'TFC_kento_{0}.xlsx'.format(str(kijunbi).replace('/', '-'))
-    #wb.save(save_file)
-    #print("{}を保存しました。".format(save_file))
-
     return wb, save_file
+        
+#def write_kexcel(hyo, kijunbi, nolist):
+#    filename = os.path.join(settings.MEDIA_ROOT, 'template', ZEXCEL)
+#    wb = openpyxl.load_workbook(filename)
+#    wb = write_kexcel_hyo(hyo, kijunbi, nolist, wb)
+#    save_file = 'TFC_kento_{0}.xlsx'.format(str(kijunbi).replace('/', '-'))
+#    return wb, save_file
+        
+#def write_kexcel_with_shouhi(hyo, kijunbi, nolist):
+#    filename = os.path.join(settings.MEDIA_ROOT, 'template', ZEXCEL)
+#    wb = openpyxl.load_workbook(filename)
+#    wb = write_kexcel_hyo(hyo, kijunbi, nolist, wb)
+#    wb = write_shouhi(wb)
+#    save_file = 'TFC_kento_{0}.xlsx'.format(str(kijunbi).replace('/', '-'))
+#    return wb, save_file
 
 def write_zaiko(data, kijunbi, begin_day):
 
@@ -233,10 +240,11 @@ def write_kento(data, kijunbi, begin_day):
     c_data = ori_sort(get_k())
     kdata=join_data(c_data, k_data)
     hyo = make_hyo(nolist, kdata, mb.totallist)
-    return write_kexcel(hyo, kijunbi, nolist)
 
-    #with open('kdata.csv', 'w', encoding='CP932') as f:
+    #with open('hyo.csv', 'w', encoding='CP932') as f:
     #    writer = csv.writer(f)
     #    writer.writerows(hyo)
+
+    return write_kexcel(hyo, kijunbi, nolist)
 
 

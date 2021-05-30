@@ -1,0 +1,37 @@
+
+{% extends 'po/po_base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block page %}
+{{ title }}
+{% endblock page %}
+
+{% block content %}
+
+    <a class="btn btn-default" href="{% url 'upload_soko'  %}">倉庫別在庫アップロード</a>
+    <a class="btn btn-default" href="{% url 'upload_soko_old'  %}">旧倉庫別在庫アップロード</a>
+    <p> |
+     {% for mt in months %}
+     	{{ mt }} |
+    {% endfor %}
+    </p>
+    <table border=1>
+	<tr>
+	<th>会計年月</th>
+	<th> コード </th>
+	<th> 消費数量 </th>
+	</tr>
+     {% for shouhi in shouhis %}
+    <tr>
+        <td>{{ shouhi.month }}</td>
+        <td>{{ shouhi.code }}</td>
+        <td>{{ shouhi.qty }}</td>
+    </tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}

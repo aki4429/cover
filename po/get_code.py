@@ -17,7 +17,7 @@ def get_z():
 def get_k():
     #検討フラグのコードを取得
     result = [] #[コード, カテゴリー] の配列
-    kcodes = TfcCode.objects.filter(kento = 1).values('hcode', 'cat')
+    kcodes = TfcCode.objects.filter(kento = 1).values('hcode', 'vol', 'cat')
     for kcode in  kcodes:
         result.append(list(kcode.values()))
 
