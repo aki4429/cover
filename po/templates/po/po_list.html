@@ -44,6 +44,7 @@
 	<td>
 	{% if add_order_exist  %}
 <a class="btn btn-default" href="{% url 'add_order' po.pk  %} " >追加</a>
+<a class="btn btn-default" href="{% url 'update_order' po.pk  %} " >更新</a>
     {% endif %}
 	</td>
     </tr>

@@ -24,7 +24,7 @@ def write_excel(inputs, invn, bangos):
             sheet.cell(row=n+5, column=5, value = '既存') #新規/既存
 
         for ban in bangos:
-            if ban.hcode == case.hcode:
+            if ban.hcode == case.hcode.replace('013CH', '013').replace('232WI', '232W').replace('271I', '271'):
                 sheet.cell(row=n+5, column=6, value = ban.se) #背番号
 
         n += 1

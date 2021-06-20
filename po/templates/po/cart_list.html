@@ -40,6 +40,7 @@ function allcheck( tf ) {
 	<th> 納期 </th>
 	<th>数量</th>
 	<th>コード有無</th>
+	<th>セットコード</th>
 	<th>オービックコード</th>
 	<th>発注:
   <input type="button" value="全部ON！" onclick="allcheck(true);">
@@ -60,11 +61,8 @@ function allcheck( tf ) {
         <td>{{ item.juchubi }}</td>
         <td>{{ item.noki }}</td>
         <td>{{ item.qty }}</td>
-        {% if item.code %}
-        <td>ok</td>
-        {% else %}
-        <td></td>
-        {% endif %}
+        <td>{{ item.flag }}</td>
+        <td>{{ item.set }}</td>
         <td>{{ item.obic }}</td>
         <td>
 	<input type="checkbox" name="order" value="{{ item.pk }}">

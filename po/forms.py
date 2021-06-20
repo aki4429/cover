@@ -112,10 +112,17 @@ class PolineForm(forms.ModelForm):
                 'qty',
                 'balance',
                 'po',
+                'ocode',
+                'hinmei',
+                'kikaku',
+                'set',
                 ]
         ### 追加 ###
         widgets = {
             'remark': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'ocode': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'hinmei': forms.Textarea(attrs={'rows':1, 'cols':15}),
+            'kikaku': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'om': forms.Textarea(attrs={'rows':1, 'cols':15}),
             'qty': forms.Textarea(attrs={'rows':1, 'cols':5}),
         }

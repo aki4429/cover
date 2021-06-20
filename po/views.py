@@ -343,30 +343,7 @@ def make_cart(request, juchu_id):
     jr = JuchuRead(juchu_file_name)
     jdata = jr.get_juchu()
 
-    add_cart = []
-    for row in jdata:
-        result = ''
-        if type(row[6]) == int :
-            result = TfcCode.objects.filter(pk=str(row[6]))
-        elif type(row[6]) and row[6].isdigit():
-            result = TfcCode.objects.filter(pk=str(row[6]))
-
-        if len(result) == 1:
-            code = result.first()
-        else:
-            code = None
-        
-        cart = Cart(hinban = row[0], \
-                om = row[1],
-                juchubi = row[2].replace('/','-'),
-                noki = row[3].replace('/','-'),
-                qty = int(float(row[4])),
-                flag = row[5],
-                code = code,
-                obic = row[7])
-        add_cart.append(cart)
-
-    Cart.objects.bulk_create(add_cart)
+    Cart.objects.bulk_create(jdata)
 
     return redirect('cart_list')
 
@@ -424,8 +401,8 @@ class CartList(LoginRequiredMixin, ListView):
         orders = request.POST.getlist('order')  # <input type="checkbox" name="delete"のnameに対応
         #POSTされたorderの配列をセッションに保存
         request.session['orders'] = orders
-        for cpk in orders:
-            Cart.objects.filter(pk=cpk).update(flag='order') 
+        #for cpk in orders:
+        #    Cart.objects.filter(pk=cpk).update(flag='order') 
 
         if 'new_order' in request.POST:
             return redirect('condition_list')  # 一覧ページにリダイレクト
@@ -569,7 +546,11 @@ class PoCreate(LoginRequiredMixin, CreateView):
                 om =cart.om,
                 qty =cart.qty,
                 balance =cart.qty,
-                po = Po.objects.last()
+                po = Po.objects.last(),
+                ocode = cart.obic,
+                hinmei = cart.hinmei,
+                kikaku = cart.kikaku,
+                set = cart.set,
                 )
             polines.append(pl)
 
@@ -740,13 +721,64 @@ def add_order(request, po_pk):
         om =cart.om,
         qty =cart.qty,
         balance =cart.qty,
-        po = po
+        po = po,
+        ocode = cart.obic,
+        hinmei = cart.hinmei,
+        kikaku = cart.kikaku,
+        set = cart.set,
         )
 
         polines.append(pl)
 
     Poline.objects.bulk_create(polines)
-    return redirect('poline_list', po_pk = po.pk)
+    return redirect('poline_list_2', po_pk = po.pk)
+
+@login_required
+def update_order(request, po_pk):
+    po = get_object_or_404(Po, pk=po_pk)
+    #orders = request.session['add_orders']
+    orders = request.session['orders']
+    polines = Poline.objects.filter(po = po)
+    uplines = [] #あとでbulk_update
+    oms = [] #om番号を集めておく
+    for poline in polines:
+        oms.append(poline.om)
+        for cartpk in orders:
+            cart = Cart.objects.get(pk=cartpk)
+            tfccode  = cart.code
+
+            #更新 
+            if poline.code.hinban == cart.hinban and\
+                    poline.om == cart.om :
+                poline.ocode = cart.obic
+                poline.hinmei = cart.hinmei
+                poline.kikaku = cart.kikaku
+                poline.set = cart.set
+                uplines.append(poline)
+
+    Poline.objects.bulk_update(uplines,\
+            fields=['ocode','hinmei','kikaku', 'set'] )
+    
+    #set=1を追加
+    createlines = [] #set=1のみまとめて bulk_create
+    for cartpk in orders:
+        cart = Cart.objects.get(pk=cartpk)
+        if cart.set==1 and cart.om in oms:
+            pl = Poline(code = cart.code,
+                remark =cart.code.remarks,
+                om =cart.om,
+                qty =cart.qty,
+                balance =cart.qty,
+                po = po,
+                ocode = cart.obic,
+                hinmei = cart.hinmei,
+                kikaku = cart.kikaku,
+                set = cart.set,
+                )
+            createlines.append(pl)
+    Poline.objects.bulk_create(createlines)
+
+    return redirect('poline_list_2', po_pk = po.pk)
 
 @login_required
 def upload_inv(request):

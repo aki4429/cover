@@ -44,6 +44,7 @@ urlpatterns = [
     path('make_po/<int:po_pk>/', views.make_po, name='make_po'),
     path('<int:kento_id>/make_zaiko/', views.make_zaiko, name='make_zaiko'),
     path('add_order/<int:po_pk>/', views.add_order, name='add_order'),
+    path('update_order/<int:po_pk>/', views.update_order, name='update_order'),
     path('condition_update/<int:pk>/', views.ConditionUpdate.as_view(), name='condition_update'),
     path('<int:pk>/condition_copy/', views.ConditionCopy.as_view(), name='condition_copy'),
     path('<int:pk>/condition_delete/', views.ConditionDelete.as_view(), name='condition_delete'),

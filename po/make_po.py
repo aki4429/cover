@@ -31,23 +31,24 @@ def write_po_excel(po):
     polines = Poline.objects.filter(po=po)
     fabs = Fabric.objects.all()
     for pl in polines:
-        c = ITEMCOLUMNBEGIN
-        sheet.cell(row=r, column=c).value = pl.code.item
-        sheet.cell(row=r, column=c+1).value = pl.code.description
-        sheet.cell(row=r, column=c+2).value = pl.remark
-        sheet.cell(row=r, column=c+3).value = int(float(pl.qty))
-        sheet.cell(row=r, column=c+4).value = pl.code.unit
-        sheet.cell(row=r, column=c+5).value = (float(pl.code.uprice) 
-            if pl.code.uprice.replace(".", "").isdigit() else 0)
-        #金額計算式挿入
-        sheet.cell(row=r, column=c+6).value = "=E{0}*G{0}".format(r)
-        sheet.cell(row=r, column=c+8).value = make_ouritem(pl.code.hinban, fabs)
-        #容積計算式挿入
-        sheet.cell(row=r, column=c+9).value = "=E{0}*N{0}".format(r)
-        sheet.cell(row=r, column=c+10).value = pl.om
-        sheet.cell(row=r, column=c+12).value = (float(pl.code.vol) 
-            if pl.code.vol.replace(".", "").isdigit() else 0)
-        r += 1
+        if pl.set < 1 : #セット品は除く
+            c = ITEMCOLUMNBEGIN
+            sheet.cell(row=r, column=c).value = pl.code.item
+            sheet.cell(row=r, column=c+1).value = pl.code.description
+            sheet.cell(row=r, column=c+2).value = pl.remark
+            sheet.cell(row=r, column=c+3).value = int(float(pl.qty))
+            sheet.cell(row=r, column=c+4).value = pl.code.unit
+            sheet.cell(row=r, column=c+5).value = (float(pl.code.uprice) 
+                if pl.code.uprice.replace(".", "").isdigit() else 0)
+            #金額計算式挿入
+            sheet.cell(row=r, column=c+6).value = "=E{0}*G{0}".format(r)
+            sheet.cell(row=r, column=c+8).value = make_ouritem(pl.code.hinban, fabs)
+            #容積計算式挿入
+            sheet.cell(row=r, column=c+9).value = "=E{0}*N{0}".format(r)
+            sheet.cell(row=r, column=c+10).value = pl.om
+            sheet.cell(row=r, column=c+12).value = (float(pl.code.vol) 
+                if pl.code.vol.replace(".", "").isdigit() else 0)
+            r += 1
 
     #書き込み最終 index から MAX 行-1行を削除
     c = ITEMCOLUMNBEGIN

@@ -4,105 +4,175 @@
 # juchu_read のデータを受け取って、CH232, 271, 907などは、
 # セットのクッションを減らし、LH03は、脚オーダーを追加する
 # ための関数
+#juchu_read のデータは cart のリスト
+#Cart オブジェクトの配列：(例)
+#CH271E-49 SP/223 JUC000026284 3 CH271   0001877 ﾏﾁﾙﾀﾞ ｶｳﾁ 
+#CH271   SE 49       DB  SP/223        Z 0
+#cart.hinban, cart.om, cart.juhcubi, cart.noki, cart.qty, cart.obic, 
+#cart.hinmei, cart.kikaku, cart.set)
 
-#受注データ構造= 品目名,受注伝票№,受注日,納期,受注数
+#271の場合の処理
+#(1)セット品にするべき37の個数と品番、om 番号をリストにする。
+#(2) データを走査し、該当するセット品37を見つけ、必要数セットフラグを立てる
 
+#品番を受けてCH271の製品コードで37付きモデルだったら、
+#セットになる37コードとセット数量, om番号を返す。
+
+from po.models import Cart, TfcCode
+import copy
+
+def check_271(cart):
+    if 'CH271' in cart.hinban.split('-')[0]:
+        if '-03 ' in cart.hinban:
+            cu = 'CH271-37 ' + cart.hinban.split(' ')[1]
+            return [cu, int(float(cart.qty)) * 2, cart.om]
+        elif '-08 ' in cart.hinban \
+            or '-09 ' in cart.hinban \
+            or '-41 ' in cart.hinban \
+            or '-42 ' in cart.hinban \
+            or '-49 ' in cart.hinban \
+            or '-50 ' in cart.hinban :
+            cu = 'CH271-37 ' + cart.hinban.split(' ')[1]
+            return [cu, int(float(cart.qty)) * 1, cart.om]
+        else:
+            return []
+
+    else:
+        return []
+
+def check_232(cart):
+    if 'CH232' in cart.hinban.split('-')[0]:
+        if '-03 ' in cart.hinban:
+            cu = 'CH232W-37 ' + cart.hinban.split(' ')[1]
+            return [cu, int(float(cart.qty)) * 2, cart.om]
+        elif '-06 ' in cart.hinban \
+            or '-07 ' in cart.hinban \
+            or '-08 ' in cart.hinban \
+            or '-09 ' in cart.hinban \
+            or '-20N ' in cart.hinban \
+            or '-49 ' in cart.hinban \
+            or '-50 ' in cart.hinban :
+            cu = 'CH232W-37 ' + cart.hinban.split(' ')[1]
+            return [cu, int(float(cart.qty)) * 1, cart.om]
+        else:
+            return []
+
+    else:
+        return []
+
+def check_lh(cart):
+    if 'LH03' in cart.hinban.split('-')[0]:
+        #カバーは除く
+        if 'C ' not in cart.hinban:
+            #スツールはLEG=Sx1がつく
+            if "-17 " in cart.hinban or \
+                    "-17L " in cart.hinban:
+                leg = 'LH03LEG-S'
+                return [leg, int(float(cart.qty)) * 1, cart.om]
+            #それ以外は、LEG-Lx1
+            else:
+                leg = 'LH03LEG-L'
+                return [leg, int(float(cart.qty)) * 1, cart.om]
+        else:
+            return []
+    else:
+        return []
+
+#加算リストをバラバラと作らないために合算する関数
+def plus_if_exist(add_list, cu_list):
+    for row in add_list:
+        #コードとom番号が同じの場合、数量を加算
+        if row[0] == cu_list[0] and row[2] == cu_list[2] :
+            row[1] += cu_list[1]
+            return add_list
+    #同じものがなければ、レコードを追加
+    return add_list.append(cu_list)
+
+#cartリストから、セットCUのリストを作る
+def add_cu(data):
+    add_list = [] #品番, 数量,om
+    for cart in data:
+        cu_list = check_271(cart) 
+        if len(cu_list) > 0 :
+            plus_if_exist(add_list, cu_list)
+        cu_list = check_232(cart) 
+        if len(cu_list) > 0 :
+            plus_if_exist(add_list, cu_list)
+
+    return add_list
+
+#cartリストから、LH-LEGの追加リストを作る
+def add_leg(data):
+    add_list = [] #品番, 数量,om
+    for cart in data:
+        leg_list = check_lh(cart) 
+        if len(leg_list) > 0 :
+            plus_if_exist(add_list, leg_list)
+
+    return add_list
+
+#受注データにセットクッションがあれば、set項目をセット
+def make_set(data):
+    add_list = add_cu(data)
+    for row in add_list: #品番,数量, om
+        #print('row', row)
+        counter = row[1] #数量をセット
+        while(counter != 0): #counterゼロになるまで繰り返し
+            for cart in data:
+                #addlist のcuコードを見つけたら、setを1にする。
+                if row[0] == cart.hinban and row[2] == cart.om and\
+                        cart.set == 0 and counter != 0:
+                    if cart.qty == counter:
+                        cart.set = 1
+                        counter = 0
+                    elif cart.qty <  counter : #数量がcounter より小さい時
+                        cart.set = 1
+                        counter = counter - cart.qty #セットして、数量分減
+                    elif cart.qty >  counter : #数量がcounterより大きい
+                        cart_new = copy.deepcopy(cart)
+                        cart_new.qty = counter #数量=カウンターの新cart作成
+                        cart_new.set = 1 #setは1
+                        data.append(cart_new)
+                        cart.qty = cart.qty - counter #残りの数量はset=0のまま
+                        counter = 0
+
+    return data
+
+#受注データにLH leg を追加
+def make_leg(data):
+    add_list = add_leg(data)
+    for row in add_list: #品番,数量, om
+        cart = Cart(hinban=row[0], qty=row[1], om = row[2], set=-1)
+        data.append(cart)
+
+    return data
+
+#TfcCodeがあればflag=ok, なければ, no, 複数は Double
+def check_code(data):
+    for cart in data:
+        results = TfcCode.objects.filter(hinban = cart.hinban)
+        if len(results) == 0:
+            cart.flag = 'NO'
+        elif len(results) == 1:
+            cart.flag = 'ok'
+            cart.code = results.first()
+        elif len(results) > 1:
+            cart.flag = 'Double'
+
+    return data
+
+def show_data(data):
+    for cart in data:
+        print('type', type(cart) )
+        print(cart.hinban, cart.om, cart.juhcubi, cart.noki, cart.qty, cart.obic, cart.hinmei, cart.kikaku, cart.set)
+
+#以下は過去のコード、今は使用していない
+"""
 #条件によってデータ追加する。
 def kako_add(data):
     new_list =[]
     for row in data:
         new_list.append(row)
-        #CH232/CH271で背クッション付きは37をマイナス数量で追加
-        if "CH232W-03 " in row[0]:
-            new_list.append([row[0].replace("-03", "-37"), row[1], row[2],
-                row[3], row[4] * -2])
-
-        if "CH232W-06 " in row[0]:
-            new_list.append([row[0].replace("-06", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH232W-07 " in row[0]:
-            new_list.append([row[0].replace("-07", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH232W-08 " in row[0]:
-            new_list.append([row[0].replace("-08", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH232W-09 " in row[0]:
-            new_list.append([row[0].replace("-09", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH232W-20N " in row[0]:
-            new_list.append([row[0].replace("-20N", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH232W-49 " in row[0]:
-            new_list.append([row[0].replace("-49", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH232W-50 " in row[0]:
-            new_list.append([row[0].replace("-50", "-37"), row[1], row[2],
-                row[3], row[4] * -1])
-
-        if "CH271-03 " in row[0]:
-            new_list.append([row[0].replace("CH271-03", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -2])
-
-        if "CH271N-08 " in row[0]:
-            new_list.append([row[0].replace("CH271N-08", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271N-09 " in row[0]:
-            new_list.append([row[0].replace("CH271N-09", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271N-49 " in row[0]:
-            new_list.append([row[0].replace("CH271N-49", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271N-50 " in row[0]:
-            new_list.append([row[0].replace("CH271N-50", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271-41 " in row[0]:
-            new_list.append([row[0].replace("CH271-41", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271-42 " in row[0]:
-            new_list.append([row[0].replace("CH271-42", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-
-        if "CH271E-03 " in row[0]:
-            new_list.append([row[0].replace("CH271E-03", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -2])
-
-        if "CH271E-08 " in row[0]:
-            new_list.append([row[0].replace("CH271E-08", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271E-09 " in row[0]:
-            new_list.append([row[0].replace("CH271E-09", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271E-49 " in row[0]:
-            new_list.append([row[0].replace("CH271E-49", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271E-50 " in row[0]:
-            new_list.append([row[0].replace("CH271E-50", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271E-41 " in row[0]:
-            new_list.append([row[0].replace("CH271E-41", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-        if "CH271E-42 " in row[0]:
-            new_list.append([row[0].replace("CH271E-42", "CH271-37"),
-                row[1], row[2], row[3], row[4] * -1])
-
-
         if "CH907-06 " in row[0]:
             new_list.append([row[0].replace("CH907-06", "CH907-35"),
                 row[1], row[2], row[3], row[4] * -1])
@@ -142,20 +212,6 @@ def kako_add(data):
             new_list.append([row[0].replace("CH261-03", "CH261-17"),
                 row[1], row[2], row[3], row[4] * -1])
             row[0] = row[0].replace("CH261-03", "CH261-03+17")
-
-        if "LH03" in row[0]:
-            #カバーは除く
-            if "C" not in row[0]:
-                #スツールはLEG=Sがつく
-                if "-17 " in row[0]:
-                    new_list.append(["LH03LEG-S",
-                        row[1], row[2], row[3], row[4] * 1])
-                elif "-17L " in row[0]:
-                    new_list.append(["LH03LEG-S",
-                        row[1], row[2], row[3], row[4] * 1])
-                else:
-                    new_list.append(["LH03LEG-L",
-                        row[1], row[2], row[3], row[4] * 1])
 
     return new_list
 
@@ -215,3 +271,5 @@ def check(data, codes):
 
 
     return data
+
+"""

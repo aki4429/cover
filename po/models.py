@@ -150,6 +150,11 @@ class Poline(models.Model):
     balance = models.FloatField(blank=True, null=True)
     #po = models.ForeignKey(Po, on_delete=models.PROTECT)
     po = models.ForeignKey(Po, on_delete=models.SET_NULL, null=True )
+    ocode = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック品番")
+    hinmei = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック商品名")
+    kikaku = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック規格")
+    set = models.SmallIntegerField(blank=True, null=True, verbose_name="セット品")
+
 
     class Meta:
         managed = True
@@ -199,6 +204,29 @@ class Cart(models.Model):
     flag = models.TextField(blank=True, null=True) #コードがあればok
     obic = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービックコード")
     code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, null=True )
+    hinmei = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック商品名")
+    kikaku = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック規格")
+    set = models.SmallIntegerField(blank=True, null=True, verbose_name="セット品")
+    #並べ替え用に品番から比較ワードを作成
+    def hikaku_word(self, hinban):
+        word = ''
+        if len(hinban.split('-')) > 1 : #モデル名
+            word += hinban.split('-')[0]
+        if len(hinban.split(' ')) > 1 : #布
+            word += hinban.split(' ')[1]
+        if len(hinban.split('-')) > 1 : #ピース
+            word +=hinban.split('-')[1]
+        if len(word) == 0 :
+            return hinban
+        else:
+            return word
+
+    def __lt__(self, other):
+        # self < other
+        if self.om == other.om: #om no.
+            return self.hikaku_word(self.hinban) < self.hikaku_word(other.hinban)
+        else:
+            return self.om < other.om
 
     class Meta:
         managed = True
