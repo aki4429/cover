@@ -6,10 +6,10 @@ DB のPOデータを指定し、podataフォルダの
 発注取込み用ファイルを吐き出す
 """
 from po.models import Po, Poline
-import datetime
-import calendar
-import csv
-import os
+import datetime, calendar, csv, os
+from django.conf import settings
+
+TORE = 'toreikomi_headder.csv'
 
 #固定定数のindex 書き出し
 HK = 1 #ヘッダ発注区分のindex
@@ -156,7 +156,8 @@ def shi_val(line:list, pl:Poline, shi_counter:int)->list:
 def make_data(pk:int)->list:
     #ヘッダ読み込み
     tori_data = []
-    with open('po/toreikomi_headder.csv') as f:
+    tore_file = os.path.join(settings.MEDIA_ROOT, 'template', TORE)
+    with open(tore_file) as f:
         reader = csv.reader(f)
         for row in reader:
             tori_data.append(row)
