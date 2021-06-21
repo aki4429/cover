@@ -166,6 +166,7 @@ def make_data(pk:int)->list:
 
     #Polineデータ取込み
     pls = Poline.objects.filter(po_id = pk).exclude(set=-1)
+    pls = sorted(pls)
 
     zai_counter = 0
     shi_counter = 0
@@ -189,12 +190,12 @@ def make_data(pk:int)->list:
 
 
 #tori_data = make_data(429)
-tori_data = make_data(459)
+#tori_data = make_data(459)
 #データ書き込み
-outfile =  'torikomi.csv'
+#outfile =  'torikomi.csv'
                     
-with open(outfile, 'w', encoding='CP932') as f:
-    writer = csv.writer(f)
-    writer.writerows(tori_data)
-    print("{}を書き込みました".format(outfile))
+#with open(outfile, 'w', encoding='CP932') as f:
+#    writer = csv.writer(f)
+#    writer.writerows(tori_data)
+#    print("{}を書き込みました".format(outfile))
 

@@ -12,13 +12,14 @@ from .make_po import write_po_excel
 import datetime, os
 from django.http import HttpResponse
 from bootstrap_datepicker_plus import DateTimePickerInput
-import openpyxl
+import openpyxl, csv, io
 from .read_inv_3 import ReadInv
 from .get_kh import read_kh
 import datetime
 from .write_zk import write_zaiko, write_kento
 from .get_shouhi_new import read_shouhi
 from .get_shouhi import read_shouhi_old
+from .make_torikomi_2 import make_data
 
 class CodeList(LoginRequiredMixin, ListView):
     context_object_name = 'codes'
@@ -996,4 +997,19 @@ def zkento_upload(request):
         }
 
     return render(request, 'po/zkento_upload.html', context )
+
+#発注取込みリスト(csv)をダウンロードします。
+@login_required
+def down_torikomi(request, po_pk):
+    po = get_object_or_404(Po, pk=po_pk)
+    response = HttpResponse(content_type='text/csv; charset=Shift-JIS') 
+    response['Content-Disposition'] = "attachment; filename='{}_torikomi.csv'".format(po.pon)
+    data = make_data(po.pk)
+
+    sio = io.StringIO()
+    writer = csv.writer(sio)
+    writer.writerows(data)
+    response.write(sio.getvalue().encode('cp932'))
+    
+    return response
 
