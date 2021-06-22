@@ -693,6 +693,8 @@ def kento_upload(request):
                 tc = TfcCode.objects.filter(hcode__iexact=code)[0]
                 cart = Cart(hinban = tc.hinban, \
                     qty = int(float(qty)),
+                    set = 0,
+                    flag = 'ok',
                     code = tc
                     )
                 add_cart.append(cart)
