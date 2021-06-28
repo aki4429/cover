@@ -170,14 +170,17 @@ class Poline(models.Model):
 
     def __lt__(self, other):
         # self < other
+        #omの値がNoneだと比較できないので、書き換えておく
+        if self.om is None:
+            self.om=''
+        if other.om is None:
+            other.om=''
         if self.om == other.om: #om no.
-            return self.hikaku_word(self.code.hinban) < self.hikaku_word(other.code.hinban)
+            if self.om == '':
+                return self.code.hcode < other.code.hcode
+            else:
+                return self.hikaku_word(self.code.hinban) < self.hikaku_word(other.code.hinban)
         else:
-            #omの値がNoneだと比較できないので、書き換えておく
-            if self.om is None:
-                self.om=''
-            if other.om is None:
-                other.om=''
             return self.om < other.om
 
     class Meta:
