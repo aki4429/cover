@@ -173,9 +173,12 @@ class Poline(models.Model):
         if self.om == other.om: #om no.
             return self.hikaku_word(self.code.hinban) < self.hikaku_word(other.code.hinban)
         else:
+            #omの値がNoneだと比較できないので、書き換えておく
+            if self.om is None:
+                self.om=''
+            if other.om is None:
+                other.om=''
             return self.om < other.om
-
-
 
     class Meta:
         managed = True

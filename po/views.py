@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from .models import TfcCode, Juchu, Cart, Condition, Po, Poline, Inv, Invline, Kento, Shouhi
 from loc.models import LocStatus
-from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm, MakezaikoForm, KentoForm, SokoUpForm
+from .forms import CodeForm, JuchuForm, ConditionForm, PoForm, PolineForm, CartForm, InvUpForm, InvForm, InvlineForm, MakezaikoForm, KentoForm, SokoUpForm 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -563,10 +563,22 @@ class PoList(LoginRequiredMixin, ListView):
     context_object_name = 'pos'
     template_name = 'po/po_list.html'
     model = Po
-    #form_class = PoForm
+    #form_class = PoListForm
+    #form = PoListForm()
 
     def get_queryset(self):
-        return Po.objects.filter(etd__gte='2020-01-01').order_by('-pon')
+        q_word = self.request.GET.get('query')
+        po_sort = self.request.GET.get('po_sort')
+        if q_word:
+            if po_sort == 'etd':
+                object_list = Po.objects.filter(etd__gte='2020-01-01').filter(comment__contains=q_word).order_by('-etd')
+            else:
+                object_list = Po.objects.filter(etd__gte='2020-01-01').filter(comment__contains=q_word).order_by('-pon')
+        elif po_sort == 'etd':
+            object_list = Po.objects.filter(etd__gte='2020-01-01').order_by('-etd')
+        else:
+            object_list = Po.objects.filter(etd__gte='2020-01-01').order_by('-pon')
+        return object_list
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

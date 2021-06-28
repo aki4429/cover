@@ -11,8 +11,14 @@
 
 {% block content %}
 
-<a class="btn btn-default" href="{% url 'upload_poinv'  %}">INVアップロード</a>
 
+<form method="get" action="">
+	コメント:<input name="query" value="{{ request.GET.query }}" type="text">
+	ソート順:<input type="radio" name="po_sort" value="pon" checked> PO No.
+	<input type="radio" name="po_sort" value="etd"> ETD
+        <button type="submit">検索する</button>
+
+</form>
 
     <table border=1>
 	<tr>

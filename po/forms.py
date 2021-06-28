@@ -5,6 +5,12 @@ from django.core.validators import FileExtensionValidator
 from django.core.files.storage import default_storage
 from django.contrib.admin.widgets import AdminDateWidget
 
+PO_ORDER = (
+        ('pon', 'PO No.'),
+        ('etd', 'ETD'),
+        ('delivery', '納入指定日'),
+        )
+
 
 class CodeForm(forms.ModelForm):
 
@@ -223,3 +229,10 @@ class SokoUpForm(forms.Form):
         #file属性で返す。
         return default_storage.open(file_name), default_storage.url(file_name)
 
+class PoListForm(forms.Form):
+    po_sort = forms.ChoiceField(
+        label='ソート',
+        widget = forms.RadioSelect,
+        choices = PO_ORDER,
+        required=True,
+    )

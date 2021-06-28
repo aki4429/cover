@@ -5,4 +5,5 @@ tfc_cover.sqlite
 locdata.sqlite
 locdata_dump.txt
 /static
+/media
 
