@@ -618,7 +618,9 @@ class PolineList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         po = Po.objects.get(pk=self.kwargs.get('po_pk'))
-        return Poline.objects.filter(po=po)
+        pls = Poline.objects.filter(po=po)
+        pls = sorted(pls)
+        return pls
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
