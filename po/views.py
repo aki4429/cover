@@ -301,7 +301,9 @@ class PolineList_2(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        po = Po.objects.get(pk=self.kwargs.get('po_pk'))
         context['title']='PO明細リスト'
+        context['po']= po
         return context
 
 class KentoList(LoginRequiredMixin, ListView):
