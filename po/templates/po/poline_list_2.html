@@ -24,7 +24,7 @@
 	<th>obicコード</th>
 	<th>品名</th>
 	<th>規格</th>
-	<th>set</th>
+	<th>setflag</th>
 	<th>編集</th>
 	<th>削除</th>
 	</tr>
@@ -39,7 +39,7 @@
         <td>{{ poline.ocode }}</td>
         <td>{{ poline.hinmei }}</td>
         <td>{{ poline.kikaku }}</td>
-        <td>{{ poline.set }}</td>
+        <td>{{ poline.setflag }}</td>
 	<td>
         <a class="btn btn-default" href="{% url 'poline_update' pk=poline.id %}"><span class="glyphicon glyphicon-pencil">編集</span></a> 
         </td>

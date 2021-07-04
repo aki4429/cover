@@ -153,7 +153,7 @@ class Poline(models.Model):
     ocode = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック品番")
     hinmei = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック商品名")
     kikaku = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック規格")
-    set = models.SmallIntegerField(blank=True, null=True, verbose_name="セット品")
+    setflag = models.SmallIntegerField(blank=True, null=True, verbose_name="セット品")
     #並べ替え用に品番から比較ワードを作成
     def hikaku_word(self, hinban):
         word = ''
@@ -233,7 +233,7 @@ class Cart(models.Model):
     code = models.ForeignKey(TfcCode, on_delete=models.SET_NULL, null=True )
     hinmei = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック商品名")
     kikaku = models.TextField(blank=True, null=True, max_length=100, verbose_name="オービック規格")
-    set = models.SmallIntegerField(blank=True, null=True, verbose_name="セット品")
+    setflag = models.SmallIntegerField(blank=True, null=True, verbose_name="セット品")
     #並べ替え用に品番から比較ワードを作成
     def hikaku_word(self, hinban):
         word = ''

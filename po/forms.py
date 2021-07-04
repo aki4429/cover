@@ -121,7 +121,7 @@ class PolineForm(forms.ModelForm):
                 'ocode',
                 'hinmei',
                 'kikaku',
-                'set',
+                'setflag',
                 ]
         ### 追加 ###
         widgets = {
@@ -145,7 +145,7 @@ class CartForm(forms.ModelForm):
                 'flag',
                 'code',
                 'obic',
-                'set',
+                'setflag',
                 ]
         ### 追加 ###
         widgets = {

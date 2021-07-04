@@ -77,7 +77,7 @@ class JuchuRead:
                         obic = row[OCODE], 
                         hinmei = row[HINMEI], 
                         kikaku = row[KIKAKU],
-                        set = 0,
+                        setflag = 0,
                         )
                     self.plus_if_exist(data, cart)
 
@@ -86,7 +86,7 @@ class JuchuRead:
     def show(self, data):
         for cart in data:
             #print(cart.hinban, cart.om, cart.qty, cart.obic, cart.hinmei, cart.kikaku, cart.set)
-            print(cart.hinban, cart.qty, cart.om, cart.set, cart.flag, cart.obic )
+            print(cart.hinban, cart.qty, cart.om, cart.setflag, cart.flag, cart.obic )
 
     #カートに入れるデータを作成
     def get_juchu(self):

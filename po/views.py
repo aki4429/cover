@@ -553,7 +553,7 @@ class PoCreate(LoginRequiredMixin, CreateView):
                 ocode = cart.obic,
                 hinmei = cart.hinmei,
                 kikaku = cart.kikaku,
-                set = cart.set,
+                setflag = cart.setflag,
                 )
             polines.append(pl)
 
@@ -709,7 +709,7 @@ def kento_upload(request):
                 tc = TfcCode.objects.filter(hcode__iexact=code)[0]
                 cart = Cart(hinban = tc.hinban, \
                     qty = int(float(qty)),
-                    set = 0,
+                    setflag = 0,
                     flag = 'ok',
                     code = tc
                     )
@@ -744,7 +744,7 @@ def add_order(request, po_pk):
         ocode = cart.obic,
         hinmei = cart.hinmei,
         kikaku = cart.kikaku,
-        set = cart.set,
+        setflag = cart.setflag,
         )
 
         polines.append(pl)
@@ -772,17 +772,17 @@ def update_order(request, po_pk):
                 poline.ocode = cart.obic
                 poline.hinmei = cart.hinmei
                 poline.kikaku = cart.kikaku
-                poline.set = cart.set
+                poline.setflag = cart.setflag
                 uplines.append(poline)
 
     Poline.objects.bulk_update(uplines,\
-            fields=['ocode','hinmei','kikaku', 'set'] )
+            fields=['ocode','hinmei','kikaku', 'setflag'] )
     
-    #set=1を追加
-    createlines = [] #set=1のみまとめて bulk_create
+    #setflag=1を追加
+    createlines = [] #setflag=1のみまとめて bulk_create
     for cartpk in orders:
         cart = Cart.objects.get(pk=cartpk)
-        if cart.set==1 and cart.om in oms:
+        if cart.setflag==1 and cart.om in oms:
             pl = Poline(code = cart.code,
                 remark =cart.code.remarks,
                 om =cart.om,
@@ -792,7 +792,7 @@ def update_order(request, po_pk):
                 ocode = cart.obic,
                 hinmei = cart.hinmei,
                 kikaku = cart.kikaku,
-                set = cart.set,
+                setflag = cart.setflag,
                 )
             createlines.append(pl)
     Poline.objects.bulk_create(createlines)

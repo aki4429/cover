@@ -166,7 +166,7 @@ def make_data(pk:int)->list:
     po = Po.objects.get(pk = pk)
 
     #Polineデータ取込み
-    pls = Poline.objects.filter(po_id = pk).exclude(set=-1)
+    pls = Poline.objects.filter(po_id = pk).exclude(setflag=-1)
     pls = sorted(pls)
 
     zai_counter = 0

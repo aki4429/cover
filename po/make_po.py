@@ -31,7 +31,7 @@ def write_po_excel(po):
     polines = Poline.objects.filter(po=po)
     fabs = Fabric.objects.all()
     for pl in polines:
-        if pl.set < 1 : #セット品は除く
+        if pl.setflag < 1 : #セット品は除く
             c = ITEMCOLUMNBEGIN
             sheet.cell(row=r, column=c).value = pl.code.item
             sheet.cell(row=r, column=c+1).value = pl.code.description

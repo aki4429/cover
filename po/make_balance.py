@@ -37,7 +37,7 @@ class MakeBalance:
         #id, 着日, etd, PO No. コード　残数
         #cur.execute("select o.id, p.delivery, p.etd, p.pon, c.hcode, o.balance from ((poline o inner join po p on o.po_id = p.id) inner join tfc_code c on o.code_id = c.id) where p.delivery > ? and p.comment like '%Nanno%' and o.om = ''", (maxdeli, ))
 
-        polines = Poline.objects.select_related('po', 'code').values('id', 'po__delivery', 'po__etd', 'po__pon', 'code__hcode', 'balance').filter(Q(code__zaiko=1) | Q(code__kento=1), po__delivery__gt = maxdeli, po__comment__contains = 'Nanno')
+        polines = Poline.objects.select_related('po', 'code').values('id', 'po__delivery', 'po__etd', 'po__pon', 'code__hcode', 'balance').filter(Q(code__zaiko=1) | Q(code__kento=1), po__delivery__gt = maxdeli, po__comment__contains = 'Nanno').filter(setflag=0)
 
         self.zan_hyo =[] #PO情報にinv情報を加えた表を作成
         bal_hyo =[] #残が０より大きいデータのみ格納

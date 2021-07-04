@@ -111,7 +111,7 @@ def add_leg(data):
 
     return add_list
 
-#受注データにセットクッションがあれば、set項目をセット
+#受注データにセットクッションがあれば、setflag項目をセット
 def make_set(data):
     add_list = add_cu(data)
     for row in add_list: #品番,数量, om
@@ -119,19 +119,19 @@ def make_set(data):
         counter = row[1] #数量をセット
         while(counter != 0): #counterゼロになるまで繰り返し
             for cart in data:
-                #addlist のcuコードを見つけたら、setを1にする。
+                #addlist のcuコードを見つけたら、setflagを1にする。
                 if row[0] == cart.hinban and row[2] == cart.om and\
-                        cart.set == 0 and counter != 0:
+                        cart.setflag == 0 and counter != 0:
                     if cart.qty == counter:
-                        cart.set = 1
+                        cart.setflag = 1
                         counter = 0
                     elif cart.qty <  counter : #数量がcounter より小さい時
-                        cart.set = 1
+                        cart.setflag = 1
                         counter = counter - cart.qty #セットして、数量分減
                     elif cart.qty >  counter : #数量がcounterより大きい
                         cart_new = copy.deepcopy(cart)
                         cart_new.qty = counter #数量=カウンターの新cart作成
-                        cart_new.set = 1 #setは1
+                        cart_new.setflag = 1 #setは1
                         data.append(cart_new)
                         cart.qty = cart.qty - counter #残りの数量はset=0のまま
                         counter = 0
@@ -142,7 +142,7 @@ def make_set(data):
 def make_leg(data):
     add_list = add_leg(data)
     for row in add_list: #品番,数量, om
-        cart = Cart(hinban=row[0], qty=row[1], om = row[2], set=-1)
+        cart = Cart(hinban=row[0], qty=row[1], om = row[2], setflag=-1)
         data.append(cart)
 
     return data
@@ -164,7 +164,7 @@ def check_code(data):
 def show_data(data):
     for cart in data:
         print('type', type(cart) )
-        print(cart.hinban, cart.om, cart.juhcubi, cart.noki, cart.qty, cart.obic, cart.hinmei, cart.kikaku, cart.set)
+        print(cart.hinban, cart.om, cart.juhcubi, cart.noki, cart.qty, cart.obic, cart.hinmei, cart.kikaku, cart.setflag)
 
 #以下は過去のコード、今は使用していない
 """
