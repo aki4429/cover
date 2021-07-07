@@ -1021,7 +1021,7 @@ def zkento_upload(request):
 def down_torikomi(request, po_pk):
     po = get_object_or_404(Po, pk=po_pk)
     response = HttpResponse(content_type='text/csv; charset=Shift-JIS') 
-    response['Content-Disposition'] = "attachment; filename='{}_torikomi.csv'".format(po.pon)
+    response['Content-Disposition'] = 'attachment; filename={}_torikomi.csv'.format(po.pon)
     data = make_data(po.pk)
 
     sio = io.StringIO()
