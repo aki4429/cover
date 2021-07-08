@@ -30,8 +30,18 @@ class CodeList(LoginRequiredMixin, ListView):
     #含まれるクエリーセットを返す関数。
     #検索語はスペースで区切って、リストでANDでつなげる
     def make_q(self,query, q_word, f_word):
+        if q_word in self.request.GET:
+            search=self.request.GET[q_word].replace("　"," ")
+            # セッションに記憶
+            self.request.session[q_word] = search
+        # セッションにデータがあればそれを使う
+        elif q_word in self.request.session:
+            search = self.request.session.get(q_word)
+            #get request オブジェクトに値を設定
+            #self.request.GET[q_word] = search
+        else:
+            return query
         #(2)キーワードをリスト化させる(複数指定の場合に対応させるため)
-        search      = self.request.GET[q_word].replace("　"," ")
         search_list = search.split(" ")
         filter = f_word + '__' + 'contains' #name__containsを作る
         #(例)info=members.filter(**{ filter: search_string })
@@ -45,43 +55,27 @@ class CodeList(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         query = Q()
-        flag = 0 #一つも検索語がなければ、flag==0
-        if 'qh' in self.request.GET:
-            query = self.make_q(query, 'qh', 'hinban')
-            flag += 1
-
-        if 'qi' in self.request.GET:
-            query = self.make_q(query, 'qi', 'item')
-            flag += 1
-
-        if 'qs' in self.request.GET:
-            query = self.make_q(query, 'qs', 'description')
-            flag += 1
-
-        if 'qb' in self.request.GET:
-            query = self.make_q(query, 'qb', 'remarks')
-            flag += 1
-
-        if 'qc' in self.request.GET:
-            query = self.make_q(query, 'qc', 'hcode')
-            flag += 1
-
-        if 'qt' in self.request.GET:
-            query = self.make_q(query, 'qt', 'cat')
-            flag += 1
-
+        query = self.make_q(query, 'qh', 'hinban')
+        query = self.make_q(query, 'qi', 'item')
+        query = self.make_q(query, 'qs', 'description')
+        query = self.make_q(query, 'qb', 'remarks')
+        query = self.make_q(query, 'qc', 'hcode')
+        query = self.make_q(query, 'qt', 'cat')
+        
         if 'z' in self.request.GET:
-            query = self.make_q(query, 'z', 'zaiko')
-            flag += 1
-
+            word =self.request.GET['z']
+            filter = 'zaiko__contains' #name__containsを作る
+            query &= Q(**{ filter: word })
+        
         if 'h' in self.request.GET:
-            query = self.make_q(query, 'h', 'kento')
-            flag += 1
+            word =self.request.GET['h']
+            filter = 'kento__contains' #name__containsを作る
+            query &= Q(**{ filter: word })
 
-        if flag == 0:
-            codes = TfcCode.objects.order_by('hinban')
+        if query == Q() :
+            codes = TfcCode.objects.order_by('hinban').filter(hinban='anything')
         else:
-            print('Query',query)
+            print('Query:',query,'size get:', len(self.request.GET))
             codes = TfcCode.objects.filter(query).order_by('hinban')
 
         return codes
