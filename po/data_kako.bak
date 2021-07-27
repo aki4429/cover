@@ -61,7 +61,6 @@ def check_232(cart):
         return []
 
 def check_lh(cart):
-    #print('lhchecking')
     if 'LH03' in cart.hinban.split('-')[0]:
         #カバーは除く
         if 'C ' not in cart.hinban:
@@ -112,26 +111,13 @@ def add_leg(data):
 
     return add_list
 
-#37クッション残を確認するため
-def get_balance(hinban, om, data):
-    balance_qty = 0
-    for cart in data:
-        if cart.hinban == hinban and cart.om == om and cart.setflag == 0 :
-            balance_qty +=  cart.qty
-
-    return balance_qty
-
 #受注データにセットクッションがあれば、setflag項目をセット
 def make_set(data):
     add_list = add_cu(data)
     for row in add_list: #品番,数量, om
         #print('row', row)
         counter = row[1] #数量をセット
-        #ただし、該当する37がなければ、counter をゼロにする。
-        balance = get_balance(row[0], row[2], data)
-        if balance == 0:
-            counter =0
-        while(counter != 0 ): #counterゼロになるまで繰り返し
+        while(counter != 0): #counterゼロになるまで繰り返し
             for cart in data:
                 #addlist のcuコードを見つけたら、setflagを1にする。
                 if row[0] == cart.hinban and row[2] == cart.om and\
@@ -142,10 +128,6 @@ def make_set(data):
                     elif cart.qty <  counter : #数量がcounter より小さい時
                         cart.setflag = 1
                         counter = counter - cart.qty #セットして、数量分減
-                        #ただし、該当する37がなければ、counter をゼロにする。
-                        balance = get_balance(row[0], row[2], data)
-                        if balance == 0:
-                            counter =0
                     elif cart.qty >  counter : #数量がcounterより大きい
                         cart_new = copy.deepcopy(cart)
                         cart_new.qty = counter #数量=カウンターの新cart作成

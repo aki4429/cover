@@ -21,7 +21,7 @@ def kako(inputs, bangos):
             line.append(row.banch)
             #背番号リストとコードが一致するとき
             for ban in bangos:
-                if row.hcode == ban.hcode: 
+                if row.hcode.replace('013CH', '013').replace('013271I', '013271').replace('013232WI', '013232W') == ban.hcode: 
                     line.append(ban.se)
 
             data.append(line)

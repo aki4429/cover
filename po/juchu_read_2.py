@@ -93,7 +93,7 @@ class JuchuRead:
         data = make_set(make_leg(self.data))
         data = check_code(data)
         data.sort()
-        #self.show(data)
+        self.show(data)
         return data
 
     def save_torikomi(self, data):
@@ -106,7 +106,7 @@ class JuchuRead:
             for row in data:
                 writer.writerow(row)
 
-#FILENAME = 'media/juchu/juchu_20210531.csv'
+#FILENAME = 'media/juchu/juchu_20210726.csv'
 #FILENAME = '/media/akiyoshi/Transcend/obic_new/juchu_data/juchu_20210222.csv'
 
 #k = JuchuRead(FILENAME)
