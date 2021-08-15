@@ -12,7 +12,7 @@
 
 <p> 現在の更新日は、{{ status.koshinbi }} です。 </p>
 <p> 参照している製造指示書は、{{ status.shijibi }} です。 </p>
-<a href="/loc/seisan_list">生産リス>ト</a>
+<a href="/loc/seisan_list">生産リスト</a>
 
 	<!-- <form method="POST" aciton="">
 	<p> ソート順を選択してください。</p>
@@ -30,7 +30,7 @@
         {% csrf_token %}
         <button type="submit">絞り込む</button>
         </form>
-    <a class="btn btn-default" href="{% url 'down_pick' pick.pk  %} " download = 'shiji.csv'>指示書ダウンロード</a>
+    <a class="btn btn-default" href="{% url 'down_pick' pick.pk  %} " download = 'shiji.csv'>指示書ダウンロード(確定)</a>
 
     <form action="" method="get">
         <input name="banchquery" value="{{ bq_word }}" type="text">

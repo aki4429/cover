@@ -1,0 +1,43 @@
+{% extends 'loc/loc_base.html' %}
+
+{% block title %}
+ピック確定リスト
+{% endblock title %}
+
+{% block page %}
+ピック確定リスト
+{% endblock page %}
+
+{% block content %}
+
+<a href="{% url 'kakutei_create' %}">新規作成</a>
+    <table border=1>
+	<tr>
+	<th>  </th>
+	<th> 番地 </th>
+	<th> コード </th>
+	<th> ピック数量 </th>
+	<th> 在庫数量 </th>
+	<th> 生産日 </th>
+	<th> 受注ナンバー </th>
+	<th colspan="2"> 編集 </th>
+	</tr>
+     {% for item in kakus %}
+    <tr>
+        <td>
+        </td>
+        <td>{{ item.banch }}</td>
+        <td>{{ item.code }}</td>
+        <td>{{ item.qty }}</td>
+        <td>{{ item.loc_qty }}</td>
+        <td>{{ item.seisan }}</td>
+        <td>{{ item.om }}</td>
+	<td><a href="{% url 'kakutei_del' item.pk %}">削除</a></th>
+	<td><a href="{% url 'kakutei_update' item.pk %}">編集</a></th>
+    <tr>
+    {% endfor %}
+	</table>
+
+
+{% endblock %}
+

@@ -3,7 +3,7 @@ from django import forms
 from django.core.files.storage import default_storage
 from django.core.validators import FileExtensionValidator
 
-from .models import Locdata, Shiji, LocStatus, Pick
+from .models import Locdata, Shiji, LocStatus, Pick, Kakutei
 
 from .p2d import p2d
 import os
@@ -57,3 +57,25 @@ class InvUpForm(forms.Form):
         #return default_storage.url(file_name)
         #file属性で返す。
         return default_storage.open(file_name), default_storage.url(file_name)
+
+
+class KakuteiForm(forms.ModelForm):
+    class Meta:
+        model = Kakutei
+        fields = [
+                 'code',
+                 'qty',
+                 'loc_qty',
+                 'seisan',
+                 'om',
+                 'banch',
+                ]
+        widgets = {
+                'code': forms.Textarea(attrs={'rows':1, 'cols':45}),
+                'qty': forms.Textarea(attrs={'rows':1, 'cols':10}),
+                'loc_qty': forms.Textarea(attrs={'rows':1, 'cols':10}),
+                'seisan':forms.DateInput(attrs={"type":"date"}),
+                'om': forms.Textarea(attrs={'rows':1, 'cols':45}),
+                'banch': forms.Textarea(attrs={'rows':1, 'cols':10}),
+            	}
+

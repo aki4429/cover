@@ -24,12 +24,13 @@ def tana(inputs, bangos):
         #line.append(item)
         #line.append(piece)
         #line.append(fab)
-        #背番号リストとコードが一致するとき
-        for ban in bangos:
-            if orig_code == 'empty':
-                line.append(" ")
-            elif orig_code == ban.hcode: 
-                line.append(ban.se)
+        if orig_code == 'empty':
+            line.append(" ")
+        else:
+            #背番号リストとコードが一致するとき
+            for ban in bangos:
+                if orig_code == ban.hcode: 
+                    line.append(ban.se)
 
         line.append(row.qty)
         data.append(line)

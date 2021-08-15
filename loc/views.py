@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm, InvUpForm
+from .forms import LocForm, ShijiForm, LocStatusForm, OrderChoiceForm, ChoiceForm, InvUpForm, KakuteiForm
 from .models import Locdata, Shiji, Seisan, LocStatus, Pick, Kakutei, Addcover, Input, Bango
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -318,29 +318,21 @@ def pick_list(request):
 @login_required
 def koshin(request, pick_id ):
     #pick_id はpicks[0]のidが与えられます。
-    #seisanbiが該当するpickデータの数量を番地リストから差し引きます。
+    #seisanbiが該当するKakuteiデータの数量を番地リストから差し引きます。
     #更新したpickデータをkakuteiデータに残します。
     last_pick = get_object_or_404(Pick, id=pick_id)
     seisanbi = last_pick.seisan
-    add_kaku = []
-    picks = Pick.objects.filter(seisan = seisanbi)
-    for pick in picks:
+    #add_kaku = []
+    #picks = Pick.objects.filter(seisan = seisanbi)
+    kakus = Kakutei.objects.filter(seisan = seisanbi)
+    for pick in kakus:
+        #とりあえずmiteiは無視します。
         if pick.banch != 'mitei':
             loc = Locdata.objects.get(banch = pick.banch)
             loc.qty = loc.qty - pick.qty
             if loc.qty == 0:
                 loc.code = 'empty'
             loc.save()
-
-            kaku = Kakutei()
-            kaku.code = pick.code
-            kaku.qty = pick.qty
-            kaku.seisan = pick.seisan
-            kaku.om = pick.om
-            kaku.banch = pick.banch
-            add_kaku.append(kaku)
-            
-    Kakutei.objects.bulk_create(add_kaku)
 
     status = LocStatus.objects.get(id=1)
     status.koshinbi = seisanbi
@@ -404,10 +396,28 @@ def status_edit(request):
     return render(request, 'loc/status_new.html', {'form': form})
 
 #ピッキング番地明細をダウンロードします。
+#この生産日の生産リストを確定(Kakutei)DBに登録します。
+#その生産日の確定データがあれば、削除して更新します。
 @login_required
 def down_pick(request, pick_pk):
     pick = get_object_or_404(Pick, pk=pick_pk)
+    #pick id の生産日のピックリストをとりだす
     picks = Pick.objects.filter(seisan = pick.seisan).order_by('banch', 'code' )
+    #同じ生産日の確定リストがあれば、全削除しておく
+    Kakutei.objects.filter(seisan = pick.seisan).delete()
+    #取り出したピックリストを確定リストに登録
+    #(あとで更新するとき、このリストで番地更新する)
+    add_kaku = []
+    for pick in picks:
+        kaku = Kakutei()
+        kaku.code = pick.code
+        kaku.qty = pick.qty
+        kaku.seisan = pick.seisan
+        kaku.om = pick.om
+        kaku.banch = pick.banch
+        add_kaku.append(kaku)
+            
+    Kakutei.objects.bulk_create(add_kaku)
     response = HttpResponse(content_type='application/vnd.ms-excel')
     response['Content-Disposition'] = 'attachment; filename="cover_pick.xlsx"'
     wb = write_pick_excel(picks)
@@ -763,4 +773,50 @@ def add_input(request):
     
 
     return redirect('loc_list')
+
+class KakuteiList(LoginRequiredMixin, ListView):
+    template_name = 'loc/kakutei_list.html'
+    context_object_name = 'kakus'
+    model = Kakutei
+    queryset = Kakutei.objects.order_by('-seisan','banch')
+
+class KakuteiUpdate(LoginRequiredMixin, UpdateView):
+    template_name = 'loc/kakutei_update.html'
+    model = Kakutei
+    form_class = KakuteiForm
+
+    def get_success_url(self):
+        return reverse('kakutei_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='確定データ編集'
+        #context['last_id'] = TfcCode.objects.last().pk
+        return context
+
+class KakuteiCreate(LoginRequiredMixin, CreateView):
+    template_name = 'loc/kakutei_create.html'
+    model = Kakutei
+    form_class = KakuteiForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='確定データ作成'
+        return context
+
+    def get_success_url(self):
+        return reverse('kakutei_list')   
+
+class KakuteiDelete(LoginRequiredMixin, DeleteView):
+    template_name = 'loc/kakutei_confirm_delete.html'
+    model = Kakutei
+    form_class = KakuteiForm
+
+    def get_success_url(self):
+        return reverse('kakutei_list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title']='確定データ削除確認'
+        return context
 

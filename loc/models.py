@@ -55,7 +55,7 @@ class Kakutei(models.Model):
     banch = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.code + '.' + self.qty + ':' + self.banch + ':' + self.om
+        return self.code + '.' + str(self.qty) + ':' + self.banch + ':' + self.om
 
 
 class Addcover(models.Model):
