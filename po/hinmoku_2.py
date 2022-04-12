@@ -58,6 +58,9 @@ class Hinmoku:
         if "Z" in self.tok:
             #print("tok", self.tok)
             return True
+        #仕入テーブル発注
+        elif self.hin.startswith('CH1174') and 'T' in self.par:
+            return True
         else:
             #print("tok", self.tok)
             return False
