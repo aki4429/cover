@@ -639,6 +639,7 @@ class PolineList(LoginRequiredMixin, ListView):
             pl.balance = pl.qty - sum
             pl_update.append(pl)
             #polineのpkは配列の[0]に代入
+            line.append(pl.id)
             line.append(pl.code.hinban)
             line.append(pl.remark)
             line.append(pl.qty)
@@ -908,7 +909,7 @@ class InvDelete(LoginRequiredMixin, DeleteView):
         context['title']='INV削除確認'
         return context
 
-class InvineUpdate(LoginRequiredMixin, UpdateView):
+class InvlineUpdate(LoginRequiredMixin, UpdateView):
     template_name = 'po/invline_update.html'
     model = Invline
     form_class = InvlineForm
@@ -932,19 +933,6 @@ class InvlineDelete(LoginRequiredMixin, DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title']='INV行削除確認'
-        return context
-
-class InvlineUpdate(LoginRequiredMixin, UpdateView):
-    template_name = 'po/invline_update.html'
-    model = Invline
-    form_class = InvlineForm
-
-    def get_success_url(self):
-        return reverse('invline_list', kwargs={'inv_pk': self.object.inv_id})
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title']='INV内容編集'
         return context
 
 
