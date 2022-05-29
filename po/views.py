@@ -641,6 +641,7 @@ class PolineList(LoginRequiredMixin, ListView):
             #polineのpkは配列の[0]に代入
             line.append(pl.id)
             line.append(pl.code.hinban)
+            line.append(pl.code.id)
             line.append(pl.remark)
             line.append(pl.qty)
             line.append(pl.om)

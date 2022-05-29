@@ -28,7 +28,7 @@ class TfcCode(models.Model):
     cat = models.TextField(blank=True, null=True, max_length=20, verbose_name="分類")
 
     def __str__(self):
-        return self.hinban
+        return str(self.id)
 
     class Meta:
         managed = True
@@ -182,6 +182,10 @@ class Poline(models.Model):
                 return self.hikaku_word(self.code.hinban) < self.hikaku_word(other.code.hinban)
         else:
             return self.om < other.om
+
+    def __str__(self):
+        return str(self.id)
+
 
     class Meta:
         managed = True
