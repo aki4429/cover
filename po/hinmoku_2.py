@@ -121,6 +121,8 @@ class Hinmoku:
             code = self.hin + "N"
         elif "E" in self.shi :
             code = self.hin + "E"
+        elif "W" in self.shi :
+            code = self.hin + "W"
         else:
             code = self.hin
 
