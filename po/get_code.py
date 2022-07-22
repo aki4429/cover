@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-CAT_ORDER = {'NEW':0, '布地':1,'ﾇｰﾄﾞ':2,'ｶﾊﾞｰ':3,'INCOON':4, 'INCOON BED':5, '脚':6,'バネ':7, 'ｸｯｼｮﾝ':8, 'HYPERFLEX':9,'ﾛｻﾞｰﾅ':10, '旧モデル':11, '':12}
+CAT_ORDER = {'NEW':0, '布地':1,'ﾇｰﾄﾞ':2,'ｶﾊﾞｰ':3,'INCOON':4, 'INCOON BED':5, '脚':6,'バネ':7, 'ｸｯｼｮﾝ':8, 'HYPERFLEX':9,'ﾛｻﾞｰﾅ':10, '旧モデル':11,'キャンセル不可品':12}
 
 from .models import TfcCode
 
