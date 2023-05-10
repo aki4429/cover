@@ -142,10 +142,12 @@ class Hinmoku:
         #if "CH1072" in self.hin :
         #    self.pie = self.pie.replace("SET", "")
 
-        #CH271の、脚色DB/NAは外す
+        #CH271の、脚色DB/NAは外す 仕様にSHが付いていれば、Hを追記
         if "CH271" in self.hin :
             self.iro = self.iro.replace("DB", "")
             self.iro = self.iro.replace("NA", "")
+            if "SH" in self.shi :
+                code = self.hin + "H"
 
         #CH1071の、脚色NAはDBに変える
         if "CH1071" in self.hin :

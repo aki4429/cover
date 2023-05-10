@@ -49,6 +49,7 @@ class Condition(models.Model):
     ('OSAKA Port', 'osaka'),
     ('HAKATA Port', 'hakata'),
     ('MOJI Port', 'moji'),
+    ('TOKYO Port', 'tokyo'),
     ('Japanese AIR Port', 'air'),
     )
 

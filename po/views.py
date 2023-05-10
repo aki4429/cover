@@ -13,7 +13,7 @@ import datetime, os
 from django.http import HttpResponse
 from bootstrap_datepicker_plus import DateTimePickerInput
 import openpyxl, csv, io
-from .read_inv_3 import ReadInv
+from .read_inv_4 import ReadInv
 from .get_kh import read_kh
 import datetime
 from .write_zk import write_zaiko, write_kento
