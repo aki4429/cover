@@ -61,7 +61,7 @@ def sum_list(data):
 #obic発注検討表 csv のfilename と ロケーション管理の
 #カバー在庫(cover_zaiko.csv)を受け取って品名,在庫,受注数の一覧と
 #基準日を返す
-def read_kh(k_filename):
+def read_kh_2(k_filename):
     covd =  read_cov() #カバーデータを読み込む
     data = []
     #発注検討表を読み込む
@@ -102,4 +102,49 @@ def read_kh(k_filename):
 #print(read_kh()[1])
 #print(row[0], row[1])
 #print('data', data)
+
+
+import pandas as pd
+
+def read_kh(k_filename):
+    #covd =  read_cov() #カバーデータを読み込む
+    USECOL = ["商品コード", "規格", "現在在庫南濃倉庫", "開始日以前出庫予定数", "受注数", "出力開始日"]
+    data = []
+    #発注検討表からUSECOL項目だけ抽出して読み込む
+    df = pd.read_csv(k_filename, encoding='CP932', usecols=USECOL)
+    #USECOLの順番通りに列を並べ替える
+    df = df.reindex(columns=USECOL)
+    #検討表の取り出した内容をリストに変換
+    kentos = df.values.tolist()
+
+    for row in kentos: 
+        #商品コード0, 規格1,現在在庫南濃倉庫2-開始日以前出庫予定数3, # 受注数4-開始日以前出庫予定数3
+        kijunbi = row[5] #基準日5を取り込み
+        if row[0].startswith('0'):
+            #商品コードが０で始まるものは材料なのでキーは商品コード
+            #if not row[10].startswith('0132'):
+                #ただし、0132で始まるカバーはロケーション管理のため除外
+            if row[0].startswith('013'):
+                #コード文字数制限で省略したCHを戻しておく
+                row[0] = row[0].replace('013', '013CH')
+
+            data.append([row[0], int(float(row[2]))-int(float(row[3])),
+                int(float(row[4]))-int(float(row[3]))])
+        elif not row[0].startswith('1'):
+            #1で始まる余計な材料コードは除く
+            row[1] = rep_nuno(row[1]) #布地コード読替え
+            h = Hinmoku(bunkai(row[1]))
+            if h.is_kansei() or not h.is_byorder():
+            #if h.is_kansei() :
+                data.append([h.make_code(), int(float(row[2]))-int(float(row[3])),
+                int(float(row[4]))-int(float(row[3]))])
+
+    #data = data + covd
+    data = sum_list(data)
+    data.sort()
+    #with open("kento_list.csv", 'w', encoding='CP932') as f:
+    #    writer = csv.writer(f)
+    #    writer.writerows(data)
+    return data, kijunbi
+
 
