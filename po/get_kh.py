@@ -103,7 +103,6 @@ def read_kh_2(k_filename):
 #print(row[0], row[1])
 #print('data', data)
 
-
 import pandas as pd
 
 def read_kh(k_filename):
@@ -127,6 +126,15 @@ def read_kh(k_filename):
             if row[0].startswith('013'):
                 #コード文字数制限で省略したCHを戻しておく
                 row[0] = row[0].replace('013', '013CH')
+                #レコルタはI品番追加
+                row[0] = row[0].replace('013CH232W-', '013CH232WI-')
+                #レコルタ35/37はI品番戻す
+                row[0] = row[0].replace('013CH232WI-3', '013CH232W-3')
+                #マチルダはI品番追加
+                row[0] = row[0].replace('013CH271-', '013CH271I-')
+                #マチルダ35/37はI品番戻す
+                row[0] = row[0].replace('013CH271I-3', '013CH271-3')
+
 
             data.append([row[0], int(float(row[2]))-int(float(row[3])),
                 int(float(row[4]))-int(float(row[3]))])
@@ -146,5 +154,4 @@ def read_kh(k_filename):
     #    writer = csv.writer(f)
     #    writer.writerows(data)
     return data, kijunbi
-
 
